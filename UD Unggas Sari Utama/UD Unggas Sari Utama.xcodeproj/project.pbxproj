@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C7D6900297A2B9C003A9949 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D68FF297A2B9C003A9949 /* TabBarView.swift */; };
+		4C7D6902297A2BC0003A9949 /* CardProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D6901297A2BC0003A9949 /* CardProductView.swift */; };
+		4C7D6904297A2BE3003A9949 /* PenjualanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D6903297A2BE3003A9949 /* PenjualanView.swift */; };
+		4C7D6907297B9B06003A9949 /* PemesananView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D6906297B9B06003A9949 /* PemesananView.swift */; };
+		4C7D6909297B9B38003A9949 /* StockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D6908297B9B38003A9949 /* StockView.swift */; };
+		4C7D690B297B9BF9003A9949 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D690A297B9BF9003A9949 /* HomeView.swift */; };
 		4CC94282295C0257006725E9 /* UD_Unggas_Sari_UtamaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC94281295C0257006725E9 /* UD_Unggas_Sari_UtamaApp.swift */; };
 		4CC94284295C0257006725E9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC94283295C0257006725E9 /* ContentView.swift */; };
 		4CC94286295C0259006725E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CC94285295C0259006725E9 /* Assets.xcassets */; };
@@ -16,6 +22,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C7D68FF297A2B9C003A9949 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		4C7D6901297A2BC0003A9949 /* CardProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardProductView.swift; sourceTree = "<group>"; };
+		4C7D6903297A2BE3003A9949 /* PenjualanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenjualanView.swift; sourceTree = "<group>"; };
+		4C7D6906297B9B06003A9949 /* PemesananView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PemesananView.swift; sourceTree = "<group>"; };
+		4C7D6908297B9B38003A9949 /* StockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockView.swift; sourceTree = "<group>"; };
+		4C7D690A297B9BF9003A9949 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		4CC9427E295C0257006725E9 /* UD Unggas Sari Utama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UD Unggas Sari Utama.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC94281295C0257006725E9 /* UD_Unggas_Sari_UtamaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UD_Unggas_Sari_UtamaApp.swift; sourceTree = "<group>"; };
 		4CC94283295C0257006725E9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -37,6 +49,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C7D68FE297A2B58003A9949 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4C7D68FF297A2B9C003A9949 /* TabBarView.swift */,
+				4C7D6903297A2BE3003A9949 /* PenjualanView.swift */,
+				4C7D6908297B9B38003A9949 /* StockView.swift */,
+				4C7D6901297A2BC0003A9949 /* CardProductView.swift */,
+				4C7D6906297B9B06003A9949 /* PemesananView.swift */,
+				4C7D690A297B9BF9003A9949 /* HomeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		4CC94275295C0257006725E9 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +81,7 @@
 		4CC94280295C0257006725E9 /* UD Unggas Sari Utama */ = {
 			isa = PBXGroup;
 			children = (
+				4C7D68FE297A2B58003A9949 /* View */,
 				4CC94281295C0257006725E9 /* UD_Unggas_Sari_UtamaApp.swift */,
 				4CC94283295C0257006725E9 /* ContentView.swift */,
 				4CC94285295C0259006725E9 /* Assets.xcassets */,
@@ -145,9 +171,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C7D6909297B9B38003A9949 /* StockView.swift in Sources */,
+				4C7D6904297A2BE3003A9949 /* PenjualanView.swift in Sources */,
+				4C7D6907297B9B06003A9949 /* PemesananView.swift in Sources */,
+				4C7D690B297B9BF9003A9949 /* HomeView.swift in Sources */,
 				4CC9428B295C0259006725E9 /* Persistence.swift in Sources */,
 				4CC9428E295C0259006725E9 /* UD_Unggas_Sari_Utama.xcdatamodeld in Sources */,
 				4CC94284295C0257006725E9 /* ContentView.swift in Sources */,
+				4C7D6900297A2B9C003A9949 /* TabBarView.swift in Sources */,
+				4C7D6902297A2BC0003A9949 /* CardProductView.swift in Sources */,
 				4CC94282295C0257006725E9 /* UD_Unggas_Sari_UtamaApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,7 +314,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeRight;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -291,9 +323,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.role.UD-Unggas-Sari-Utama";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -310,7 +345,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeRight;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -319,9 +354,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.role.UD-Unggas-Sari-Utama";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
