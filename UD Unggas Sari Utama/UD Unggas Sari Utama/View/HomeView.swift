@@ -12,10 +12,16 @@ struct HomeView: View {
     var body: some View {
         if #available(iOS 16.0, *) {
             GeometryReader{ geometry in
-                VStack{
-                    Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+                NavigationStack{
+                    VStack{
+                        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+                    }.frame(width: geometry.size.width/1, height: geometry.size.height/1)
+                    .navigationTitle("UD. Amerta Yoga")
+                    
+            
                 }.frame(width: geometry.size.width/1, height: geometry.size.height/1)
-            }.onAppear{
+            }
+            .onAppear{
                 visibility = .visible
               
             }

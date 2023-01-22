@@ -30,7 +30,7 @@ struct TabBarView: View {
                 .accentColor(.purple)
             PemesananView()
                 .tabItem {
-                    Label("Pemesanan", systemImage: "list.bullet.clipboard.fill")
+                    Label("Pesanan", systemImage: "list.bullet.clipboard.fill")
                 }
                 .accentColor(.purple)
             StockView()

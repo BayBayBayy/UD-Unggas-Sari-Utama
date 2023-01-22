@@ -6,15 +6,26 @@
 //
 
 import SwiftUI
-
 struct StockView: View {
     var body: some View {
-        Text("View Stock")
-    }
-}
-
-struct StockView_Previews: PreviewProvider {
-    static var previews: some View {
-        StockView()
+        if #available(iOS 16.0, *) {
+            GeometryReader{ geometry in
+                NavigationStack{
+                    VStack{
+                        Text("Stok View")
+                    }.frame(width: geometry.size.width/1, height: geometry.size.height/1)
+                        .navigationTitle("Stok")
+                    
+                    
+                }.frame(width: geometry.size.width/1, height: geometry.size.height/1)
+            }
+            
+            .edgesIgnoringSafeArea(.all)
+            .ignoresSafeArea()
+            
+            
+        } else{
+            // not allowed
+        }
     }
 }

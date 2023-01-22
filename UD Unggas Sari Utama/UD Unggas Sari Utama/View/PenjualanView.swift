@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PenjualanView: View {
     var body: some View {
+        
         Text("View Penjualan")
     }
 }

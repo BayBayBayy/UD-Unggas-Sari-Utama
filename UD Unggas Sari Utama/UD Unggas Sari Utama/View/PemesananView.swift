@@ -9,7 +9,25 @@ import SwiftUI
 
 struct PemesananView: View {
     var body: some View {
-        Text("View Pemesanan")
+        if #available(iOS 16.0, *) {
+            GeometryReader{ geometry in
+                NavigationStack{
+                    VStack{
+                        Text("Pesanan View")
+                    }.frame(width: geometry.size.width/1, height: geometry.size.height/1)
+                        .navigationTitle("Pesanan")
+                    
+                    
+                }.frame(width: geometry.size.width/1, height: geometry.size.height/1)
+            }
+            
+            .edgesIgnoringSafeArea(.all)
+            .ignoresSafeArea()
+            
+            
+        } else{
+            // not allowed
+        }
     }
 }
 
