@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C6209EA2980C078007BE841 /* ProdukModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6209E92980C078007BE841 /* ProdukModel.swift */; };
+		4C6209EE2980C905007BE841 /* PenjualanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6209ED2980C905007BE841 /* PenjualanModel.swift */; };
+		4C6209F02980CB79007BE841 /* PemesananModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6209EF2980CB79007BE841 /* PemesananModel.swift */; };
 		4C7D6900297A2B9C003A9949 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D68FF297A2B9C003A9949 /* TabBarView.swift */; };
-		4C7D6902297A2BC0003A9949 /* CardProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D6901297A2BC0003A9949 /* CardProductView.swift */; };
 		4C7D6904297A2BE3003A9949 /* PenjualanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D6903297A2BE3003A9949 /* PenjualanView.swift */; };
 		4C7D6907297B9B06003A9949 /* PemesananView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D6906297B9B06003A9949 /* PemesananView.swift */; };
 		4C7D6909297B9B38003A9949 /* StockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D6908297B9B38003A9949 /* StockView.swift */; };
@@ -22,8 +24,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C6209E92980C078007BE841 /* ProdukModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdukModel.swift; sourceTree = "<group>"; };
+		4C6209ED2980C905007BE841 /* PenjualanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenjualanModel.swift; sourceTree = "<group>"; };
+		4C6209EF2980CB79007BE841 /* PemesananModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PemesananModel.swift; sourceTree = "<group>"; };
 		4C7D68FF297A2B9C003A9949 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
-		4C7D6901297A2BC0003A9949 /* CardProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardProductView.swift; sourceTree = "<group>"; };
 		4C7D6903297A2BE3003A9949 /* PenjualanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenjualanView.swift; sourceTree = "<group>"; };
 		4C7D6906297B9B06003A9949 /* PemesananView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PemesananView.swift; sourceTree = "<group>"; };
 		4C7D6908297B9B38003A9949 /* StockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockView.swift; sourceTree = "<group>"; };
@@ -49,13 +53,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C6209E82980C042007BE841 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4C6209E92980C078007BE841 /* ProdukModel.swift */,
+				4C6209ED2980C905007BE841 /* PenjualanModel.swift */,
+				4C6209EF2980CB79007BE841 /* PemesananModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		4C7D68FE297A2B58003A9949 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				4C7D68FF297A2B9C003A9949 /* TabBarView.swift */,
 				4C7D6903297A2BE3003A9949 /* PenjualanView.swift */,
 				4C7D6908297B9B38003A9949 /* StockView.swift */,
-				4C7D6901297A2BC0003A9949 /* CardProductView.swift */,
 				4C7D6906297B9B06003A9949 /* PemesananView.swift */,
 				4C7D690A297B9BF9003A9949 /* HomeView.swift */,
 			);
@@ -81,6 +94,7 @@
 		4CC94280295C0257006725E9 /* UD Unggas Sari Utama */ = {
 			isa = PBXGroup;
 			children = (
+				4C6209E82980C042007BE841 /* Model */,
 				4C7D68FE297A2B58003A9949 /* View */,
 				4CC94281295C0257006725E9 /* UD_Unggas_Sari_UtamaApp.swift */,
 				4CC94283295C0257006725E9 /* ContentView.swift */,
@@ -174,12 +188,14 @@
 				4C7D6909297B9B38003A9949 /* StockView.swift in Sources */,
 				4C7D6904297A2BE3003A9949 /* PenjualanView.swift in Sources */,
 				4C7D6907297B9B06003A9949 /* PemesananView.swift in Sources */,
+				4C6209EA2980C078007BE841 /* ProdukModel.swift in Sources */,
 				4C7D690B297B9BF9003A9949 /* HomeView.swift in Sources */,
 				4CC9428B295C0259006725E9 /* Persistence.swift in Sources */,
 				4CC9428E295C0259006725E9 /* UD_Unggas_Sari_Utama.xcdatamodeld in Sources */,
 				4CC94284295C0257006725E9 /* ContentView.swift in Sources */,
+				4C6209F02980CB79007BE841 /* PemesananModel.swift in Sources */,
 				4C7D6900297A2B9C003A9949 /* TabBarView.swift in Sources */,
-				4C7D6902297A2BC0003A9949 /* CardProductView.swift in Sources */,
+				4C6209EE2980C905007BE841 /* PenjualanModel.swift in Sources */,
 				4CC94282295C0257006725E9 /* UD_Unggas_Sari_UtamaApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

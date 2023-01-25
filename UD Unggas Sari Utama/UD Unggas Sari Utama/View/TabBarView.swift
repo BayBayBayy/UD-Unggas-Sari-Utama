@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct TabBarView: View {
-    @State var visibility: Visibility = .visible
-
     init(){
             let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.backgroundColor = UIColor(.yellow)
@@ -23,7 +21,7 @@ struct TabBarView: View {
         }
     var body: some View {
         TabView {
-         HomeView(visibility: $visibility)
+         HomeView()
                 .tabItem {
                     Label("Penjualan", systemImage: "keyboard.fill")
                 }
