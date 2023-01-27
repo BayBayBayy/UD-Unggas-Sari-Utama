@@ -10,6 +10,7 @@
 		4C6209EA2980C078007BE841 /* ProdukModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6209E92980C078007BE841 /* ProdukModel.swift */; };
 		4C6209EE2980C905007BE841 /* PenjualanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6209ED2980C905007BE841 /* PenjualanModel.swift */; };
 		4C6209F02980CB79007BE841 /* PemesananModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6209EF2980CB79007BE841 /* PemesananModel.swift */; };
+		4C6209F2298203E7007BE841 /* DummyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6209F1298203E7007BE841 /* DummyModel.swift */; };
 		4C7D6900297A2B9C003A9949 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D68FF297A2B9C003A9949 /* TabBarView.swift */; };
 		4C7D6904297A2BE3003A9949 /* PenjualanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D6903297A2BE3003A9949 /* PenjualanView.swift */; };
 		4C7D6907297B9B06003A9949 /* PemesananView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D6906297B9B06003A9949 /* PemesananView.swift */; };
@@ -27,6 +28,7 @@
 		4C6209E92980C078007BE841 /* ProdukModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdukModel.swift; sourceTree = "<group>"; };
 		4C6209ED2980C905007BE841 /* PenjualanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenjualanModel.swift; sourceTree = "<group>"; };
 		4C6209EF2980CB79007BE841 /* PemesananModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PemesananModel.swift; sourceTree = "<group>"; };
+		4C6209F1298203E7007BE841 /* DummyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyModel.swift; sourceTree = "<group>"; };
 		4C7D68FF297A2B9C003A9949 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		4C7D6903297A2BE3003A9949 /* PenjualanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenjualanView.swift; sourceTree = "<group>"; };
 		4C7D6906297B9B06003A9949 /* PemesananView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PemesananView.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				4C6209E92980C078007BE841 /* ProdukModel.swift */,
 				4C6209ED2980C905007BE841 /* PenjualanModel.swift */,
 				4C6209EF2980CB79007BE841 /* PemesananModel.swift */,
+				4C6209F1298203E7007BE841 /* DummyModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 			files = (
 				4C7D6909297B9B38003A9949 /* StockView.swift in Sources */,
 				4C7D6904297A2BE3003A9949 /* PenjualanView.swift in Sources */,
+				4C6209F2298203E7007BE841 /* DummyModel.swift in Sources */,
 				4C7D6907297B9B06003A9949 /* PemesananView.swift in Sources */,
 				4C6209EA2980C078007BE841 /* ProdukModel.swift in Sources */,
 				4C7D690B297B9BF9003A9949 /* HomeView.swift in Sources */,
