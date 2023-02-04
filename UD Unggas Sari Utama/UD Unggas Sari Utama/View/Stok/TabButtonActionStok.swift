@@ -1,0 +1,103 @@
+//
+//  TabButtonActionStok.swift
+//  UD Unggas Sari Utama
+//
+//  Created by I Wayan Adnyana on 04/02/23.
+//
+
+import SwiftUI
+
+struct TabButtonActionStok: View {
+    @Binding var check : Bool
+    var body: some View {
+        GeometryReader{ geometry in
+            HStack{
+                Spacer()
+                    .frame(width: geometry.size.width/2.5, height: geometry.size.height/1)
+                HStack{
+                    
+                    Button {
+                        check.toggle()
+                    } label: {
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color("GrayMiddleColor"))
+                                .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
+                            VStack {
+                                Text("Laporan Stok")
+                                    .foregroundColor(.black)
+                                    .font(.system(size: 16))
+                                    .bold()
+                                    .frame(width: geometry.size.width/8, height: geometry.size.height/16)
+                            }
+                        }
+                        .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
+                        .cornerRadius(8)
+                    }.tag(1)
+                    
+                    Button {
+                        check.toggle()
+                    } label: {
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color("GrayMiddleColor"))
+                                .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
+                               
+                            VStack {
+                                Text("Stok Opname")
+                                    .foregroundColor(.black)
+                                    .font(.system(size: 16))
+                                    .bold()
+                                    .frame(width: geometry.size.width/8, height: geometry.size.height/16)
+                            }
+                        }
+                        .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
+                        .cornerRadius(8)
+                    }.tag(2)
+                    
+                    Button {
+                        check.toggle()
+                    } label: {
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color("GrayMiddleColor"))
+                                .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
+                            VStack {
+                                Text("Input Barang Baru")
+                                    .foregroundColor(.black)
+                                    .font(.system(size: 16))
+                                    .bold()
+                                    .frame(width: geometry.size.width/8, height: geometry.size.height/16)
+                            }
+                        }
+                        .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
+                        .cornerRadius(8)
+                    }.tag(3)
+                    
+                    Button {
+                        check.toggle()
+                    } label: {
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color("GrayMiddleColor"))
+                                .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
+                            VStack {
+                                Text("Konversi Stok")
+                                    .foregroundColor(.black)
+                                    .font(.system(size: 16))
+                                    .bold()
+                                    .frame(width: geometry.size.width/8, height: geometry.size.height/16)
+                            }
+                        }
+                        .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
+                        .cornerRadius(8)
+                    }.tag(4)
+                    
+                }
+                .frame(width: geometry.size.width/2, height: geometry.size.height/1)
+            }
+            .frame(width: geometry.size.width/1, height: geometry.size.height/0.65)
+            
+        }.edgesIgnoringSafeArea(.all)
+    }
+}
