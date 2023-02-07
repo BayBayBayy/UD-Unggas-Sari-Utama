@@ -8,6 +8,7 @@
 import SwiftUI
 struct StockView: View {
     @State var checkStokOpname : Bool = false
+//    @Binding var keyValueButton : Int
     var body: some View {
         if #available(iOS 16.0, *) {
             GeometryReader{ geometry in
@@ -20,16 +21,18 @@ struct StockView: View {
                             .background(.red)
                     }
                     .frame(width: geometry.size.width/1, height: geometry.size.height/1)
+                    .background(Color("GrayBackgroundColor"))
                     .navigationTitle("Stok")
-                    .overlay(alignment: .bottom) {
-                        GeometryReader{ geometry in
-                            if checkStokOpname == true  {
-                                    StokOpnamePopupView(checkPopup: $checkStokOpname)
-                                    .frame(width: geometry.size.width/1.5, height:  geometry.size.height/1.5, alignment: .center)
-                                    .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.55)
-                            }
-                        }.edgesIgnoringSafeArea(.all)
-                    }
+//                    .overlay(alignment: .bottom) {
+//                        GeometryReader{ geometry in
+//                            if checkStokOpname == true & keyValueButton = 1  {
+//                                    StokOpnamePopupView(checkPopup: $checkStokOpname)
+//                                    .frame(width: geometry.size.width/1.5, height:  geometry.size.height/1.5, alignment: .center)
+//                                    .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.55)
+//                            }
+//
+//                        }.edgesIgnoringSafeArea(.all)
+//                    }
                 }
                 .frame(width: geometry.size.width/1, height: geometry.size.height/1)
             }

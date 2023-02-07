@@ -19,7 +19,6 @@ struct StokOpnamePopupView: View {
                     .frame(width: geometry.size.width/1.1, height: geometry.size.height/1)
                     .border(Color(.black))
                 VStack (alignment: .center, spacing: .zero) {
-                    
                     title
                         . frame( height: geometry.size.height/8)
                     PickerProduk()

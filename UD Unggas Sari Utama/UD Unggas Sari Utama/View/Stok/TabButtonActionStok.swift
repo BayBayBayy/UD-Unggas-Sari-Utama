@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TabButtonActionStok: View {
     @Binding var check : Bool
+
     var body: some View {
         GeometryReader{ geometry in
             HStack{
@@ -33,7 +34,9 @@ struct TabButtonActionStok: View {
                         }
                         .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
                         .cornerRadius(8)
-                    }.tag(1)
+                    }.onChange(of: check) { newValue in
+                        StokOpnamePopupView(checkPopup: $check)
+                    }
                     
                     Button {
                         check.toggle()
@@ -53,7 +56,7 @@ struct TabButtonActionStok: View {
                         }
                         .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
                         .cornerRadius(8)
-                    }.tag(2)
+                    }
                     
                     Button {
                         check.toggle()
@@ -72,7 +75,7 @@ struct TabButtonActionStok: View {
                         }
                         .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
                         .cornerRadius(8)
-                    }.tag(3)
+                    }
                     
                     Button {
                         check.toggle()
@@ -91,7 +94,7 @@ struct TabButtonActionStok: View {
                         }
                         .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
                         .cornerRadius(8)
-                    }.tag(4)
+                    }
                     
                 }
                 .frame(width: geometry.size.width/2, height: geometry.size.height/1)

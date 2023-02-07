@@ -18,7 +18,9 @@ struct PemesananView: View {
                         .navigationTitle("Pesanan")
                     
                     
-                }.frame(width: geometry.size.width/1, height: geometry.size.height/1)
+                }
+                .frame(width: geometry.size.width/1, height: geometry.size.height/1)
+                .background(Color("GrayBackgroundColor"))
             }
             
             .edgesIgnoringSafeArea(.all)
