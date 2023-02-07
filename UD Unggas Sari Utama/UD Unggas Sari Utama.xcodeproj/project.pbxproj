@@ -24,6 +24,8 @@
 		4C853C80298CDE91004FA781 /* StokOpnamePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C853C7F298CDE91004FA781 /* StokOpnamePopupView.swift */; };
 		4C945DC52991543100D5CA5A /* CardProdukView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C945DC42991543100D5CA5A /* CardProdukView.swift */; };
 		4C945DC8299159AB00D5CA5A /* TambahkanPesananPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C945DC7299159AB00D5CA5A /* TambahkanPesananPopupView.swift */; };
+		4C945DCA2992B41800D5CA5A /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C945DC92992B41800D5CA5A /* ButtonView.swift */; };
+		4C945DCC2992BF3200D5CA5A /* ButtonPemesananView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C945DCB2992BF3200D5CA5A /* ButtonPemesananView.swift */; };
 		4CC94282295C0257006725E9 /* UD_Unggas_Sari_UtamaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC94281295C0257006725E9 /* UD_Unggas_Sari_UtamaApp.swift */; };
 		4CC94284295C0257006725E9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC94283295C0257006725E9 /* ContentView.swift */; };
 		4CC94286295C0259006725E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CC94285295C0259006725E9 /* Assets.xcassets */; };
@@ -50,6 +52,8 @@
 		4C853C7F298CDE91004FA781 /* StokOpnamePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StokOpnamePopupView.swift; sourceTree = "<group>"; };
 		4C945DC42991543100D5CA5A /* CardProdukView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardProdukView.swift; sourceTree = "<group>"; };
 		4C945DC7299159AB00D5CA5A /* TambahkanPesananPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TambahkanPesananPopupView.swift; sourceTree = "<group>"; };
+		4C945DC92992B41800D5CA5A /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
+		4C945DCB2992BF3200D5CA5A /* ButtonPemesananView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonPemesananView.swift; sourceTree = "<group>"; };
 		4CC9427E295C0257006725E9 /* UD Unggas Sari Utama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UD Unggas Sari Utama.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC94281295C0257006725E9 /* UD_Unggas_Sari_UtamaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UD_Unggas_Sari_UtamaApp.swift; sourceTree = "<group>"; };
 		4CC94283295C0257006725E9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -78,6 +82,7 @@
 				4C7D690A297B9BF9003A9949 /* HomeView.swift */,
 				4C7D6903297A2BE3003A9949 /* PenjualanView.swift */,
 				4C945DC42991543100D5CA5A /* CardProdukView.swift */,
+				4C945DC92992B41800D5CA5A /* ButtonView.swift */,
 			);
 			path = Penjualan;
 			sourceTree = "<group>";
@@ -86,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				4C7D6906297B9B06003A9949 /* PemesananView.swift */,
+				4C945DCB2992BF3200D5CA5A /* ButtonPemesananView.swift */,
 			);
 			path = Pemesanan;
 			sourceTree = "<group>";
@@ -274,6 +280,7 @@
 				4C7D6904297A2BE3003A9949 /* PenjualanView.swift in Sources */,
 				4C6209F2298203E7007BE841 /* DummyModel.swift in Sources */,
 				4C7D6907297B9B06003A9949 /* PemesananView.swift in Sources */,
+				4C945DCA2992B41800D5CA5A /* ButtonView.swift in Sources */,
 				4C853C80298CDE91004FA781 /* StokOpnamePopupView.swift in Sources */,
 				4C6209EA2980C078007BE841 /* ProdukModel.swift in Sources */,
 				4C7D690B297B9BF9003A9949 /* HomeView.swift in Sources */,
@@ -287,6 +294,7 @@
 				4C6209F02980CB79007BE841 /* PemesananModel.swift in Sources */,
 				4C65EF80298EB12300D7182A /* TabButtonActionStok.swift in Sources */,
 				4C7D6900297A2B9C003A9949 /* TabBarView.swift in Sources */,
+				4C945DCC2992BF3200D5CA5A /* ButtonPemesananView.swift in Sources */,
 				4C6209EE2980C905007BE841 /* PenjualanModel.swift in Sources */,
 				4CC94282295C0257006725E9 /* UD_Unggas_Sari_UtamaApp.swift in Sources */,
 			);

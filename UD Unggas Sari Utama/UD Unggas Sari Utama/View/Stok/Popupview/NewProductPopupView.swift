@@ -13,6 +13,7 @@ struct NewProductPopupView: View {
     @State var kategoriProduk : String = ""
     @State var hargaProduk : String = ""
     @State var jumlahProduk : String = ""
+    @Binding var check3: Bool
     var body: some View {
         GeometryReader{ geometry in
             ZStack{

@@ -10,7 +10,7 @@ import SwiftUI
 struct KonversiPopupView: View {
     @State var jumlahSebelum : String = ""
     @State var jumlahSetelah : String = ""
-    @Binding var checkPopup : Bool
+    @Binding var check2: Bool
     
     var body: some View {
         GeometryReader{ geometry in

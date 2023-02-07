@@ -10,7 +10,7 @@ import SwiftUI
 struct StokOpnamePopupView: View {
     @State var jumlah : String = ""
     @State var keterangan : String = ""
-    @Binding var checkPopup : Bool
+    @Binding var check1: Bool
     var body: some View {
         GeometryReader { geometry in
             ZStack{

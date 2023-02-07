@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TabButtonActionStok: View {
-    @Binding var check : Bool
+    @State var check : Bool = false
 
     var body: some View {
         GeometryReader{ geometry in
@@ -18,7 +18,7 @@ struct TabButtonActionStok: View {
                 HStack{
                     
                     Button {
-                        check.toggle()
+                        self.check.toggle()
                     } label: {
                         ZStack{
                             RoundedRectangle(cornerRadius: 8)
@@ -34,12 +34,10 @@ struct TabButtonActionStok: View {
                         }
                         .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
                         .cornerRadius(8)
-                    }.onChange(of: check) { newValue in
-                        StokOpnamePopupView(checkPopup: $check)
                     }
                     
                     Button {
-                        check.toggle()
+                        self.check.toggle()
                     } label: {
                         ZStack{
                             RoundedRectangle(cornerRadius: 8)
@@ -59,7 +57,7 @@ struct TabButtonActionStok: View {
                     }
                     
                     Button {
-                        check.toggle()
+                        self.check.toggle()
                     } label: {
                         ZStack{
                             RoundedRectangle(cornerRadius: 8)
@@ -78,7 +76,7 @@ struct TabButtonActionStok: View {
                     }
                     
                     Button {
-                        check.toggle()
+                        self.check.toggle()
                     } label: {
                         ZStack{
                             RoundedRectangle(cornerRadius: 8)

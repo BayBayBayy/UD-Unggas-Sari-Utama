@@ -48,7 +48,14 @@ struct cardView : View{
                     .fill(Color.white)
                     .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                     .padding()
-                
+                VStack{
+                    Spacer()
+                        .frame(width: geometry.size.width/1, height: geometry.size.height/1.5)
+                    RoundedRectangle(cornerRadius: 5)
+                        .fill(Color("OrangeColorSet"))
+                        .frame(width: geometry.size.width/1, height: geometry.size.height/3)
+                        .padding()
+                } .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                 VStack{
                     Image(card.image)
                         .resizable()
@@ -59,7 +66,6 @@ struct cardView : View{
                         .multilineTextAlignment(.leading)
                         .font(.title3)
                         .frame(width: geometry.size.width/1.1, height: geometry.size.height/4)
-                        .background(.orange)
                         .lineLimit(2)
                 }
                 .frame(width: geometry.size.width/1, height: geometry.size.height/1)

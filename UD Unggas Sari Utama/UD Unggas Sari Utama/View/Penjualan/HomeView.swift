@@ -17,7 +17,7 @@ struct HomeView: View {
                     VStack{
                         Spacer()
                             .frame(width: geometry.size.width/14, height: geometry.size.height/14)
-                            .background(.yellow)
+                        
                         HStack{
                             CardProdukView()
                                 .frame(width: geometry.size.width/1.5, height: geometry.size.height/1.75)
@@ -27,9 +27,12 @@ struct HomeView: View {
                                 .frame(width: geometry.size.width/3.5, height: geometry.size.height/1.75)
                                 .background(.green)
                         }.frame(width: geometry.size.width/1, height: geometry.size.height/1.75)
+                        
                         Spacer()
-                            .frame(width: 10, height: geometry.size.height/4)
-                            .background(.red)
+                            .frame(height: geometry.size.height/16)
+                        
+                        ButtonView()
+                            .frame(width: geometry.size.width/1, height: geometry.size.height/6)
                     }
                     .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                     .background(Color("GrayBackgroundColor"))

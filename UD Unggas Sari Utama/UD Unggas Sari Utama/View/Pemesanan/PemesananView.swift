@@ -13,11 +13,15 @@ struct PemesananView: View {
             GeometryReader{ geometry in
                 NavigationStack{
                     VStack{
-                        Text("Pesanan View")
+                        Spacer()
+                            .frame(width: geometry.size.width/1, height: geometry.size.height/10)
+                        ButtonPemesananView()
+                            .frame(width: geometry.size.width/1, height: geometry.size.height/14, alignment: .bottom)
+                        Spacer()
+                            .frame(width: geometry.size.width/1, height: geometry.size.height/1.3)
+                            .background(.blue)
                     }.frame(width: geometry.size.width/1, height: geometry.size.height/1)
                         .navigationTitle("Pesanan")
-                    
-                    
                 }
                 .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                 .background(Color("GrayBackgroundColor"))

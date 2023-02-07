@@ -11,7 +11,7 @@ struct TabBarView: View {
 
     init(){
         let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.backgroundColor = UIColor(.yellow)
+        tabBarAppearance.backgroundColor = UIColor(Color("OrangeColorSet"))
         tabBarAppearance.stackedLayoutAppearance.normal.iconColor = UIColor(.black)
         tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor(.white)]
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
@@ -27,14 +27,14 @@ struct TabBarView: View {
                 HomeView()
                     .tabItem {
 //                        Label("Penjualan", systemImage: "chart.xyaxis.line")
-                        Image(systemName: "chart.xyaxis.line").font(.system(size: 26))
+                        Image(systemName: "chart.xyaxis.line").font(.system(size: 40))
                         Text("Penjualan")
                     }
                     .accentColor(.purple)
                 PemesananView()
                     .tabItem {
 //                        Label("Pesanan", systemImage: "list.bullet.clipboard.fill")
-                        Image(systemName: "list.bullet.clipboard.fill").font(.largeTitle)
+                        Image(systemName: "list.bullet.clipboard.fill").font(.system(size: 40))
                         Text("Pesanan")
                         
                     }
