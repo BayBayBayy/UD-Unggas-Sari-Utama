@@ -17,15 +17,15 @@ struct TabButtonActionStok: View {
                     .frame(width: geometry.size.width/2.5, height: geometry.size.height/1)
                 HStack{
                     
-                    Button {
-                        self.check.toggle()
+                    NavigationLink {
+                        LaporanStokView()
                     } label: {
                         ZStack{
                             RoundedRectangle(cornerRadius: 8)
-                                .fill(Color("GrayMiddleColor"))
+                                .fill(Color("OrangeColorSet"))
                                 .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
                             VStack {
-                                Text("Laporan Stok")
+                                Text("Laporan")
                                     .foregroundColor(.black)
                                     .font(.system(size: 16))
                                     .bold()
@@ -41,7 +41,7 @@ struct TabButtonActionStok: View {
                     } label: {
                         ZStack{
                             RoundedRectangle(cornerRadius: 8)
-                                .fill(Color("GrayMiddleColor"))
+                                .fill(Color("OrangeColorSet"))
                                 .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
                                
                             VStack {
@@ -61,7 +61,7 @@ struct TabButtonActionStok: View {
                     } label: {
                         ZStack{
                             RoundedRectangle(cornerRadius: 8)
-                                .fill(Color("GrayMiddleColor"))
+                                .fill(Color("OrangeColorSet"))
                                 .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
                             VStack {
                                 Text("Input Barang Baru")
@@ -80,7 +80,7 @@ struct TabButtonActionStok: View {
                     } label: {
                         ZStack{
                             RoundedRectangle(cornerRadius: 8)
-                                .fill(Color("GrayMiddleColor"))
+                                .fill(Color("OrangeColorSet"))
                                 .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
                             VStack {
                                 Text("Konversi Stok")

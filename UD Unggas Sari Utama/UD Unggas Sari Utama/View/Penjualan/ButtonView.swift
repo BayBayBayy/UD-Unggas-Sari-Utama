@@ -12,12 +12,12 @@ struct ButtonView: View {
     var body: some View {
         GeometryReader{ geometry in
             HStack{
-                Button {
-                    self.check.toggle()
+                NavigationLink {
+                    LaporanPenjualanView()
                 } label: {
                     ZStack{
                         RoundedRectangle(cornerRadius: 8)
-                            .fill(Color("GrayMiddleColor"))
+                            .fill(Color("OrangeColorSet"))
                             .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
                         VStack {
                             Text("Laporan")
@@ -31,12 +31,12 @@ struct ButtonView: View {
                     .cornerRadius(8)
                 }
                 
-                Button {
-                    self.check.toggle()
+                NavigationLink {
+                    HistoriPenjualanView()
                 } label: {
                     ZStack{
                         RoundedRectangle(cornerRadius: 8)
-                            .fill(Color("GrayMiddleColor"))
+                            .fill(Color("OrangeColorSet"))
                             .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
                         VStack {
                             Text("Histori")

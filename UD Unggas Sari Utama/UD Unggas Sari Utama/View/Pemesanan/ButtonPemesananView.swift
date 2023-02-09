@@ -13,13 +13,14 @@ struct ButtonPemesananView: View {
         GeometryReader{ geometry in
             HStack{
                 Spacer()
-                    .frame(width: geometry.size.width/1.5)
-                Button {
-                    self.check.toggle()
+                    .frame(width: geometry.size.width/1.25)
+                
+                NavigationLink {
+                    LaporanPemesananView()
                 } label: {
                     ZStack{
                         RoundedRectangle(cornerRadius: 8)
-                            .fill(Color("GrayMiddleColor"))
+                            .fill(Color("OrangeColorSet"))
                             .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
                         VStack {
                             Text("Laporan")
@@ -32,7 +33,7 @@ struct ButtonPemesananView: View {
                     .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
                     .cornerRadius(8)
                 }
-            } .frame(width: geometry.size.width/1, height: geometry.size.height/8)
+            } .frame(width: geometry.size.width/1, height: geometry.size.height/0.65)
         }.edgesIgnoringSafeArea(.all)
     }
 }

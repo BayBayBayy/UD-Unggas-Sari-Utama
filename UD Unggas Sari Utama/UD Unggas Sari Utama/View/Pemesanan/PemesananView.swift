@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct PemesananView: View {
+    @State var favoriteCards: [produkDummy] = produkDummy.sampleData
+
     var body: some View {
         if #available(iOS 16.0, *) {
             GeometryReader{ geometry in
                 NavigationStack{
                     VStack{
-                        Spacer()
-                            .frame(width: geometry.size.width/1, height: geometry.size.height/10)
                         ButtonPemesananView()
                             .frame(width: geometry.size.width/1, height: geometry.size.height/14, alignment: .bottom)
+//                        cardPView()?
                         Spacer()
                             .frame(width: geometry.size.width/1, height: geometry.size.height/1.3)
                             .background(.blue)
@@ -25,20 +26,13 @@ struct PemesananView: View {
                 }
                 .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                 .background(Color("GrayBackgroundColor"))
+                .accentColor(Color("OrangeColorSet"))
             }
             
             .edgesIgnoringSafeArea(.all)
             .ignoresSafeArea()
-            
-            
         } else{
             // not allowed
         }
-    }
-}
-
-struct PemesananView_Previews: PreviewProvider {
-    static var previews: some View {
-        PemesananView()
     }
 }

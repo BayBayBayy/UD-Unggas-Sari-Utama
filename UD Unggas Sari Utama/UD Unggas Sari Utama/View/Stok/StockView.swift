@@ -25,6 +25,7 @@ struct StockView: View {
                     .navigationTitle("Stok")
                 }
                 .frame(width: geometry.size.width/1, height: geometry.size.height/1)
+                .accentColor(Color("OrangeColorSet"))
             }
             .edgesIgnoringSafeArea(.all)
             .ignoresSafeArea() 

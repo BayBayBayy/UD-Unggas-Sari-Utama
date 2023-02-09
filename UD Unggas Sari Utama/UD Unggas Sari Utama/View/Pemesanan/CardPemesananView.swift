@@ -1,16 +1,17 @@
 //
-//  CardProdukView.swift
+//  CardPemesananView.swift
 //  UD Unggas Sari Utama
 //
-//  Created by I Wayan Adnyana on 06/02/23.
+//  Created by I Wayan Adnyana on 09/02/23.
 //
 
 import SwiftUI
 
-struct CardProdukView: View {
-    @State var favoriteCards: [produkDummy] = produkDummy.sampleData
+struct CardPemesananView: View {
+    @State var dummy: [pesananDummy] = pesananDummy.sampleData
     @State var check: Bool = false
     let columns = [
+        GridItem(.flexible()),
         GridItem(.flexible()),
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -20,9 +21,9 @@ struct CardProdukView: View {
             VStack{
                 ScrollView{
                     LazyVGrid(columns: columns, alignment: .center, spacing: 10){
-                        ForEach(favoriteCards, id:\.self){ card in
+                        ForEach(dummy, id:\.self){ card in
                             
-                            cardView(card: card, check: $check)
+                            cardPView(card: card, check: $check)
                                 .frame(width: geometry.size.width/3.5, height: geometry.size.height/4)
                                 .padding()
                             
@@ -41,8 +42,8 @@ struct CardProdukView: View {
     }
 }
 
-struct cardView : View{
-    var card: produkDummy
+struct cardPView : View{
+    var card: pesananDummy
     @Binding var check: Bool
     var body: some View{
         GeometryReader{ geometry in
@@ -64,11 +65,13 @@ struct cardView : View{
                             .padding()
                     } .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                     VStack{
-                        Image(card.image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: geometry.size.width/2.2, height: geometry.size.height/2)
-                        
+                        Text(card.urutanPesanan)
+                            .multilineTextAlignment(.leading)
+                            .font(.title)
+                            .foregroundColor(.black)
+                            .frame(width: geometry.size.width/1.1, height: geometry.size.height/4)
+                            .lineLimit(2)
+ 
                         Text(card.nama)
                             .multilineTextAlignment(.leading)
                             .font(.title3)

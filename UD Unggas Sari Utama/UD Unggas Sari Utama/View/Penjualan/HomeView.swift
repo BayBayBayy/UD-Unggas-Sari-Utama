@@ -20,12 +20,15 @@ struct HomeView: View {
                         
                         HStack{
                             CardProdukView()
-                                .frame(width: geometry.size.width/1.5, height: geometry.size.height/1.75)
+                                .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
                             Spacer()
                                 .frame(width: 10)
-                            Spacer()
-                                .frame(width: geometry.size.width/3.5, height: geometry.size.height/1.75)
-                                .background(.green)
+                            ShoppingChartView()
+                                .frame(width: geometry.size.width/2.75, height: geometry.size.height/1.75)
+                                .background(Color("GrayContentColor"))
+                                .overlay(RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color(.sRGB, red: 150/255, green: 150/255, blue: 150/255), lineWidth: 1)
+                                    .shadow(radius: 1))
                         }.frame(width: geometry.size.width/1, height: geometry.size.height/1.75)
                         
                         Spacer()
@@ -37,7 +40,9 @@ struct HomeView: View {
                     .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                     .background(Color("GrayBackgroundColor"))
                     .navigationTitle("UD. Amerta Yoga")
-                }.frame(width: geometry.size.width/1, height: geometry.size.height/1)
+                }
+                .frame(width: geometry.size.width/1, height: geometry.size.height/1)
+                .accentColor(Color("OrangeColorSet"))
             }
             .edgesIgnoringSafeArea(.all)
             .ignoresSafeArea()
