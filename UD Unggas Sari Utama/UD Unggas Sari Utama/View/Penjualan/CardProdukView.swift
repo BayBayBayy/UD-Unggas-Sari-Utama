@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CardProdukView: View {
     @State var favoriteCards: [produkDummy] = produkDummy.sampleData
-    @State var check: Bool = false
+    @Binding var check: Bool
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),

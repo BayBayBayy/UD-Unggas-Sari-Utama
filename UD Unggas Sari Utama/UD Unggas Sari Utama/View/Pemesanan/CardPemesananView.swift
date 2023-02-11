@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CardPemesananView: View {
     @State var dummy: [pesananDummy] = pesananDummy.sampleData
-    @State var check: Bool = false
+    @Binding var check: Bool
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -23,8 +23,8 @@ struct CardPemesananView: View {
                     LazyVGrid(columns: columns, alignment: .center, spacing: 10){
                         ForEach(dummy, id:\.self){ card in
                             
-                            cardPView(card: card, check: $check)
-                                .frame(width: geometry.size.width/3.5, height: geometry.size.height/4)
+                            cardPView(cards: card, check: $check)
+                                .frame(width: geometry.size.width/4.5, height: geometry.size.height/5)
                                 .padding()
                             
                         }
@@ -43,7 +43,7 @@ struct CardPemesananView: View {
 }
 
 struct cardPView : View{
-    var card: pesananDummy
+    var cards: pesananDummy
     @Binding var check: Bool
     var body: some View{
         GeometryReader{ geometry in
@@ -65,16 +65,22 @@ struct cardPView : View{
                             .padding()
                     } .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                     VStack{
-                        Text(card.urutanPesanan)
+                        Spacer()
+                            .frame(width: geometry.size.width/1, height: geometry.size.height/10)
+                        Text(cards.urutanPesanan)
                             .multilineTextAlignment(.leading)
-                            .font(.title)
+                            .bold()
+                            .font(.system(size: 60))
                             .foregroundColor(.black)
                             .frame(width: geometry.size.width/1.1, height: geometry.size.height/4)
                             .lineLimit(2)
- 
-                        Text(card.nama)
+                        
+                        Spacer()
+                            .frame(width: geometry.size.width/1, height: geometry.size.height/4)
+                        Text(cards.nama)
                             .multilineTextAlignment(.leading)
-                            .font(.title3)
+                            .bold()
+                            .font(.system(size: 32))
                             .foregroundColor(.black)
                             .frame(width: geometry.size.width/1.1, height: geometry.size.height/4)
                             .lineLimit(2)

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ShoppingChartView: View {
-    @State var showPesanan: Bool = false
+    @Binding var showPesanan: Bool
     var body: some View {
         GeometryReader{ geometry in
             VStack{
@@ -91,11 +91,5 @@ struct ShoppingChartView: View {
                 }.frame(width: geometry.size.width/1.1, height: geometry.size.height/4)
             }.frame(width: geometry.size.width/1, height: geometry.size.height/1)
         }.edgesIgnoringSafeArea(.all)
-    }
-}
-
-struct ShoppingChartView_Previews: PreviewProvider {
-    static var previews: some View {
-        ShoppingChartView()
     }
 }

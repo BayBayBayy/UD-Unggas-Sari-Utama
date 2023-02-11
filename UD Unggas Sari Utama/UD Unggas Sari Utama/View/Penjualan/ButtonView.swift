@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ButtonView: View {
-    @State var check: Bool = false
+    @Binding var checkOk: Bool
+    @Binding var buttonValue: Int
+
     var body: some View {
         GeometryReader{ geometry in
             HStack{
@@ -54,7 +56,8 @@ struct ButtonView: View {
                     .frame(width: geometry.size.width/1.75)
                 
                 Button {
-                    self.check.toggle()
+                    self.checkOk.toggle()
+                    buttonValue = 1
                 } label: {
                     ZStack{
                         RoundedRectangle(cornerRadius: 8)
@@ -77,8 +80,3 @@ struct ButtonView: View {
     }
 }
 
-struct ButtonView_Previews: PreviewProvider {
-    static var previews: some View {
-        ButtonView()
-    }
-}

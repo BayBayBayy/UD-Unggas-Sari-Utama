@@ -69,6 +69,7 @@ struct StokOpnamePopupView: View {
              TextField("", text: $jumlah)
          }
          .textFieldStyle(.roundedBorder)
+         .keyboardType(.numberPad)
     
      }
      var fieldKeterangan : some View{

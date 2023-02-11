@@ -17,22 +17,33 @@ struct KonversiPopupView: View {
             ZStack{
                 RoundedRectangle(cornerRadius: 8)
                     .fill(Color("GrayMiddleColor"))
-                    .frame(width: geometry.size.width/1.1, height: geometry.size.height/1)
+                    .frame(width: geometry.size.width/1, height: geometry.size.height/0.9)
                     .border(Color(.black))
                 VStack (alignment: .center, spacing: .zero) {
                     
                     title
-                        . frame( height: geometry.size.height/8)
-                    Text("Ubah dari")
+                        . frame( height: geometry.size.height/6)
+                    HStack{
+                        Text("Ubah dari")
+                            .bold()
+                            .font(.system(size: 28))
+                        Spacer()
+                    }.frame( height: geometry.size.height/10)
+                    
                     PickerProduk()
                         . frame( height: geometry.size.height/6)
                     fieldJumlahSebelum
-                        . frame( height: geometry.size.height/6)
-                    Text("Menjadi")
+                        . frame( height: geometry.size.height/8)
+                    HStack{
+                        Text("Menjadi")
+                            .bold()
+                            .font(.system(size: 28))
+                        Spacer()
+                    }.frame( height: geometry.size.height/10)
                     PickerProduk()
                         . frame( height: geometry.size.height/6)
                     fieldJumlahSetelah
-                        . frame( height: geometry.size.height/6)
+                        . frame( height: geometry.size.height/8)
                     Button(action: generateStokOpname) {
                         ZStack{
                             RoundedRectangle(cornerRadius: 8)
@@ -57,7 +68,7 @@ struct KonversiPopupView: View {
 
 extension KonversiPopupView {
     var title : some View{
-        Text("Stok Opname")
+        Text("Konversi Stok")
             .bold()
             .font(.system(size: 40))
     }

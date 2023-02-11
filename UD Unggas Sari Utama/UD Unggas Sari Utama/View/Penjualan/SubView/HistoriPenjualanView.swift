@@ -15,9 +15,9 @@ struct HistoriPenjualanView: View {
         GeometryReader{ geometry in
             VStack{
                 Table(Person.people) {
-                    TableColumn("Given Name", value: \.hargaTotal)
-                        TableColumn("Family Name", value: \.tanggal)
-                        TableColumn("E-Mail address", value: \.opsi)
+                    TableColumn("No Penjualan", value: \.hargaTotal)
+                        TableColumn("Tanggal Penjualan", value: \.tanggal)
+                        TableColumn("Detail", value: \.opsi)
                 } .frame(width: geometry.size.width/1, height: geometry.size.height/1.5)
                 Spacer()
                     .frame(width: geometry.size.width/1, height: geometry.size.height/8)

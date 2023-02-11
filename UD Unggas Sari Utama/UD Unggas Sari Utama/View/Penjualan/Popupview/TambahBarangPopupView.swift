@@ -1,36 +1,48 @@
 //
-//  TambahkanPesananPopupView.swift
+//  TambahBarangPopupView.swift
 //  UD Unggas Sari Utama
 //
-//  Created by I Wayan Adnyana on 06/02/23.
+//  Created by I Wayan Adnyana on 11/02/23.
 //
 
 import SwiftUI
 
-struct TambahkanPesananPopupView: View {
-    @State var namaPemesan: String = ""
-    @State var noHp: String = ""
-    @State var dpDibayar: String = ""
-    @State var selectedDate = Date()
+struct TambahBarangPopupView: View {
+    @State var jumlahBarang: String = ""
     
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
                 RoundedRectangle(cornerRadius: 8)
                     .fill(Color("GrayMiddleColor"))
-                    .frame(width: geometry.size.width/1.1, height: geometry.size.height/1.1)
+                    .frame(width: geometry.size.width/1.1, height: geometry.size.height/1.3)
                     .border(Color(.black))
                 VStack (alignment: .center, spacing: .zero) {
                     title
                         .frame( height: geometry.size.height/6)
-                    nama
-                        .frame( height: geometry.size.height/8)
-                    no
-                        .frame( height: geometry.size.height/8)
-                    dp
-                        .frame( height: geometry.size.height/8)
-                    tanggal
-                        .frame( height: geometry.size.height/8)
+                    HStack{
+                        Text("Nama :")
+                        Spacer()
+                            .frame(width: geometry.size.width/18)
+                        Text("nama barang")
+                            .bold()
+                        Spacer()
+                    }.frame( height: geometry.size.height/7)
+                    HStack{
+                        Text("Harga :")
+                        Spacer()
+                            .frame(width: geometry.size.width/18)
+                        Text("harga barang")
+                            .bold()
+                        Spacer()
+                    }.frame( height: geometry.size.height/7)
+                    HStack{
+                        jumlah
+                            .frame(width: geometry.size.width/1.6)
+                        Text("Satuan")
+                            .frame(width: geometry.size.width/6)
+                        Spacer()
+                    }.frame( height: geometry.size.height/7)
                     Button(action: generatePesanan) {
                         ZStack{
                             RoundedRectangle(cornerRadius: 8)
@@ -47,46 +59,20 @@ struct TambahkanPesananPopupView: View {
                 }.frame( width: geometry.size.width/1.2, height: geometry.size.height/1.2)
             }.frame( width: geometry.size.width/1, height: geometry.size.height/1)
         }.edgesIgnoringSafeArea(.all)
-        
     }
 }
 
-extension TambahkanPesananPopupView{
+extension TambahBarangPopupView{
     var title : some View{
-        Text("Pesanan")
+        Text("Tambahkan ke List Belanja")
             .bold()
             .font(.system(size: 40))
     }
-    var nama : some View{
+    var jumlah : some View{
         HStack{
-            Text("Nama :")
-            TextField("", text: $namaPemesan)
+            Text("jumlah :")
+            TextField("", text: $jumlahBarang)
         }
         .textFieldStyle(.roundedBorder)
     }
-   var no : some View{
-       HStack{
-           Text("No HP :")
-           TextField("", text: $noHp)
-       }
-       .textFieldStyle(.roundedBorder)
-   }
-    var dp : some View{
-        HStack{
-            Text("DP Dibayar :")
-            TextField("", text: $dpDibayar)
-        }
-        .textFieldStyle(.roundedBorder)
-    }
-    var tanggal : some View{
-        HStack{
-            Text("Tanggal Prngambilan :")
-            DatePicker("", selection: $selectedDate, displayedComponents: .date)
-        }
-        .textFieldStyle(.roundedBorder)
-    }
-}
-
-func generatePesanan(){
-    
 }

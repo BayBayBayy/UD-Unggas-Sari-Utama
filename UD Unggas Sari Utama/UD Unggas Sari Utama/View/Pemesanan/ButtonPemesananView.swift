@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ButtonPemesananView: View {
-    @State var check: Bool = false
     var body: some View {
         GeometryReader{ geometry in
             HStack{

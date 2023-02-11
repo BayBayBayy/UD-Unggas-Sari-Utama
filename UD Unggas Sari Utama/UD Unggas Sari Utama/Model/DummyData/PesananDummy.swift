@@ -17,5 +17,7 @@ extension pesananDummy{
     [pesananDummy(nama: "Pak yan", urutanPesanan: "#1"),
      pesananDummy(nama: "pak tut", urutanPesanan: "#2"),
      pesananDummy(nama: "pak man", urutanPesanan: "#3"),
-     pesananDummy(nama: "pak ngah", urutanPesanan: "#4")]
+     pesananDummy(nama: "pak ngah", urutanPesanan: "#4"),
+     pesananDummy(nama: "pak ngah", urutanPesanan: "#5"),
+     pesananDummy(nama: "pak ngah", urutanPesanan: "#6")]
 }

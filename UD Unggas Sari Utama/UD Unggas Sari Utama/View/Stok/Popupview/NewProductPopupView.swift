@@ -19,22 +19,22 @@ struct NewProductPopupView: View {
             ZStack{
                 RoundedRectangle(cornerRadius: 8)
                     .fill(Color("GrayMiddleColor"))
-                    .frame(width: geometry.size.width/1.1, height: geometry.size.height/1)
+                    .frame(width: geometry.size.width/1.2, height: geometry.size.height/1)
                     .border(Color(.black))
                 VStack (alignment: .center, spacing: .zero) {
                     
                     title
-                        . frame( height: geometry.size.height/8)
+                        . frame( height: geometry.size.height/6)
                     nama
-                        . frame( height: geometry.size.height/6)
+                        . frame( height: geometry.size.height/8)
                     satuan
-                        . frame( height: geometry.size.height/6)
+                        . frame( height: geometry.size.height/8)
                     kategori
-                        . frame( height: geometry.size.height/6)
+                        . frame( height: geometry.size.height/8)
                     harga
-                        . frame( height: geometry.size.height/6)
+                        . frame( height: geometry.size.height/8)
                     jumlah
-                        . frame( height: geometry.size.height/6)
+                        . frame( height: geometry.size.height/8)
                     Button(action: generateStokOpname) {
                         ZStack{
                             RoundedRectangle(cornerRadius: 8)
@@ -48,7 +48,7 @@ struct NewProductPopupView: View {
                         }
                         . frame( width: geometry.size.width/8, height: geometry.size.height/12)
                     }  
-                }.frame(width: geometry.size.width/1.2, height: geometry.size.height/1.2)
+                }.frame(width: geometry.size.width/1.5, height: geometry.size.height/1.5)
             }.frame(width: geometry.size.width/1, height: geometry.size.height/1)
         }.edgesIgnoringSafeArea(.all)
     }
