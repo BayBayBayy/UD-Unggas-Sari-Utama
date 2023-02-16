@@ -16,9 +16,6 @@ struct TabBarView: View {
         tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor(.white)]
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         UITabBar.appearance().standardAppearance = tabBarAppearance
-        
-        UITabBar.appearance().backgroundColor = UIColor(Color("colourPurple"))
-        UITabBar.appearance().unselectedItemTintColor = UIColor(Color("colourLightPurple"))
     }
     
     var body: some View {

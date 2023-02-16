@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct Person: Identifiable {
+    let idP: String
     let hargaTotal: String
     let tanggal: String
     let opsi: String
@@ -17,7 +18,7 @@ struct Person: Identifiable {
 
 extension Person{
     static var people: [Person] = [
-        Person(hargaTotal: "19000", tanggal: "19122022", opsi: "ButtonPemesananView()")
+        Person(idP:"PJ0001",hargaTotal: "19000", tanggal: "19122022", opsi: "ButtonPemesananView()")
 
     ]
 }

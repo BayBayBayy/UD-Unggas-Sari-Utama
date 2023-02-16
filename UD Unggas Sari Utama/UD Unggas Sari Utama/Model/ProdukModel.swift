@@ -7,20 +7,20 @@
 
 import Foundation
 
-struct produk{
-    var id = UUID()
-    var nama : String
-    var satuan : String
-    var kategori : String
-    var harga : Int
-    var jumlah : Int
-    var tanggalMasuk : Date
-}
-struct stokProduk{
-    var produkId = UUID()
-    var totalProduk : Int
-    var produkTerkini : Int
-    var produkTerjual : Int
-    var produkRusak : Int
-    var produkSisa : Int
-}
+//struct produk{
+//    var id = UUID()
+//    var nama : String
+//    var satuan : String
+//    var kategori : String
+//    var harga : Int
+//    var jumlah : Int
+//    var tanggalMasuk : Date
+//}
+//struct stokProduk{
+//    var produkId = UUID()
+//    var totalProduk : Int
+//    var produkTerkini : Int
+//    var produkTerjual : Int
+//    var produkRusak : Int
+//    var produkSisa : Int
+//}
