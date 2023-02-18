@@ -17,6 +17,7 @@
 		4C65EF80298EB12300D7182A /* TabButtonActionStok.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C65EF7F298EB12300D7182A /* TabButtonActionStok.swift */; };
 		4C65EF82298EB73700D7182A /* KonversiPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C65EF81298EB73700D7182A /* KonversiPopupView.swift */; };
 		4C65EF84298EC79400D7182A /* NewProductPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C65EF83298EC79400D7182A /* NewProductPopupView.swift */; };
+		4C6FB75329A0D178003E3A7C /* GetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6FB75229A0D178003E3A7C /* GetData.swift */; };
 		4C6FF6E3298E4E7C001FE696 /* PickerProduk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6FF6E2298E4E7C001FE696 /* PickerProduk.swift */; };
 		4C7D6900297A2B9C003A9949 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D68FF297A2B9C003A9949 /* TabBarView.swift */; };
 		4C7D6907297B9B06003A9949 /* PemesananView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D6906297B9B06003A9949 /* PemesananView.swift */; };
@@ -37,6 +38,7 @@
 		4C9529E22993FAD1000042D0 /* ShoppingChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9529E12993FAD1000042D0 /* ShoppingChartView.swift */; };
 		4C9529E72994999E000042D0 /* DummyPemesananModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9529E62994999E000042D0 /* DummyPemesananModel.swift */; };
 		4C9529EA29949B39000042D0 /* ButtonActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9529E929949B39000042D0 /* ButtonActionView.swift */; };
+		4C9B3A1529A0E06700C25F99 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B3A1429A0E06700C25F99 /* test.swift */; };
 		4CAA87B3299D44DC0093FF76 /* ProdukDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAA87B2299D44DC0093FF76 /* ProdukDataResponse.swift */; };
 		4CAA87B8299D49FD0093FF76 /* ProdukViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAA87B7299D49FD0093FF76 /* ProdukViewModel.swift */; };
 		4CAA87BA299DCD6B0093FF76 /* DataProdukView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAA87B9299DCD6B0093FF76 /* DataProdukView.swift */; };
@@ -59,6 +61,7 @@
 		4C65EF7F298EB12300D7182A /* TabButtonActionStok.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabButtonActionStok.swift; sourceTree = "<group>"; };
 		4C65EF81298EB73700D7182A /* KonversiPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KonversiPopupView.swift; sourceTree = "<group>"; };
 		4C65EF83298EC79400D7182A /* NewProductPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProductPopupView.swift; sourceTree = "<group>"; };
+		4C6FB75229A0D178003E3A7C /* GetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetData.swift; sourceTree = "<group>"; };
 		4C6FF6E2298E4E7C001FE696 /* PickerProduk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerProduk.swift; sourceTree = "<group>"; };
 		4C7D68FF297A2B9C003A9949 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		4C7D6906297B9B06003A9949 /* PemesananView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PemesananView.swift; sourceTree = "<group>"; };
@@ -79,6 +82,8 @@
 		4C9529E12993FAD1000042D0 /* ShoppingChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingChartView.swift; sourceTree = "<group>"; };
 		4C9529E62994999E000042D0 /* DummyPemesananModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyPemesananModel.swift; sourceTree = "<group>"; };
 		4C9529E929949B39000042D0 /* ButtonActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonActionView.swift; sourceTree = "<group>"; };
+		4C9B3A1429A0E06700C25F99 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
+		4C9B3A1629A0F0C800C25F99 /* UD Unggas Sari Utama.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UD Unggas Sari Utama.entitlements"; sourceTree = "<group>"; };
 		4CAA87AB299BDF6D0093FF76 /* UD-Unggas-Sari-Utama-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "UD-Unggas-Sari-Utama-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4CAA87B2299D44DC0093FF76 /* ProdukDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdukDataResponse.swift; sourceTree = "<group>"; };
 		4CAA87B7299D49FD0093FF76 /* ProdukViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdukViewModel.swift; sourceTree = "<group>"; };
@@ -104,6 +109,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C3202A729A0DD45001D2C84 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4C5DACD9298D54EA00CA04D1 /* Penjualan */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				4CAA87B2299D44DC0093FF76 /* ProdukDataResponse.swift */,
+				4C6FB75229A0D178003E3A7C /* GetData.swift */,
 			);
 			path = RequestData;
 			sourceTree = "<group>";
@@ -258,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				4CAA87B7299D49FD0093FF76 /* ProdukViewModel.swift */,
+				4C9B3A1429A0E06700C25F99 /* test.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -267,6 +281,7 @@
 			children = (
 				4CC94280295C0257006725E9 /* UD Unggas Sari Utama */,
 				4CC9427F295C0257006725E9 /* Products */,
+				4C3202A729A0DD45001D2C84 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -281,6 +296,7 @@
 		4CC94280295C0257006725E9 /* UD Unggas Sari Utama */ = {
 			isa = PBXGroup;
 			children = (
+				4C9B3A1629A0F0C800C25F99 /* UD Unggas Sari Utama.entitlements */,
 				4CAA87AB299BDF6D0093FF76 /* UD-Unggas-Sari-Utama-Info.plist */,
 				4CAA87B4299D46300093FF76 /* ViewModel */,
 				4C5DACDB298D551500CA04D1 /* Main */,
@@ -320,6 +336,8 @@
 			dependencies = (
 			);
 			name = "UD Unggas Sari Utama";
+			packageProductDependencies = (
+			);
 			productName = "UD Unggas Sari Utama";
 			productReference = 4CC9427E295C0257006725E9 /* UD Unggas Sari Utama.app */;
 			productType = "com.apple.product-type.application";
@@ -348,6 +366,9 @@
 				Base,
 			);
 			mainGroup = 4CC94275295C0257006725E9;
+			packageReferences = (
+				4C6FB75429A0DC3E003E3A7C /* XCRemoteSwiftPackageReference "mysql" */,
+			);
 			productRefGroup = 4CC9427F295C0257006725E9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -385,10 +406,12 @@
 				4C9529E72994999E000042D0 /* DummyPemesananModel.swift in Sources */,
 				4C9529DA2993F053000042D0 /* LaporanPemesananView.swift in Sources */,
 				4C852C4A2995418300655137 /* CardPemesananView.swift in Sources */,
+				4C6FB75329A0D178003E3A7C /* GetData.swift in Sources */,
 				4C853C80298CDE91004FA781 /* StokOpnamePopupView.swift in Sources */,
 				4C6209EA2980C078007BE841 /* ProdukModel.swift in Sources */,
 				4C7D690B297B9BF9003A9949 /* HomeView.swift in Sources */,
 				4CAA87B3299D44DC0093FF76 /* ProdukDataResponse.swift in Sources */,
+				4C9B3A1529A0E06700C25F99 /* test.swift in Sources */,
 				4C945DC52991543100D5CA5A /* CardProdukView.swift in Sources */,
 				4C6273602997810A00DA8595 /* TambahBarangPopupView.swift in Sources */,
 				4CC9428B295C0259006725E9 /* Persistence.swift in Sources */,
@@ -536,6 +559,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "UD Unggas Sari Utama/UD Unggas Sari Utama.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"UD Unggas Sari Utama/Preview Content\"";
@@ -570,6 +594,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "UD Unggas Sari Utama/UD Unggas Sari Utama.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"UD Unggas Sari Utama/Preview Content\"";
@@ -621,6 +646,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4C6FB75429A0DC3E003E3A7C /* XCRemoteSwiftPackageReference "mysql" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vapor/mysql.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCVersionGroup section */
 		4CC9428C295C0259006725E9 /* UD_Unggas_Sari_Utama.xcdatamodeld */ = {
