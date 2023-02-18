@@ -71,7 +71,7 @@ struct HomeView: View {
                         
                  // Popup View
                         if self.check == true && value == 1{
-                            PembayaranPopupView()
+                            PembayaranPopupView(close: $check)
                                 .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
                         }else if checkPesanan == true{
                             TambahkanPesananPopupView()

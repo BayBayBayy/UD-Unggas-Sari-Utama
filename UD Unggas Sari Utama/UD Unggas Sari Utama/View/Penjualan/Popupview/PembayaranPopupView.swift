@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PembayaranPopupView: View {
+    @Binding var close: Bool
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
@@ -24,19 +25,21 @@ struct PembayaranPopupView: View {
                         .lineLimit(3)
                         .frame(width: geometry.size.width/3, height: geometry.size.height/6)
                     HStack{
-                        Button(action: pembelianBarang) {
-                            ZStack{
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(Color("GrayMiddleColor"))
-                                    . frame( width: geometry.size.width/8, height: geometry.size.height/12)
-                                    .cornerRadius(8)
-                                    .border(Color.black, width: 2)
-                                Text("OK")
-                                    .bold()
-                                    .font(.title2)
-                            }
-                            .frame( width: geometry.size.width/8, height: geometry.size.height/12)
+                        Button{
+                            dismiss()
+                        } label: {
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color("GrayMiddleColor"))
+                                . frame( width: geometry.size.width/8, height: geometry.size.height/12)
+                                .cornerRadius(8)
+                                .border(Color.black, width: 2)
+                            Text("OK")
+                                .bold()
+                                .font(.title2)
                         }
+                        .frame( width: geometry.size.width/8, height: geometry.size.height/12)
+                    }
                         Spacer()
                             .frame( width: geometry.size.width/20)
                         
@@ -58,6 +61,9 @@ struct PembayaranPopupView: View {
                 }.frame( width: geometry.size.width/0.9, height: geometry.size.height/0.9)
             }.frame( width: geometry.size.width/1, height: geometry.size.height/1)
         }.edgesIgnoringSafeArea(.all)
+    }
+    func dismiss(){
+        self.close = false
     }
 }
 

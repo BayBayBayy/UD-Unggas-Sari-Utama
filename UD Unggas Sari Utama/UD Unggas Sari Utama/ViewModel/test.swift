@@ -8,17 +8,22 @@
 import SwiftUI
 
 struct test: View {
-    @StateObject var viewModel = ProdukViewModel(produkFetcher: ProdukFetcher())
+    @ObservedObject var viewModel = ProdukFetcher()
         
         var body: some View {
-            List(viewModel.dataTest) { produk in
-                VStack(alignment: .leading) {
-                    Text(produk.nama_produk)
-                    Text("Rp. \(produk.harga)")
+            NavigationStack{
+                List(viewModel.produk) { item in
+                    VStack(alignment: .leading) {
+                        Text(item.nama_produk)
+                            .font(.headline)
+                        Text("$\(item.harga)")
+                            .font(.subheadline)
+                    }
                 }
+                .navigationBarTitle("Items")
             }
             .onAppear {
-                viewModel.fetchProduk()
+                viewModel.fetchData()
             }
         }
 }

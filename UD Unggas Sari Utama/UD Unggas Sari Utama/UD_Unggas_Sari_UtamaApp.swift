@@ -13,8 +13,8 @@ struct UD_Unggas_Sari_UtamaApp: App {
 
     var body: some Scene {
         WindowGroup {
-//            TabBarView()
-            test()
+            TabBarView()
+//            test()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

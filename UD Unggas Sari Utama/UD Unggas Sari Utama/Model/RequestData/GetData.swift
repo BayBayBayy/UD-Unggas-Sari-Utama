@@ -10,6 +10,10 @@ import Foundation
 class ProdukFetcher: ObservableObject {
     @Published var produk: [ProdukResponseModel] = []
     
+    init(){
+        fetchData()
+    }
+    
     func fetchData() {
         guard let url = URL(string: "https://indramaryati.com/bayu/service.php") else {
             print("Invalid URL")
@@ -33,19 +37,6 @@ class ProdukFetcher: ObservableObject {
                 print("Error decoding JSON:", error)
             }
         }.resume()
-    }
-}
-
-class ProdukViewModel: ObservableObject {
-    @Published var dataTest: [ProdukResponseModel] = []
-    private var produkFetcher: ProdukFetcher
-    
-    init(produkFetcher: ProdukFetcher) {
-        self.produkFetcher = produkFetcher
-    }
-    
-    func fetchProduk() {
-        produkFetcher.fetchData()
     }
 }
 

@@ -1,34 +1,76 @@
-////
-////  DataProdukView.swift
-////  UD Unggas Sari Utama
-////
-////  Created by I Wayan Adnyana on 16/02/23.
-////
 //
-//import SwiftUI
+//  DataProdukView.swift
+//  UD Unggas Sari Utama
 //
-//struct DataProdukView: View{
-//    @EnvironmentObject var viewModel: produkViewModel
-//    var body: some View{
-//        GeometryReader{ geometry in
-//            VStack{
-//                Table(viewModel.items, id: \.idProduk) {
-//                    TableColumn("No Produk", value: \.idProduk)
-//                    TableColumn("nama", value: \.namaProduk)
-//                    TableColumn("satuan", value: \.satuan)
-//                    TableColumn("kategori", value: \.produkKategori)
-//                    TableColumn("image", value: \.imageProduk)
-//                    TableColumn("jumlah", value: \.jumlahProduk)
-//                    TableColumn("harga", value: \.harga)
-//                    TableColumn("tanggal", value: \.tanggalProduk)
-//                } .frame(width: geometry.size.width/1, height: geometry.size.height/1.5)
-//                Spacer()
-//                    .frame(width: geometry.size.width/1, height: geometry.size.height/8)
-//            }.task({
-//                await viewModel.fetchData()
-//            })
-//            .frame(width: geometry.size.width/1, height: geometry.size.height/1)
-//        }.edgesIgnoringSafeArea(.all)
-//    }
-//}
+//  Created by I Wayan Adnyana on 16/02/23.
 //
+
+import SwiftUI
+
+struct DataProdukView: View{
+    @ObservedObject var viewModel = ProdukFetcher()
+    let columns = [
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible())
+        ]
+        var body: some View {
+//            List(viewModel.produk, id: \.id) { product in
+//                HStack {
+//                    Text(product.id)
+//                    Text(product.nama_produk)
+//                    Text(product.satuan)
+//                    Text(product.produk_kategori)
+//                    Text(product.image)
+//                    Text("\(product.harga)")
+//                    Text("\(product.jumlah_produk)")
+//                    Text("\(product.tanggal_masuk_produk)")
+//                }
+//            }
+            ScrollView {
+                LazyVGrid(columns: columns) {
+                    ForEach(viewModel.produk) { product in
+                        VStack {
+                            Text(product.id)
+                                .font(.headline)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Text(product.nama_produk)
+                                .font(.subheadline)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Text(product.satuan)
+                                .font(.subheadline)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Text(product.produk_kategori)
+                                .font(.subheadline)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Text(product.image)
+                                .font(.subheadline)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Text("\(product.harga)")
+                                .font(.subheadline)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Text("\(product.jumlah_produk)")
+                                .font(.subheadline)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Text("\(product.tanggal_masuk_produk)")
+                                .font(.subheadline)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        .padding(16)
+                        .background(Color.white)
+                        .cornerRadius(8)
+                        .shadow(radius: 4)
+                    }
+                }
+                .padding(.horizontal, 16)
+                .padding(.top, 16)
+                .padding(.bottom, 32)
+            }
+        }
+}
+

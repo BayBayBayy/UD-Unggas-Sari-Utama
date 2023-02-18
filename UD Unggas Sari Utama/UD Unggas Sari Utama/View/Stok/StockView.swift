@@ -18,7 +18,7 @@ struct StockView: View {
                         VStack{
                             TabButtonActionStok(check: $check, valuePopup: $keyValueButton)
                                 .frame(width: geometry.size.width/1, height: geometry.size.height/14, alignment: .bottom)
-                            Spacer()
+                            DataProdukView()
                                 .frame(width: geometry.size.width/1, height: geometry.size.height/1.3)
                                 .background(.red)
                               

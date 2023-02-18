@@ -48,6 +48,7 @@
 		4CC94289295C0259006725E9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CC94288295C0259006725E9 /* Preview Assets.xcassets */; };
 		4CC9428B295C0259006725E9 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC9428A295C0259006725E9 /* Persistence.swift */; };
 		4CC9428E295C0259006725E9 /* UD_Unggas_Sari_Utama.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CC9428C295C0259006725E9 /* UD_Unggas_Sari_Utama.xcdatamodeld */; };
+		4CD5836729A1469F00737066 /* SetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5836629A1469F00737066 /* SetUpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,7 @@
 		4CC9428A295C0259006725E9 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		4CC9428D295C0259006725E9 /* UD_Unggas_Sari_Utama.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UD_Unggas_Sari_Utama.xcdatamodel; sourceTree = "<group>"; };
 		4CC9428F295C0259006725E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CD5836629A1469F00737066 /* SetUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +274,7 @@
 			children = (
 				4CAA87B7299D49FD0093FF76 /* ProdukViewModel.swift */,
 				4C9B3A1429A0E06700C25F99 /* test.swift */,
+				4CD5836629A1469F00737066 /* SetUpView.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				4C6FB75329A0D178003E3A7C /* GetData.swift in Sources */,
 				4C853C80298CDE91004FA781 /* StokOpnamePopupView.swift in Sources */,
 				4C6209EA2980C078007BE841 /* ProdukModel.swift in Sources */,
+				4CD5836729A1469F00737066 /* SetUpView.swift in Sources */,
 				4C7D690B297B9BF9003A9949 /* HomeView.swift in Sources */,
 				4CAA87B3299D44DC0093FF76 /* ProdukDataResponse.swift in Sources */,
 				4C9B3A1529A0E06700C25F99 /* test.swift in Sources */,
