@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ProdukResponseModel: Codable, Identifiable{
+struct ProdukResponseModel: Codable, Identifiable, Hashable{
     let id: String
     let nama_produk: String
     let satuan: String
@@ -33,7 +33,7 @@ struct ProdukResponseModel: Codable, Identifiable{
         jumlah_produk = Int(jumlahString) ?? 0
         image = try values.decode(String.self, forKey: .image)
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         tanggal_masuk_produk = try dateFormatter.date(from: values.decode(String.self, forKey: .tanggal_masuk_produk)) ?? Date()
     }
     
@@ -47,7 +47,7 @@ struct ProdukResponseModel: Codable, Identifiable{
         try container.encode(harga, forKey: .harga)
         try container.encode(jumlah_produk, forKey: .jumlah_produk)
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         try container.encode(dateFormatter.string(from: tanggal_masuk_produk), forKey: .tanggal_masuk_produk)
         
     }

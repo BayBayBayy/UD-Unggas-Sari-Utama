@@ -11,6 +11,7 @@ struct KonversiPopupView: View {
     @State var jumlahSebelum : String = ""
     @State var jumlahSetelah : String = ""
     @Binding var check2: Bool
+    @ObservedObject var viewModel = ProdukFetcher()
     
     var body: some View {
         GeometryReader{ geometry in
@@ -30,7 +31,7 @@ struct KonversiPopupView: View {
                         Spacer()
                     }.frame( height: geometry.size.height/10)
                     
-                    PickerProduk()
+                    PickerProduk(viewModel: viewModel)
                         . frame( height: geometry.size.height/6)
                     fieldJumlahSebelum
                         . frame( height: geometry.size.height/8)
@@ -40,7 +41,7 @@ struct KonversiPopupView: View {
                             .font(.system(size: 28))
                         Spacer()
                     }.frame( height: geometry.size.height/10)
-                    PickerProduk()
+                    PickerProduk(viewModel: viewModel)
                         . frame( height: geometry.size.height/6)
                     fieldJumlahSetelah
                         . frame( height: geometry.size.height/8)

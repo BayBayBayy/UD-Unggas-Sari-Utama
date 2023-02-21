@@ -7,13 +7,6 @@
 
 import Foundation
 
-struct penjualan {
-    var id = UUID()
-    var detailPenjualanId = UUID()
-    var totalHarga : Int
-    var tanggalPembelian : Date
-}
-
 struct detailPenjualan{
     var id = UUID()
     var penjualanId = UUID()

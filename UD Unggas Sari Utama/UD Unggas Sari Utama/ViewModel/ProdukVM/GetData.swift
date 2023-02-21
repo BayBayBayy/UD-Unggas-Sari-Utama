@@ -8,8 +8,9 @@
 import Foundation
 
 class ProdukFetcher: ObservableObject {
-    @Published var produk: [ProdukResponseModel] = []
-    
+    //    @Published var produk: [ProdukResponseModel] = []
+    @Published var produk = [ProdukResponseModel]()
+    @Published var selectedProduk: ProdukResponseModel? // tambahkan properti selectedProduk
     init(){
         fetchData()
     }
@@ -37,6 +38,14 @@ class ProdukFetcher: ObservableObject {
                 print("Error decoding JSON:", error)
             }
         }.resume()
+    }
+    
+    func selectProduk(produk: ProdukResponseModel) {
+        self.selectedProduk = produk
+    }
+    
+    func resetSelectedProduk() {
+        self.selectedProduk = nil
     }
 }
 

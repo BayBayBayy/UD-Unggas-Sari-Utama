@@ -10,6 +10,7 @@ import SwiftUI
 struct ButtonView: View {
     @Binding var checkOk: Bool
     @Binding var buttonValue: Int
+    @State var checkDetails: Bool = false
 
     var body: some View {
         GeometryReader{ geometry in
@@ -34,7 +35,7 @@ struct ButtonView: View {
                 }
                 
                 NavigationLink {
-                    HistoriPenjualanView()
+                    HistoriPenjualanView(checkDetail: $checkDetails)
                 } label: {
                     ZStack{
                         RoundedRectangle(cornerRadius: 8)

@@ -11,6 +11,8 @@ struct StokOpnamePopupView: View {
     @State var jumlah : String = ""
     @State var keterangan : String = ""
     @Binding var check1: Bool
+    @ObservedObject var viewModel = ProdukFetcher()
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack{
@@ -21,7 +23,7 @@ struct StokOpnamePopupView: View {
                 VStack (alignment: .center, spacing: .zero) {
                     title
                         . frame( height: geometry.size.height/8)
-                    PickerProduk()
+                    PickerProduk(viewModel: viewModel)
                         . frame( height: geometry.size.height/6)
                     choiceSituation
                         . frame( height: geometry.size.height/6)

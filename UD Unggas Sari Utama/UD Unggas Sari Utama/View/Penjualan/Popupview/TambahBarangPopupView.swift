@@ -10,6 +10,16 @@ import SwiftUI
 struct TambahBarangPopupView: View {
     @State var jumlahBarang: String = ""
     
+    var produk: ProdukResponseModel
+    @Binding var isPresented: ProdukResponseModel?
+    
+    let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale(identifier: "id_ID")
+        return formatter
+    }()
+    
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
@@ -17,6 +27,7 @@ struct TambahBarangPopupView: View {
                     .fill(Color("GrayMiddleColor"))
                     .frame(width: geometry.size.width/1.1, height: geometry.size.height/1.3)
                     .border(Color(.black))
+                
                 VStack (alignment: .center, spacing: .zero) {
                     title
                         .frame( height: geometry.size.height/6)
@@ -24,26 +35,31 @@ struct TambahBarangPopupView: View {
                         Text("Nama :")
                         Spacer()
                             .frame(width: geometry.size.width/18)
-                        Text("nama barang")
+                        Text(produk.nama_produk)
                             .bold()
                         Spacer()
                     }.frame( height: geometry.size.height/7)
+                    
                     HStack{
                         Text("Harga :")
                         Spacer()
                             .frame(width: geometry.size.width/18)
-                        Text("harga barang")
+                        Text(numberFormatter.string(from: NSNumber(value: produk.harga)) ?? "")
                             .bold()
                         Spacer()
                     }.frame( height: geometry.size.height/7)
+                    
                     HStack{
                         jumlah
                             .frame(width: geometry.size.width/1.6)
-                        Text("Satuan")
+                        Text(produk.satuan)
                             .frame(width: geometry.size.width/6)
                         Spacer()
                     }.frame( height: geometry.size.height/7)
-                    Button(action: generatePesanan) {
+                    
+                    Button(action: {
+                        self.isPresented = nil
+                    }, label: {
                         ZStack{
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(Color("GrayMiddleColor"))
@@ -55,7 +71,7 @@ struct TambahBarangPopupView: View {
                                 .font(.title)
                         }
                         .frame( width: geometry.size.width/8, height: geometry.size.height/12)
-                    }
+                    })
                 }.frame( width: geometry.size.width/1.2, height: geometry.size.height/1.2)
             }.frame( width: geometry.size.width/1, height: geometry.size.height/1)
         }.edgesIgnoringSafeArea(.all)

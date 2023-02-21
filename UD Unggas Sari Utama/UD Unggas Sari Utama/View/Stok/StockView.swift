@@ -10,6 +10,7 @@ struct StockView: View {
 
     @State var keyValueButton = Int()
     @State var check: Bool = false
+    @State var checkOpsi: Bool = false
     var body: some View {
         if #available(iOS 16.0, *) {
             GeometryReader{ geometry in
@@ -18,9 +19,12 @@ struct StockView: View {
                         VStack{
                             TabButtonActionStok(check: $check, valuePopup: $keyValueButton)
                                 .frame(width: geometry.size.width/1, height: geometry.size.height/14, alignment: .bottom)
-                            DataProdukView()
-                                .frame(width: geometry.size.width/1, height: geometry.size.height/1.3)
-                                .background(.red)
+                            DataProdukView(checkEdit: $checkOpsi)
+                                .frame(width: geometry.size.width/1.05, height: geometry.size.height/1.3)
+                                .background(Color("GrayContentColor"))
+                                .overlay(RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color(.sRGB, red: 150/255, green: 150/255, blue: 150/255), lineWidth: 1)
+                                    .shadow(radius: 1))
                               
                         }
                         .frame(width: geometry.size.width/1, height: geometry.size.height/1)

@@ -8,30 +8,80 @@
 import SwiftUI
 
 struct HistoriPenjualanView: View {
-    @State var dummyModel: [Person] = Person.people
-    @State private var sortOrder = [KeyPathComparator(\Person.hargaTotal)]
+    @ObservedObject var viewModelPenjualan = FethcerPenjualan()
+    @Binding var checkDetail: Bool
+    let dateFormatter = DateFormatter()
+    let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale(identifier: "id_ID")
+        return formatter
+    }()
     
     var body: some View {
         GeometryReader{ geometry in
-            VStack{
-                Table(Person.people) {
-                    TableColumn("No Penjualan", value: \.idP)
-                    TableColumn("Harga", value: \.hargaTotal)
-                    TableColumn("Tanggal Penjualan", value: \.tanggal)
-                    TableColumn("Detail", value: \.opsi)
-                } .frame(width: geometry.size.width/1, height: geometry.size.height/1.5)
-                Spacer()
-                    .frame(width: geometry.size.width/1, height: geometry.size.height/8)
+            ZStack{
+                VStack{
+                    HStack {
+                        Text("No Penjualan")
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity)
+                        Text("Total Harga")
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity)
+                        Text("Tanggal")
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity)
+                        Text("Opsi")
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity)
+                    }
+                    .padding()
+                    .background(Color.gray.opacity(0.3))
+                    .cornerRadius(8)
+                    ScrollView {
+                        ForEach(viewModelPenjualan.dataPenjualan) { data in
+                            HStack {
+                                Text(data.id)
+                                    .frame(maxWidth: .infinity)
+                                Text(numberFormatter.string(from: NSNumber(value: data.total_harga)) ?? "")
+                                    .frame(maxWidth: .infinity)
+                                Text(dateFormatter.string(from: data.tanggal_pembelian))
+                                    .frame(maxWidth: .infinity)
+                                Button(action: {
+                                    self.checkDetail = true
+                                    self.viewModelPenjualan.selectPenjualan(penjualan: data)
+                                }) {
+                                    ZStack{
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .fill(Color("OrangeColorSet"))
+                                            .frame(width: 80, height: 40)
+                                        Text("Detail")
+                                            .font(.title3)
+                                            .bold()
+                                            .foregroundColor(.black)
+                                    }
+                                }.frame(maxWidth: .infinity)
+                            }
+                            .padding(.vertical, 8)
+                            .background(Color.white)
+                            .cornerRadius(8)
+                        }
+                    }
+                    .background(Color("GrayContentColor"))
+                }
+                .frame(width: geometry.size.width/1.05, height: geometry.size.height/1.25)
+                .navigationTitle("Laporan Penjualan")
+                .navigationBarTitleDisplayMode(.inline)
+                .overlay(RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color(.sRGB, red: 150/255, green: 150/255, blue: 150/255), lineWidth: 1)
+                    .shadow(radius: 1))
+                .onAppear {
+                    dateFormatter.dateFormat = "dd-MM-yyyy" // format tanggal dari data
+                    viewModelPenjualan.fetchData()
+                }
             }
             .frame(width: geometry.size.width/1, height: geometry.size.height/1)
-            .navigationTitle("Histori Penjualan")
-            .navigationBarTitleDisplayMode(.inline)
         }.edgesIgnoringSafeArea(.all)
-    }
-}
-
-struct HistoriPenjualanView_Previews: PreviewProvider {
-    static var previews: some View {
-        HistoriPenjualanView()
     }
 }

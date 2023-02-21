@@ -8,23 +8,21 @@
 import SwiftUI
 
 struct PickerProduk: View {
-    @State private var selectedStrength = "Ayam Broiller"
-    let strengths = ["Ayam Broiller", "Ayam Merah", "Aayam Pejantan"]
+    
+    @ObservedObject var viewModel : ProdukFetcher
+    
     var body: some View {
         HStack{
             Text("Pilih Berdasarkan")
-            Picker("Strength", selection: $selectedStrength) {
-                ForEach(strengths, id: \.self) {
-                    Text($0)
+            Picker("Pilih", selection: $viewModel.selectedProduk) {
+                ForEach(viewModel.produk, id: \.id) { produk in
+                    Text(produk.nama_produk)
                 }
             }
             .pickerStyle(.wheel)
         }
-    }
-}
-
-struct PickerProduk_Previews: PreviewProvider {
-    static var previews: some View {
-        PickerProduk()
+        .onAppear(){
+            self.viewModel.fetchData()
+        }
     }
 }

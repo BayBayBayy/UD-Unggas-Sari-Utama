@@ -13,6 +13,10 @@ struct HomeView: View {
     @State var checkCard: Bool = false
     @State var checkPesanan: Bool = false
     @State var value = Int()
+    
+    @ObservedObject var viewModel = ProdukFetcher()
+    @State private var selectedProduk: ProdukResponseModel?
+    
     var body: some View {
         if #available(iOS 16.0, *) {
             GeometryReader{ geometry in
@@ -23,7 +27,7 @@ struct HomeView: View {
                                 .frame(width: geometry.size.width/14, height: geometry.size.height/14)
                             
                             HStack{
-                                CardProdukView(check: $checkCard)
+                                CardProdukView(produkVM: viewModel, check: $checkCard)
                                     .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
                                 Spacer()
                                     .frame(width: 10)
@@ -51,7 +55,7 @@ struct HomeView: View {
                                 dismissCard()
                             })
                         
-                // Blur View
+                        // Blur View
                         if self.check == true{
                             Spacer()
                                 .background(.gray)
@@ -69,7 +73,7 @@ struct HomeView: View {
                                 .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                         }
                         
-                 // Popup View
+                        // Popup View
                         if self.check == true && value == 1{
                             PembayaranPopupView(close: $check)
                                 .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
@@ -77,11 +81,15 @@ struct HomeView: View {
                             TambahkanPesananPopupView()
                                 .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
                         }else if checkCard == true{
-                            TambahBarangPopupView()
-                                .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
+//                            TambahBarangPopupView(produk: ProdukResponseModel)
                         }
                         
-                          
+                        
+                    }
+                    
+                    
+                    .onAppear(){
+                        self.viewModel.fetchData()
                     }
                     .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                     

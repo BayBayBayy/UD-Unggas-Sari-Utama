@@ -26,6 +26,8 @@
 		4C852C4A2995418300655137 /* CardPemesananView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C852C492995418300655137 /* CardPemesananView.swift */; };
 		4C852C4C299541CF00655137 /* PesananDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C852C4B299541CF00655137 /* PesananDummy.swift */; };
 		4C853C80298CDE91004FA781 /* StokOpnamePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C853C7F298CDE91004FA781 /* StokOpnamePopupView.swift */; };
+		4C8CA39529A4989A00F2C62F /* PenjualanResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8CA39429A4989A00F2C62F /* PenjualanResponseModel.swift */; };
+		4C8CA39729A49AE600F2C62F /* GetDataPenjualan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8CA39629A49AE600F2C62F /* GetDataPenjualan.swift */; };
 		4C945DC52991543100D5CA5A /* CardProdukView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C945DC42991543100D5CA5A /* CardProdukView.swift */; };
 		4C945DC8299159AB00D5CA5A /* TambahkanPesananPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C945DC7299159AB00D5CA5A /* TambahkanPesananPopupView.swift */; };
 		4C945DCA2992B41800D5CA5A /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C945DC92992B41800D5CA5A /* ButtonView.swift */; };
@@ -48,7 +50,6 @@
 		4CC94289295C0259006725E9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CC94288295C0259006725E9 /* Preview Assets.xcassets */; };
 		4CC9428B295C0259006725E9 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC9428A295C0259006725E9 /* Persistence.swift */; };
 		4CC9428E295C0259006725E9 /* UD_Unggas_Sari_Utama.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CC9428C295C0259006725E9 /* UD_Unggas_Sari_Utama.xcdatamodeld */; };
-		4CD5836729A1469F00737066 /* SetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5836629A1469F00737066 /* SetUpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,8 @@
 		4C852C492995418300655137 /* CardPemesananView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPemesananView.swift; sourceTree = "<group>"; };
 		4C852C4B299541CF00655137 /* PesananDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PesananDummy.swift; sourceTree = "<group>"; };
 		4C853C7F298CDE91004FA781 /* StokOpnamePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StokOpnamePopupView.swift; sourceTree = "<group>"; };
+		4C8CA39429A4989A00F2C62F /* PenjualanResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenjualanResponseModel.swift; sourceTree = "<group>"; };
+		4C8CA39629A49AE600F2C62F /* GetDataPenjualan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataPenjualan.swift; sourceTree = "<group>"; };
 		4C945DC42991543100D5CA5A /* CardProdukView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardProdukView.swift; sourceTree = "<group>"; };
 		4C945DC7299159AB00D5CA5A /* TambahkanPesananPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TambahkanPesananPopupView.swift; sourceTree = "<group>"; };
 		4C945DC92992B41800D5CA5A /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
@@ -97,7 +100,6 @@
 		4CC9428A295C0259006725E9 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		4CC9428D295C0259006725E9 /* UD_Unggas_Sari_Utama.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UD_Unggas_Sari_Utama.xcdatamodel; sourceTree = "<group>"; };
 		4CC9428F295C0259006725E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4CD5836629A1469F00737066 /* SetUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,7 +157,8 @@
 		4C6209E82980C042007BE841 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4CAA87B1299D44970093FF76 /* RequestData */,
+				4C8CA39329A496F200F2C62F /* PenjualanModel */,
+				4CAA87B1299D44970093FF76 /* ProdukModel */,
 				4C9529E529948A57000042D0 /* DummyData */,
 				4C6209E92980C078007BE841 /* ProdukModel.swift */,
 				4C6209ED2980C905007BE841 /* PenjualanModel.swift */,
@@ -204,6 +207,30 @@
 				4CAA87B9299DCD6B0093FF76 /* DataProdukView.swift */,
 			);
 			path = Stok;
+			sourceTree = "<group>";
+		};
+		4C8CA39129A4952700F2C62F /* ProdukVM */ = {
+			isa = PBXGroup;
+			children = (
+				4C6FB75229A0D178003E3A7C /* GetData.swift */,
+			);
+			path = ProdukVM;
+			sourceTree = "<group>";
+		};
+		4C8CA39229A4964400F2C62F /* PenjualanVM */ = {
+			isa = PBXGroup;
+			children = (
+				4C8CA39629A49AE600F2C62F /* GetDataPenjualan.swift */,
+			);
+			path = PenjualanVM;
+			sourceTree = "<group>";
+		};
+		4C8CA39329A496F200F2C62F /* PenjualanModel */ = {
+			isa = PBXGroup;
+			children = (
+				4C8CA39429A4989A00F2C62F /* PenjualanResponseModel.swift */,
+			);
+			path = PenjualanModel;
 			sourceTree = "<group>";
 		};
 		4C945DC62991595E00D5CA5A /* Popupview */ = {
@@ -260,21 +287,21 @@
 			path = SubView;
 			sourceTree = "<group>";
 		};
-		4CAA87B1299D44970093FF76 /* RequestData */ = {
+		4CAA87B1299D44970093FF76 /* ProdukModel */ = {
 			isa = PBXGroup;
 			children = (
 				4CAA87B2299D44DC0093FF76 /* ProdukDataResponse.swift */,
-				4C6FB75229A0D178003E3A7C /* GetData.swift */,
 			);
-			path = RequestData;
+			path = ProdukModel;
 			sourceTree = "<group>";
 		};
 		4CAA87B4299D46300093FF76 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				4C8CA39229A4964400F2C62F /* PenjualanVM */,
+				4C8CA39129A4952700F2C62F /* ProdukVM */,
 				4CAA87B7299D49FD0093FF76 /* ProdukViewModel.swift */,
 				4C9B3A1429A0E06700C25F99 /* test.swift */,
-				4CD5836629A1469F00737066 /* SetUpView.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -412,7 +439,6 @@
 				4C6FB75329A0D178003E3A7C /* GetData.swift in Sources */,
 				4C853C80298CDE91004FA781 /* StokOpnamePopupView.swift in Sources */,
 				4C6209EA2980C078007BE841 /* ProdukModel.swift in Sources */,
-				4CD5836729A1469F00737066 /* SetUpView.swift in Sources */,
 				4C7D690B297B9BF9003A9949 /* HomeView.swift in Sources */,
 				4CAA87B3299D44DC0093FF76 /* ProdukDataResponse.swift in Sources */,
 				4C9B3A1529A0E06700C25F99 /* test.swift in Sources */,
@@ -430,12 +456,14 @@
 				4CAA87BA299DCD6B0093FF76 /* DataProdukView.swift in Sources */,
 				4C9529DE2993F1FC000042D0 /* HistoriPenjualanView.swift in Sources */,
 				4C7D6900297A2B9C003A9949 /* TabBarView.swift in Sources */,
+				4C8CA39729A49AE600F2C62F /* GetDataPenjualan.swift in Sources */,
 				4C9529EA29949B39000042D0 /* ButtonActionView.swift in Sources */,
 				4C945DCC2992BF3200D5CA5A /* ButtonPemesananView.swift in Sources */,
 				4C6209EE2980C905007BE841 /* PenjualanModel.swift in Sources */,
 				4C9529E02993F256000042D0 /* LaporanStokView.swift in Sources */,
 				4CC94282295C0257006725E9 /* UD_Unggas_Sari_UtamaApp.swift in Sources */,
 				4CAA87B8299D49FD0093FF76 /* ProdukViewModel.swift in Sources */,
+				4C8CA39529A4989A00F2C62F /* PenjualanResponseModel.swift in Sources */,
 				4C9529D629933E76000042D0 /* DetailPesananPopupview.swift in Sources */,
 				4C852C4C299541CF00655137 /* PesananDummy.swift in Sources */,
 			);
