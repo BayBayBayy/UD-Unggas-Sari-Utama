@@ -11,6 +11,9 @@ class ProdukFetcher: ObservableObject {
     //    @Published var produk: [ProdukResponseModel] = []
     @Published var produk = [ProdukResponseModel]()
     @Published var selectedProduk: ProdukResponseModel? // tambahkan properti selectedProduk
+    @Published var selectedProduct: ProdukResponseModel?
+    @Published var selectedProdukId: String?
+    
     init(){
         fetchData()
     }
@@ -38,6 +41,14 @@ class ProdukFetcher: ObservableObject {
                 print("Error decoding JSON:", error)
             }
         }.resume()
+    }
+    
+    func selectProdukId(withId id: String) {
+        self.selectedProdukId = id
+    }
+    
+    func selectProduct(_ product: ProdukResponseModel) {
+        self.selectedProduct = product
     }
     
     func selectProduk(produk: ProdukResponseModel) {

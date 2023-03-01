@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct  PenjualanResponseModel: Codable, Identifiable, Hashable {
+struct  PenjualanResponseModel: Codable, Identifiable, Hashable{
     var id: String
     var total_harga: Int
     var tanggal_pembelian: Date
@@ -35,4 +35,12 @@ struct  PenjualanResponseModel: Codable, Identifiable, Hashable {
         try container.encode(dateFormatter.string(from: tanggal_pembelian), forKey: .tanggal_pembelian)
         
     }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(tanggal_pembelian)
+        hasher.combine(total_harga)
+        
+        
+    }
 }
+

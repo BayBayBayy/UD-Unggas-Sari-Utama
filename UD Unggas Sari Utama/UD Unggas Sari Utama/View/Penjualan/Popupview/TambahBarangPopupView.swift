@@ -10,7 +10,8 @@ import SwiftUI
 struct TambahBarangPopupView: View {
     @State var jumlahBarang: String = ""
     
-    var produk: ProdukResponseModel
+    let produk: ProdukResponseModel
+    
     @Binding var isPresented: ProdukResponseModel?
     
     let numberFormatter: NumberFormatter = {

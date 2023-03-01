@@ -27,7 +27,7 @@ struct HomeView: View {
                                 .frame(width: geometry.size.width/14, height: geometry.size.height/14)
                             
                             HStack{
-                                CardProdukView(produkVM: viewModel, check: $checkCard)
+                                CardProdukView(produkVM: viewModel, selectedProduk: $selectedProduk, check: $checkCard)
                                     .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
                                 Spacer()
                                     .frame(width: 10)

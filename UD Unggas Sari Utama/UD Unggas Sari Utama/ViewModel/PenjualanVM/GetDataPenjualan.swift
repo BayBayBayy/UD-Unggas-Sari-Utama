@@ -10,6 +10,7 @@ import Foundation
 class FethcerPenjualan: ObservableObject{
     @Published var dataPenjualan = [PenjualanResponseModel]()
     @Published var selectedPenjualan: PenjualanResponseModel?
+    @Published var dataChart: [(String, Double)] = []
     
     init(){
         fetchData()
@@ -32,7 +33,11 @@ class FethcerPenjualan: ObservableObject{
             do {
                 let penjualan = try JSONDecoder().decode([PenjualanResponseModel].self, from: data)
                 DispatchQueue.main.async {
+                    let formatter = DateFormatter()
+                        formatter.dateStyle = .short
                     self.dataPenjualan = penjualan
+                    self.dataChart = penjualan.map { (formatter.string(from: $0.tanggal_pembelian), Double($0.total_harga)) }
+                    self.objectWillChange.send()
                 }
             } catch let error {
                 print("Error decoding JSON:", error)

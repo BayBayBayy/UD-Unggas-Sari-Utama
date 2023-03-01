@@ -8,12 +8,38 @@
 import SwiftUI
 
 struct LaporanPemesananView: View {
+    @State var indexTabs = Int()
     var body: some View {
-        VStack{
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        }
-        .navigationTitle("Laporan Pemesanan")
-        .navigationBarTitleDisplayMode(.inline)
+        GeometryReader{ geometry in
+            VStack{
+                HStack{
+                    Spacer()
+                        .frame(width: geometry.size.width/2.3, height: geometry.size.height/14)
+    
+                    ButtonLaporanPemesan(tabIndex: $indexTabs)
+                        .frame(width: geometry.size.width/2, height: geometry.size.height/14)
+                }
+                .frame(width: geometry.size.width/1, height: geometry.size.height/6)
+                
+                HStack(spacing: 80){
+                    CardLaporanPemesanan(title: "Produk Terbanyak Di Pesan", hasil: "Ayam Broiller")
+                        .frame(width: geometry.size.width/3, height: geometry.size.height/8)
+                    CardLaporanPemesanan(title: "Total Pesanan", hasil: "120")
+                        .frame(width: geometry.size.width/4.2, height: geometry.size.height/8)
+                    CardLaporanPemesanan(title: "Rata-Rata Pesanan", hasil: "120")
+                        .frame(width: geometry.size.width/4.2, height: geometry.size.height/8)
+
+                }
+                .frame(width: geometry.size.width/1, height: geometry.size.height/3.5)
+             
+                
+                Spacer()
+                    .frame(width: geometry.size.width/1, height: geometry.size.height/2.5)
+            }
+            .navigationTitle("Laporan Pemesanan")
+            .navigationBarTitleDisplayMode(.inline)
+            .frame(width: geometry.size.width/1, height: geometry.size.height/1)
+        }.edgesIgnoringSafeArea(.all)
     }
 }
 

@@ -10,12 +10,15 @@ import SwiftUI
 @main
 struct UD_Unggas_Sari_UtamaApp: App {
     let persistenceController = PersistenceController.shared
+    
+    @StateObject var produkFetcher = ProdukFetcher()
 
     var body: some Scene {
         WindowGroup {
             TabBarView()
 //            test()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(produkFetcher)
         }
     }
 }

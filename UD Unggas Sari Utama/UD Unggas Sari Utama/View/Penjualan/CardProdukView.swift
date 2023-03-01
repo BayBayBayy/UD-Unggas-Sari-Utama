@@ -10,14 +10,21 @@ import SwiftUI
 struct CardProdukView: View {
     //    @State var favoriteCards: [produkDummy] = produkDummy.sampleData
     @ObservedObject var produkVM = ProdukFetcher()
-    @State private var selectedProduk: ProdukResponseModel?
+    @Binding private var selectedProduk: ProdukResponseModel?
     @Binding var check: Bool
+    @State private var selectedProdukIdProduk: String? = nil
     
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
         GridItem(.flexible())
     ]
+    
+    init(produkVM: ProdukFetcher = ProdukFetcher(), selectedProduk: Binding<ProdukResponseModel?>, check: Binding<Bool>) {
+        self.produkVM = produkVM
+        self._selectedProduk = selectedProduk
+        self._check = check
+    }
     
     var body: some View{
         GeometryReader{ geometry in
@@ -27,9 +34,11 @@ struct CardProdukView: View {
                         LazyVGrid(columns: columns, alignment: .center, spacing: 10){
                             ForEach(produkVM.produk, id:\.id){ card in
                                 
-                                cardView(cards: card, check: $check)
+                                cardView(cards: card, selectedProduk: $selectedProduk, check: $check)
                                     .onTapGesture {
-                                        self.produkVM.selectProduk(produk: card)
+                                        self.produkVM.selectProduct(card)
+                                        check = true
+                                        selectedProduk = card
                                     }
                                     .frame(width: geometry.size.width/3.5, height: geometry.size.height/4)
                                     .padding()
@@ -39,14 +48,16 @@ struct CardProdukView: View {
                     }.frame(width: geometry.size.width, height: geometry.size.height)
                 }.frame(width: geometry.size.width, height: geometry.size.height)
                 
-//                if check == true{
-//                    TambahBarangPopupView(produk: selectedProduk!, isPresented: self.$produkVM.selectedProduk)
-//                }
+                //                if check {
+                //                    TambahBarangPopupView(produk: selectedProduk, isPresented: self.$produkVM.selectedProduk)
+                //                }
                 
-            }.frame(width: geometry.size.width, height: geometry.size.height)
-//            .sheet(item: self.$produkVM.selectedProduk) { produk in
-//                            TambahBarangPopupView(produk: produk, isPresented: self.$produkVM .selectedProduk)
-//                        }
+            }
+            .frame(width: geometry.size.width, height: geometry.size.height)
+            .sheet(item: $selectedProduk) { selectedProduct in
+                TambahBarangPopupView(produk: selectedProduct, isPresented: $selectedProduk)
+                
+            }
             .onAppear(){
                 self.produkVM.fetchData()
             }
@@ -64,12 +75,22 @@ struct CardProdukView: View {
 struct cardView : View{
     //    var card: produkDummy
     var cards: ProdukResponseModel
-    
+    @EnvironmentObject var viewModel: ProdukFetcher
+    @Binding private var selectedProduk: ProdukResponseModel?
     @Binding var check: Bool
+    
+    init(cards: ProdukResponseModel, selectedProduk: Binding<ProdukResponseModel?>, check: Binding<Bool>) {
+        self.cards = cards
+        self._selectedProduk = selectedProduk
+        self._check = check
+    }
+
+    
     var body: some View{
         GeometryReader{ geometry in
             
             Button {
+                viewModel.selectProduct(cards)
                 self.check.toggle()
             } label: {
                 ZStack{
@@ -100,6 +121,9 @@ struct cardView : View{
                     }
                     .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                 }.frame(width: geometry.size.width/1, height: geometry.size.height/1)
+            }
+            .onTapGesture {
+                selectedProduk = cards
             }
         }
         .edgesIgnoringSafeArea(.all)
