@@ -17,7 +17,7 @@ class FethcerPenjualan: ObservableObject{
     }
     
     func fetchData() {
-        guard let url = URL(string: "https://indramaryati.com/bayu/penjualan.php") else {
+        guard let url = URL(string: "https://indramaryati.com/bayu/Penjualan/penjualan.php") else {
             print("Invalid URL")
             return
         }
@@ -34,7 +34,7 @@ class FethcerPenjualan: ObservableObject{
                 let penjualan = try JSONDecoder().decode([PenjualanResponseModel].self, from: data)
                 DispatchQueue.main.async {
                     let formatter = DateFormatter()
-                        formatter.dateStyle = .short
+                    formatter.dateStyle = .short
                     self.dataPenjualan = penjualan
                     self.dataChart = penjualan.map { (formatter.string(from: $0.tanggal_pembelian), Double($0.total_harga)) }
                     self.objectWillChange.send()
@@ -52,5 +52,4 @@ class FethcerPenjualan: ObservableObject{
     func resetSelectedPenjualan() {
         self.selectedPenjualan = nil
     }
-    
 }

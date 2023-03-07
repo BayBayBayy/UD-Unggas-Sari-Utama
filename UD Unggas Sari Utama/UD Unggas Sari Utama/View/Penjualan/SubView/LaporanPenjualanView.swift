@@ -33,20 +33,18 @@ struct LaporanPenjualanView: View {
 
                 }
                 .frame(width: geometry.size.width/1, height: geometry.size.height/3.5)
-                .background(.yellow)
-             
                 
                 ChartPenjualanView(data: salesData.dataChart)
-                    .frame(width: geometry.size.width/1.5, height: geometry.size.height/3)
-                    .background(.gray)
-                
-                Spacer()
-                    .frame(width: geometry.size.width/1, height: geometry.size.height/10)
-                 
+                    .frame(width: geometry.size.width/1.5, height: geometry.size.height/2.5)
+                    .background(Color("GrayContentColor"))
+                    .overlay(RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color(.sRGB, red: 150/255, green: 150/255, blue: 150/255), lineWidth: 1)
+                        .shadow(radius: 1))
             }
             .onAppear(){
                 salesData.fetchData()
             }
+            .background(Color("GrayBackgroundColor"))
             .navigationTitle("Laporan Penjualan")
             .navigationBarTitleDisplayMode(.inline)
             .frame(width: geometry.size.width/1, height: geometry.size.height/1)

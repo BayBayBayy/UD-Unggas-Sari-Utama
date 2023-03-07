@@ -42,5 +42,6 @@ struct  PenjualanResponseModel: Codable, Identifiable, Hashable{
         
         
     }
+    
 }
 

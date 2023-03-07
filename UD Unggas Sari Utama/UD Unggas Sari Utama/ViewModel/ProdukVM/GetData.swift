@@ -17,9 +17,9 @@ class ProdukFetcher: ObservableObject {
     init(){
         fetchData()
     }
-    
+    // View Data
     func fetchData() {
-        guard let url = URL(string: "https://indramaryati.com/bayu/service.php") else {
+        guard let url = URL(string: "https://indramaryati.com/bayu/Produk/service.php") else {
             print("Invalid URL")
             return
         }
@@ -58,5 +58,45 @@ class ProdukFetcher: ObservableObject {
     func resetSelectedProduk() {
         self.selectedProduk = nil
     }
+    
+    
+    func createProduct(completion: @escaping (String) -> Void) {
+        let url = URL(string: "http://your-api-url/create_product.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        
+        do {
+            let data = try encoder.encode(self.produk)
+            request.httpBody = data
+        } catch {
+            completion("Error: \(error.localizedDescription)")
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion("Error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let data = data, let response = response as? HTTPURLResponse else {
+                completion("Error: Invalid response")
+                return
+            }
+            
+            if response.statusCode == 200 {
+                completion("Product created successfully")
+            } else {
+                completion("Error: \(response.statusCode)")
+            }
+        }
+        
+        task.resume()
+    }
+    
+    
 }
 

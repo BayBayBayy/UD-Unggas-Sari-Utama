@@ -47,7 +47,8 @@ struct buttonView: View{
                 .bold()
                 
         }
-        .background(RoundedRectangle(cornerRadius: 8).stroke(Color("OrangeColorSet"), lineWidth: 3))
+        .background(RoundedRectangle(cornerRadius: 8).stroke(Color("OrangeColorSet"),
+                                                             lineWidth: 3))
     }
 }
 
@@ -64,7 +65,7 @@ struct cardLaporanPenjualan: View{
     var body: some View{
         ZStack{
             RoundedRectangle(cornerRadius: 8)
-                .fill(Color("GrayBackgroundColor"))
+                .fill(Color.white)
             VStack{
                 Text(title)
                     .foregroundColor(.gray)
