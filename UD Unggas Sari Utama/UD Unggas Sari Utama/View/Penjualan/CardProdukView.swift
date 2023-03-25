@@ -9,22 +9,16 @@ import SwiftUI
 
 struct CardProdukView: View {
     //    @State var favoriteCards: [produkDummy] = produkDummy.sampleData
+    @EnvironmentObject var penjualanViewModel: PenjualanViewModel
     @ObservedObject var produkVM = ProdukFetcher()
-    @Binding private var selectedProduk: ProdukResponseModel?
-    @Binding var check: Bool
-    @State private var selectedProdukIdProduk: String? = nil
+    @Binding var cloeThis: Bool
+    @Binding var cancelList: Bool
     
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
         GridItem(.flexible())
     ]
-    
-    init(produkVM: ProdukFetcher = ProdukFetcher(), selectedProduk: Binding<ProdukResponseModel?>, check: Binding<Bool>) {
-        self.produkVM = produkVM
-        self._selectedProduk = selectedProduk
-        self._check = check
-    }
     
     var body: some View{
         GeometryReader{ geometry in
@@ -34,11 +28,9 @@ struct CardProdukView: View {
                         LazyVGrid(columns: columns, alignment: .center, spacing: 10){
                             ForEach(produkVM.produk, id:\.id){ card in
                                 
-                                cardView(cards: card, selectedProduk: $selectedProduk, check: $check)
+                                cardView(cards: card, selectedProduk: $produkVM.selectedProduk, check: $cloeThis)
                                     .onTapGesture {
                                         self.produkVM.selectProduct(card)
-                                        check = true
-                                        selectedProduk = card
                                     }
                                     .frame(width: geometry.size.width/3.5, height: geometry.size.height/4)
                                     .padding()
@@ -48,16 +40,21 @@ struct CardProdukView: View {
                     }.frame(width: geometry.size.width, height: geometry.size.height)
                 }.frame(width: geometry.size.width, height: geometry.size.height)
                 
-                //                if check {
-                //                    TambahBarangPopupView(produk: selectedProduk, isPresented: self.$produkVM.selectedProduk)
-                //                }
+                if self.cloeThis == true{
+                    Spacer()
+                        .background(.gray)
+                        .opacity(0.5)
+                        .frame(width: geometry.size.width/1, height: geometry.size.height/1)
+                }
+                if cloeThis {
+                    TambahBarangPopupView(viewModel: _penjualanViewModel, produk: produkVM.selectedProduk!, close: $cloeThis, cancelList: $cancelList)
+                        .environmentObject(penjualanViewModel)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .transition(.move(edge: .bottom))
+                }
                 
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
-            .sheet(item: $selectedProduk) { selectedProduct in
-                TambahBarangPopupView(produk: selectedProduct, isPresented: $selectedProduk)
-                
-            }
             .onAppear(){
                 self.produkVM.fetchData()
             }
@@ -84,13 +81,14 @@ struct cardView : View{
         self._selectedProduk = selectedProduk
         self._check = check
     }
-
+    
     
     var body: some View{
         GeometryReader{ geometry in
             
             Button {
                 viewModel.selectProduct(cards)
+                selectedProduk = cards
                 self.check.toggle()
             } label: {
                 ZStack{

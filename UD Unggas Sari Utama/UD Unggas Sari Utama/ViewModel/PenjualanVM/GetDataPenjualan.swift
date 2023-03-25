@@ -11,6 +11,7 @@ class FethcerPenjualan: ObservableObject{
     @Published var dataPenjualan = [PenjualanResponseModel]()
     @Published var selectedPenjualan: PenjualanResponseModel?
     @Published var dataChart: [(String, Double)] = []
+    @Published var totalSales = 0
     
     init(){
         fetchData()
@@ -38,6 +39,7 @@ class FethcerPenjualan: ObservableObject{
                     self.dataPenjualan = penjualan
                     self.dataChart = penjualan.map { (formatter.string(from: $0.tanggal_pembelian), Double($0.total_harga)) }
                     self.objectWillChange.send()
+//                    self.totalSales = decodedResponse.reduce(0) { $0 + ($1.price * $1.quantity) }
                 }
             } catch let error {
                 print("Error decoding JSON:", error)

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ShoppingChartView: View {
     @Binding var showPesanan: Bool
+    @EnvironmentObject var penjualanViewModel: PenjualanViewModel
+    @State private var reloadList = UUID()
     var body: some View {
         GeometryReader{ geometry in
             VStack{
@@ -41,28 +43,31 @@ struct ShoppingChartView: View {
                 }.frame(width: geometry.size.width/1.1, height: geometry.size.height/6)
                 
                 ScrollView(){
-                    HStack{
-                        Text("1")
-                            .bold()
-                            .font(.system(size: 16))
-                            .frame(width: geometry.size.width/10)
-                        Text("Ayam Broiler")
-                            .bold()
-                            .font(.system(size: 16))
-                            .frame(width: geometry.size.width/5)
-                        Text("2")
-                            .bold()
-                            .font(.system(size: 16))
-                            .frame(width: geometry.size.width/5)
-                        Text("12000")
-                            .bold()
-                            .font(.system(size: 16))
-                            .frame(width: geometry.size.width/6)
-                        Text("24000")
-                            .bold()
-                            .font(.system(size: 16))
-                            .frame(width: geometry.size.width/5)
-                    }.frame(width: geometry.size.width/1.1, height: geometry.size.height/8)
+                    ForEach(penjualanViewModel.detailPenjualanList.indices, id: \.self) { index in
+                        let detailPenjualan = penjualanViewModel.detailPenjualanList[index]
+                        HStack{
+                            Text("\(index + 1)")
+                                .bold()
+                                .font(.system(size: 16))
+                                .frame(width: geometry.size.width/10)
+                            Text(detailPenjualan.namaBarang)
+                                .bold()
+                                .font(.system(size: 16))
+                                .frame(width: geometry.size.width/5)
+                            Text("\(detailPenjualan.jumlah)")
+                                .bold()
+                                .font(.system(size: 16))
+                                .frame(width: geometry.size.width/5)
+                            Text("\(detailPenjualan.harga)")
+                                .bold()
+                                .font(.system(size: 16))
+                                .frame(width: geometry.size.width/6)
+                            Text("\(detailPenjualan.subHarga)")
+                                .bold()
+                                .font(.system(size: 16))
+                                .frame(width: geometry.size.width/5)
+                        }.frame(width: geometry.size.width/1.1, height: geometry.size.height/8)
+                    }
                 }.frame(width: geometry.size.width/1.1, height: geometry.size.height/2)
                 
                 VStack{
@@ -74,7 +79,7 @@ struct ShoppingChartView: View {
                             .bold()
                             .font(.system(size: 20))
                         Spacer()
-                        Text("24000")
+                        Text("\(penjualanViewModel.totalHarga)")
                             .bold()
                             .font(.system(size: 20))
                     }.frame(width: geometry.size.width/1.1, height: geometry.size.height/10)
@@ -89,7 +94,12 @@ struct ShoppingChartView: View {
                     }.frame(width: geometry.size.width/1.1, height: geometry.size.height/10)
                     
                 }.frame(width: geometry.size.width/1.1, height: geometry.size.height/4)
-            }.frame(width: geometry.size.width/1, height: geometry.size.height/1)
+            }
+            .onReceive(penjualanViewModel.$reloadList) { _ in
+                reloadList = UUID()
+                print("List belanja diperbarui")
+            }
+            .frame(width: geometry.size.width/1, height: geometry.size.height/1)
         }.edgesIgnoringSafeArea(.all)
     }
 }

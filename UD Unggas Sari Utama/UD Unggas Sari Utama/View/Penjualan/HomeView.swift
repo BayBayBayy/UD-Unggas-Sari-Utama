@@ -13,9 +13,11 @@ struct HomeView: View {
     @State var checkCard: Bool = false
     @State var checkPesanan: Bool = false
     @State var value = Int()
+    @State var cancelListPenjualan: Bool = false
     
+    @EnvironmentObject var penjualanViewModel: PenjualanViewModel
     @ObservedObject var viewModel = ProdukFetcher()
-    @State private var selectedProduk: ProdukResponseModel?
+    @ObservedObject var vmPenjualan = PenjualanViewModel(produkViewModel: ProdukFetcher())
     
     var body: some View {
         if #available(iOS 16.0, *) {
@@ -27,11 +29,11 @@ struct HomeView: View {
                                 .frame(width: geometry.size.width/14, height: geometry.size.height/14)
                             
                             HStack{
-                                CardProdukView(produkVM: viewModel, selectedProduk: $selectedProduk, check: $checkCard)
+                                CardProdukView(produkVM: viewModel, cloeThis: $checkCard, cancelList: $cancelListPenjualan)
                                     .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
                                 Spacer()
                                     .frame(width: 10)
-                                ShoppingChartView(showPesanan: $checkPesanan)
+                                ShoppingChartView(showPesanan: $checkPesanan, penjualanViewModel: _penjualanViewModel)
                                     .frame(width: geometry.size.width/2.75, height: geometry.size.height/1.75)
                                     .background(Color("GrayContentColor"))
                                     .overlay(RoundedRectangle(cornerRadius: 10)
@@ -42,7 +44,7 @@ struct HomeView: View {
                             Spacer()
                                 .frame(height: geometry.size.height/16)
                             
-                            ButtonView(checkOk: $check, buttonValue: $value)
+                            ButtonView(checkOk: $check, buttonValue: $value, cancelList: $cancelListPenjualan)
                                 .frame(width: geometry.size.width/1, height: geometry.size.height/6)
                         }
                         .frame(width: geometry.size.width/1, height: geometry.size.height/1)
@@ -52,7 +54,6 @@ struct HomeView: View {
                             TapGesture().onEnded {
                                 dismiss()
                                 dismissPesanan()
-                                dismissCard()
                             })
                         
                         // Blur View
@@ -66,11 +67,6 @@ struct HomeView: View {
                                 .background(.gray)
                                 .opacity(0.5)
                                 .frame(width: geometry.size.width/1, height: geometry.size.height/1)
-                        }else if self.checkCard == true{
-                            Spacer()
-                                .background(.gray)
-                                .opacity(0.5)
-                                .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                         }
                         
                         // Popup View
@@ -80,8 +76,6 @@ struct HomeView: View {
                         }else if checkPesanan == true{
                             TambahkanPesananPopupView()
                                 .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
-                        }else if checkCard == true{
-//                            TambahBarangPopupView(produk: ProdukResponseModel)
                         }
                         
                         

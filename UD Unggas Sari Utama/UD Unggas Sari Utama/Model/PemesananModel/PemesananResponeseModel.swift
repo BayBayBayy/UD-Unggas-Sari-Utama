@@ -15,7 +15,7 @@ struct PemesananResponseModel: Codable, Identifiable, Hashable{
     var dp_dibayar: Int
     var sisa_pembayaran: Int
     var status: Int
-    var tanggal_pembelian: Date
+    var tanggal_pemesanan: Date
     var tanggal_pengambilan: Date
     
     
@@ -27,7 +27,7 @@ struct PemesananResponseModel: Codable, Identifiable, Hashable{
              dp_dibayar,
              sisa_pembayaran,
              status,
-             tanggal_pembelian,
+             tanggal_pemesanan,
              tanggal_pengambilan
     }
     
@@ -47,8 +47,10 @@ struct PemesananResponseModel: Codable, Identifiable, Hashable{
         status = Int(cek) ?? 0
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        tanggal_pembelian = try dateFormatter.date(from: values.decode(String.self, forKey: .tanggal_pembelian)) ?? Date()
-        tanggal_pengambilan = try dateFormatter.date(from: values.decode(String.self, forKey: .tanggal_pengambilan)) ?? Date()
+        tanggal_pemesanan = try dateFormatter.date(from: values.decode(String.self, forKey: .tanggal_pemesanan)) ?? Date()
+        let date = DateFormatter()
+        date.dateFormat = "yyyy-MM-dd"
+        tanggal_pengambilan = try date.date(from: values.decode(String.self, forKey: .tanggal_pengambilan)) ?? Date()
     }
     
     func encode(to encoder: Encoder) throws {
@@ -62,8 +64,10 @@ struct PemesananResponseModel: Codable, Identifiable, Hashable{
         try container.encode(status, forKey: .status)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        try container.encode(dateFormatter.string(from: tanggal_pembelian), forKey: .tanggal_pembelian)
-        try container.encode(dateFormatter.string(from: tanggal_pengambilan), forKey: .tanggal_pengambilan)
+        try container.encode(dateFormatter.string(from: tanggal_pemesanan), forKey: .tanggal_pemesanan)
+        let date = DateFormatter()
+        date.dateFormat = "yyyy-MM-dd"
+        try container.encode(date.string(from: tanggal_pengambilan), forKey: .tanggal_pengambilan)
         
     }
 }

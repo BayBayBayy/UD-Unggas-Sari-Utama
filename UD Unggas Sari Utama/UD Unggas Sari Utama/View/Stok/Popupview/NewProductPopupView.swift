@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct NewProductPopupView: View {
+    let vmCreateProduk = ProdukManager()
+    @ObservedObject var viewModel = ProdukFetcher()
+    @State var id : String = " "
     @State var namaProduk : String = ""
     @State var satuanProduk : String = ""
     @State var kategoriProduk : String = ""
     @State var hargaProduk : String = ""
+    @State var image: String = ""
     @State var jumlahProduk : String = ""
+    @State var ecer: Bool = false
+    @State var tanggal: Date = Date()
     @Binding var check3: Bool
     var body: some View {
         GeometryReader{ geometry in
@@ -31,23 +37,56 @@ struct NewProductPopupView: View {
                         . frame( height: geometry.size.height/8)
                     kategori
                         . frame( height: geometry.size.height/8)
+                    gambar
+                        . frame( height: geometry.size.height/8)
                     harga
                         . frame( height: geometry.size.height/8)
                     jumlah
                         . frame( height: geometry.size.height/8)
-                    Button(action: generateStokOpname) {
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color("GrayMiddleColor"))
-                                . frame( width: geometry.size.width/8, height: geometry.size.height/12)
-                                .cornerRadius(8)
-                                .border(Color.black, width: 2)
-                            Text("OK")
-                                .bold()
-                                .font(.title)
+                    CheckToggle(isOn: $ecer, title: "Bisa Ecer")
+                    DatePicker("Tanggal Produk", selection: $tanggal, displayedComponents: [.date])
+                    
+                    HStack{
+                        Button{ vmCreateProduk.simpanProduk(id: id, nama_produk: namaProduk, satuan: satuanProduk, produk_kategori: kategoriProduk, image: image, harga: hargaProduk, jumlah_produk: jumlahProduk, produk_ecer: ecer, tanggal_masuk_produk: tanggal){ response in
+                            if response != nil {
+                                print("Data berhasil disimpan")
+                            } else {
+                                print("Terjadi kesalahan saat menyimpan data")
+                            }
                         }
-                        . frame( width: geometry.size.width/8, height: geometry.size.height/12)
-                    }  
+                            viewModel.fetchData()
+                            check3.toggle()
+                            
+                        } label:{
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color("GrayMiddleColor"))
+                                    . frame( width: geometry.size.width/8, height: geometry.size.height/12)
+                                    .cornerRadius(8)
+                                    .border(Color.black, width: 2)
+                                Text("OK")
+                                    .bold()
+                                    .font(.title)
+                            }
+                            . frame( width: geometry.size.width/8, height: geometry.size.height/12)
+                        }
+                        
+                        Button{
+                            check3 = false
+                        } label:{
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color("GrayMiddleColor"))
+                                    . frame( width: geometry.size.width/8, height: geometry.size.height/12)
+                                    .cornerRadius(8)
+                                    .border(Color.black, width: 2)
+                                Text("Batal")
+                                    .bold()
+                                    .font(.title)
+                            }
+                            . frame( width: geometry.size.width/8, height: geometry.size.height/12)
+                        }
+                    }
                 }.frame(width: geometry.size.width/1.5, height: geometry.size.height/1.5)
             }.frame(width: geometry.size.width/1, height: geometry.size.height/1)
         }.edgesIgnoringSafeArea(.all)
@@ -71,6 +110,7 @@ extension NewProductPopupView {
        HStack{
            Text("Satuan :")
            TextField("", text: $satuanProduk)
+               
        }
        .textFieldStyle(.roundedBorder)
    }
@@ -81,10 +121,18 @@ extension NewProductPopupView {
        }
        .textFieldStyle(.roundedBorder)
    }
+    var gambar : some View{
+        HStack{
+            Text("gambar :")
+            TextField("", text: $image)
+        }
+        .textFieldStyle(.roundedBorder)
+    }
    var harga : some View{
        HStack{
            Text("Harga :")
            TextField("", text: $hargaProduk)
+               .keyboardType(.numberPad)
        }
        .textFieldStyle(.roundedBorder)
    }
@@ -92,6 +140,7 @@ extension NewProductPopupView {
        HStack{
            Text("Jumlah :")
            TextField("", text: $jumlahProduk)
+               .keyboardType(.numberPad)
        }
        .textFieldStyle(.roundedBorder)
    }

@@ -24,7 +24,7 @@ struct LaporanPenjualanView: View {
              
                 
                 HStack(spacing: 80){
-                    cardLaporanPenjualan(title: "Total Saldo", hasil: "1.200.000")
+                    cardLaporanPenjualan(title: "Total Revenue", hasil: "1.200.000")
                         .frame(width: geometry.size.width/4, height: geometry.size.height/8)
                     cardLaporanPenjualan(title: "Total Transaksi", hasil: "120")
                         .frame(width: geometry.size.width/4, height: geometry.size.height/8)

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CardPemesananView: View {
+    @ObservedObject var pemesananVM = fetchPemesanan()
     @State var dummy: [pesananDummy] = pesananDummy.sampleData
     @Binding var check: Bool
     let columns = [
@@ -21,7 +22,7 @@ struct CardPemesananView: View {
             VStack{
                 ScrollView{
                     LazyVGrid(columns: columns, alignment: .center, spacing: 10){
-                        ForEach(dummy, id:\.self){ card in
+                        ForEach(pemesananVM.dataPemesanan, id:\.id){ card in
                             
                             cardPView(cards: card, check: $check)
                                 .frame(width: geometry.size.width/4.5, height: geometry.size.height/5)
@@ -30,6 +31,9 @@ struct CardPemesananView: View {
                         }
                     }
                 }.frame(width: geometry.size.width, height: geometry.size.height)
+            }
+            .onAppear(){
+                self.pemesananVM.fetchData()
             }
             .frame(width: geometry.size.width/1, height: geometry.size.height/1)
             .background(Color("GrayContentColor"))
@@ -43,7 +47,7 @@ struct CardPemesananView: View {
 }
 
 struct cardPView : View{
-    var cards: pesananDummy
+    var cards: PemesananResponseModel
     @Binding var check: Bool
     var body: some View{
         GeometryReader{ geometry in
@@ -67,17 +71,17 @@ struct cardPView : View{
                     VStack{
                         Spacer()
                             .frame(width: geometry.size.width/1, height: geometry.size.height/10)
-                        Text(cards.urutanPesanan)
+                        Text(cards.nama_pembeli)
                             .multilineTextAlignment(.leading)
                             .bold()
-                            .font(.system(size: 48))
+                            .font(.system(size: 36))
                             .foregroundColor(.black)
                             .frame(width: geometry.size.width/1.1, height: geometry.size.height/4)
                             .lineLimit(2)
                         
                         Spacer()
                             .frame(width: geometry.size.width/1, height: geometry.size.height/4)
-                        Text(cards.nama)
+                        Text(cards.id)
                             .multilineTextAlignment(.leading)
                             .bold()
                             .font(.system(size: 24))

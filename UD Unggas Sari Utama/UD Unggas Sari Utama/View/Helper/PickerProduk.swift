@@ -26,3 +26,23 @@ struct PickerProduk: View {
         }
     }
 }
+
+struct PickerProdukEcer: View {
+    
+    @ObservedObject var viewModel : ProdukFetcher
+    
+    var body: some View {
+        HStack{
+            Text("Pilih Berdasarkan")
+            Picker("Pilih", selection: $viewModel.selectedProduk) {
+                ForEach(viewModel.produkEcer, id: \.id) { produk in
+                    Text(produk.nama_produk)
+                }
+            }
+            .pickerStyle(.wheel)
+        }
+        .onAppear(){
+            self.viewModel.fetchData()
+        }
+    }
+}

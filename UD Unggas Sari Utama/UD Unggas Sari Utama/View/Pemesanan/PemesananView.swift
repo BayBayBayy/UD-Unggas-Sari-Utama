@@ -10,6 +10,7 @@ import SwiftUI
 struct PemesananView: View {
     @State var favoriteCards: [pesananDummy] = pesananDummy.sampleData
     @State var checkPemesanan: Bool = false
+    @ObservedObject var VM = fetchPemesanan()
 
     var body: some View {
         if #available(iOS 16.0, *) {
@@ -45,7 +46,12 @@ struct PemesananView: View {
                                 .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                         }
                         
-                    }.frame(width: geometry.size.width/1, height: geometry.size.height/1)
+                    }
+                    .frame(width: geometry.size.width/1, height: geometry.size.height/1)
+                    .onAppear(){
+                        self.VM.fetchData()
+                    }
+                        
                 }
                 .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                 .background(Color("GrayBackgroundColor"))

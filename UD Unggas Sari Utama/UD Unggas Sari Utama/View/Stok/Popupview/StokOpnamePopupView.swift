@@ -45,7 +45,8 @@ struct StokOpnamePopupView: View {
                         . frame( width: geometry.size.width/8, height: geometry.size.height/12)
                     }
                 }.frame(width: geometry.size.width/1.2, height: geometry.size.height/1.2)
-            }.frame(width: geometry.size.width/1, height: geometry.size.height/1)
+            }
+            .frame(width: geometry.size.width/1, height: geometry.size.height/1)
         }.edgesIgnoringSafeArea(.all)
     }
 }

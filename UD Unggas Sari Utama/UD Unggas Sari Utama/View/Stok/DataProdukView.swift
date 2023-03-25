@@ -9,8 +9,10 @@ import SwiftUI
 
 struct DataProdukView: View{
     @ObservedObject var viewModel = ProdukFetcher()
+    @State var productList: [ProdukResponseModel] = []
+    @State var selectedProduct: ProdukResponseModel? = nil
     let dateFormatter = DateFormatter()
-    @Binding var checkEdit: Bool
+    @State var checkEdit: Bool = false
     let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
@@ -19,82 +21,91 @@ struct DataProdukView: View{
     }()
     
     var body: some View {
-        VStack{
-            HStack {
-                Text("ID Produk")
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity)
-                Text("Nama")
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity)
-                Text("Satuan")
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity)
-                Text("Kategori")
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity)
-                Text("Image")
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity)
-                Text("Price")
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity)
-                Text("Jumlah")
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity)
-                Text("Tanggal")
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity)
-                Text("Opsi")
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity)
-            }
-            .padding()
-            .background(Color.gray.opacity(0.3))
-            .cornerRadius(8)
-            ScrollView {
-                ForEach(viewModel.produk) { product in
+        GeometryReader{ geometry in
+            ZStack{
+                VStack{
                     HStack {
-                        Text(product.id)
+                        Text("ID Produk")
+                            .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
-                        Text(product.nama_produk)
+                        Text("Nama")
+                            .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
-                        Text(product.satuan)
+                        Text("Satuan")
+                            .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
-                        Text(product.produk_kategori)
+                        Text("Kategori")
+                            .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
-                        Text(product.image)
+                        Text("Harga")
+                            .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
-                        Text(numberFormatter.string(from: NSNumber(value: product.harga)) ?? "")
+                        Text("Jumlah")
+                            .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
-                        Text(String(product.jumlah_produk))
+                        Text("Tanggal")
+                            .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
-                        Text(dateFormatter.string(from: product.tanggal_masuk_produk))
+                        Text("Opsi")
+                            .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
-                        Button(action: {
-                            self.checkEdit = true
-                            self.viewModel.selectProduk(produk: product)
-                        }) {
-                            ZStack{
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(Color("OrangeColorSet"))
-                                    .frame(width: 80, height: 40)
-                                Text("Edit")
-                                    .font(.title3)
-                                    .bold()
-                                    .foregroundColor(.black)
-                            }
-                        }.frame(maxWidth: .infinity)
                     }
-                    .padding(.vertical, 8)
-                    .background(Color.white)
+                    .padding()
+                    .background(Color.gray.opacity(0.3))
                     .cornerRadius(8)
+                    ScrollView {
+                        ForEach(viewModel.produk, id:\.id) { product in
+                            HStack {
+                                Text(product.id)
+                                    .frame(maxWidth: .infinity)
+                                Text(product.nama_produk)
+                                    .frame(maxWidth: .infinity)
+                                Text(product.satuan)
+                                    .frame(maxWidth: .infinity)
+                                Text(product.produk_kategori)
+                                    .frame(maxWidth: .infinity)
+                                Text(numberFormatter.string(from: NSNumber(value: product.harga)) ?? "")
+                                    .frame(maxWidth: .infinity)
+                                Text(String(product.jumlah_produk))
+                                    .frame(maxWidth: .infinity)
+                                Text(dateFormatter.string(from: product.tanggal_masuk_produk))
+                                    .frame(maxWidth: .infinity)
+                                Button(action: {
+                                    self.checkEdit = true
+                                    self.viewModel.selectProduk(produk: product)
+                                }) {
+                                    ZStack{
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .fill(Color("OrangeColorSet"))
+                                            .frame(width: 80, height: 40)
+                                        Text("Edit")
+                                            .font(.title3)
+                                            .bold()
+                                            .foregroundColor(.black)
+                                    }
+                                }.frame(maxWidth: .infinity)
+                            }
+                            .padding(.vertical, 8)
+                            .background(Color.white)
+                            .cornerRadius(8)
+                        }
+                    }
+                }
+                if checkEdit == true{
+                    EditProdukPopupView(produk: viewModel.selectedProduk!, id: viewModel.selectedProduk!.id, namaProduk: viewModel.selectedProduk!.nama_produk, satuanProduk: viewModel.selectedProduk!.satuan, kategoriProduk: viewModel.selectedProduk!.produk_kategori, hargaProduk: viewModel.selectedProduk!.harga, image: viewModel.selectedProduk!.image, jumlahProduk: viewModel.selectedProduk!.jumlah_produk, ecer: viewModel.selectedProduk!.produk_ecer, tanggal: viewModel.selectedProduk!.tanggal_masuk_produk, check3: $checkEdit)
+                        .frame(width: geometry.size.width/1.2, height: geometry.size.height/1.2)
                 }
             }
-        }
-        .onAppear {
-            dateFormatter.dateFormat = "dd-MM-yyyy" // format tanggal dari data
-            viewModel.fetchData()
+            .onAppear {
+                viewModel.fetchData()
+                dateFormatter.dateFormat = "dd-MM-yyyy" // format tanggal dari data
+                viewModel.refreshData()
+            }
+            .onDisappear(){
+                viewModel.fetchData()
+                dateFormatter.dateFormat = "dd-MM-yyyy" // format tanggal dari data
+                viewModel.refreshData()
+            }
         }
     }
 }

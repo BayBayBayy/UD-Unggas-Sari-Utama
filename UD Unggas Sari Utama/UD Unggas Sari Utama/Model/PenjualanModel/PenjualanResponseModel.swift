@@ -12,6 +12,7 @@ struct  PenjualanResponseModel: Codable, Identifiable, Hashable{
     var total_harga: Int
     var tanggal_pembelian: Date
     
+    
     enum CodingKeys: String, CodingKey {
         case id, total_harga, tanggal_pembelian
     }

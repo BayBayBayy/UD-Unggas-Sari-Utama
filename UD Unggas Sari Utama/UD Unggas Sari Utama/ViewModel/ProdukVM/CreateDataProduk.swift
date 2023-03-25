@@ -7,39 +7,98 @@
 
 import Foundation
 
-//class ProductRepository {
-//
-//    func createProduct(product: Product, completion: @escaping (Product?, Error?) -> Void) {
-//        guard let url = URL(string: "https://example.com/create_product.php") else {
-//            fatalError("Invalid URL")
-//        }
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "POST"
-//        let encoder = JSONEncoder()
-//        do {
-//            let data = try encoder.encode(product)
-//            request.httpBody = data
-//            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-//                if let error = error {
-//                    completion(nil, error)
-//                    return
-//                }
-//                guard let data = data else {
-//                    completion(nil, NSError(domain: "", code: 1, userInfo: [NSLocalizedDescriptionKey: "No data returned"]))
-//                    return
-//                }
-//                let decoder = JSONDecoder()
-//                do {
-//                    let product = try decoder.decode(Product.self, from: data)
-//                    completion(product, nil)
-//                } catch {
-//                    completion(nil, error)
-//                }
-//            }
-//            task.resume()
-//        } catch {
-//            completion(nil, error)
-//        }
-//    }
-//
-//}
+class ProdukManager {
+    private let produkManager = ProdukFetcher()
+    
+    func simpanProduk(id: String, nama_produk: String, satuan: String, produk_kategori: String, image: String, harga: String, jumlah_produk: String, produk_ecer: Bool,  tanggal_masuk_produk: Date, completionHandler: @escaping (String?) -> Void) {
+        
+        let url = URL(string: "https://indramaryati.com/bayu/Produk/createProduk.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        
+        let ecerString = produk_ecer ? "1" : "0"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let tanggalString = dateFormatter.string(from: tanggal_masuk_produk)
+        
+        let postString = "id=\(id)&nama_produk=\(nama_produk)&satuan=\(satuan)&produk_kategori=\(produk_kategori)&image=\(image)&harga=\(harga)&jumlah_produk=\(jumlah_produk)&produk_ecer=\(ecerString)&tanggal_masuk_produk=\(tanggalString)"
+        request.httpBody = postString.data(using: .utf8)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                completionHandler(nil)
+                return
+            }
+            
+            if let responseString = String(data: data, encoding: .utf8) {
+                if responseString == "Produk berhasil disimpan" {
+                    self.produkManager.refreshData()
+                }
+                completionHandler(responseString)
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func editProduk(id: String, namaProduk: String, satuanProduk: String, kategoriProduk: String, imageProduk: String, hargaProduk: String, jumlahProduk: String, produkEcer: Bool, tanggalMasukProduk: Date, completionHandler: @escaping (Bool, String) -> Void) {
+        
+        // URL endpoint untuk edit produk
+        let url = URL(string: "https://indramaryati.com/bayu/Produk/updateProduk.php")!
+        
+        // Buat request dengan metode HTTP POST
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let tanggalString = dateFormatter.string(from: tanggalMasukProduk)
+        
+        // Menyiapkan data yang akan dikirim
+        let parameters: [String: Any] = [
+            "id": id,
+            "nama_produk": namaProduk,
+            "satuan": satuanProduk,
+            "produk_kategori": kategoriProduk,
+            "image": imageProduk,
+            "harga": hargaProduk,
+            "jumlah_produk": jumlahProduk,
+            "produk_ecer": produkEcer ? "1" : "0",
+            "tanggal_masuk_produk": tanggalString
+        ]
+        print("ini paramaternya : \(parameters)")
+        do {
+            // Encode data menjadi format JSON dan memasukkan ke dalam body request
+            let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            request.httpBody = jsonData
+            print("ini jsonData: \(jsonData)")
+        } catch {
+            completionHandler(false, "Terjadi kesalahan saat mengirim data")
+            return
+        }
+        
+        // Kirim request ke server menggunakan URLSession
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { (data, response, error) in
+            
+            // Handle response dari server
+            guard let data = data, let response = response as? HTTPURLResponse, error == nil else {
+                completionHandler(false, "Terjadi kesalahan saat mengirim data")
+                return
+            }
+            
+            if response.statusCode == 200 {
+                // Response dari server sukses
+                completionHandler(true, "Data produk berhasil diubah")
+            } else {
+                // Response dari server gagal
+                completionHandler(false, "Terjadi kesalahan pada server")
+            }
+            print(data)
+        }
+        task.resume()
+    }
+    
+    
+}

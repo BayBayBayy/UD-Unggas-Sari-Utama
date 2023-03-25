@@ -15,10 +15,19 @@ struct ProdukResponseModel: Codable, Identifiable, Hashable{
     let image: String
     let harga: Int
     let jumlah_produk: Int
+    let produk_ecer: Bool
     let tanggal_masuk_produk: Date
     
     enum CodingKeys: String, CodingKey {
-        case id, nama_produk, satuan, harga, image, produk_kategori, jumlah_produk, tanggal_masuk_produk
+        case id
+        case nama_produk
+        case satuan
+        case produk_kategori
+        case image
+        case harga
+        case jumlah_produk
+        case produkEcer = "produk_ecer"
+        case tanggal_masuk_produk
     }
     
     init(from decoder: Decoder) throws {
@@ -29,9 +38,16 @@ struct ProdukResponseModel: Codable, Identifiable, Hashable{
         produk_kategori = try values.decode(String.self, forKey: .produk_kategori)
         let hargaString = try values.decode(String.self, forKey: .harga)
         harga = Int(hargaString) ?? 0
+        image = try values.decode(String.self, forKey: .image)
         let jumlahString = try values.decode(String.self, forKey: .jumlah_produk)
         jumlah_produk = Int(jumlahString) ?? 0
-        image = try values.decode(String.self, forKey: .image)
+        
+        if let produkEcer = try values.decodeIfPresent(String.self, forKey: .produkEcer) {
+            self.produk_ecer = produkEcer == "1"
+        } else {
+            self.produk_ecer = false
+        }
+    
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         tanggal_masuk_produk = try dateFormatter.date(from: values.decode(String.self, forKey: .tanggal_masuk_produk)) ?? Date()
@@ -46,6 +62,7 @@ struct ProdukResponseModel: Codable, Identifiable, Hashable{
         try container.encode(image, forKey: .image)
         try container.encode(harga, forKey: .harga)
         try container.encode(jumlah_produk, forKey: .jumlah_produk)
+        try container.encode(produk_ecer, forKey: .produkEcer)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         try container.encode(dateFormatter.string(from: tanggal_masuk_produk), forKey: .tanggal_masuk_produk)
