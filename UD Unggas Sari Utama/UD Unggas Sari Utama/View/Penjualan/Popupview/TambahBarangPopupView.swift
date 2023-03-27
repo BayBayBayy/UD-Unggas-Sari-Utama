@@ -58,28 +58,46 @@ struct TambahBarangPopupView: View {
                         Spacer()
                     }.frame( height: geometry.size.height/7)
                     
-                    Button{
-                        if let jumlahInt = Int(jumlahInput), jumlahInt > 0 {
-                            // Tambahkan ke list belanja di view model
-                            viewModel.tambahDetailPenjualan(penjualanId: "", produkId: produk.id, jumlah: jumlahInt)
-                            jumlahInput = "0" // Reset jumlah ke 0
-                            print("Data berhasil ditambahkan!")
-                            print("Data berhasil ditambahkan: produk ID \(produk.id), jumlah \(jumlahInt)")
+                    HStack{
+                        Button{
+                            self.close = false
+                        } label: {
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color("GrayMiddleColor"))
+                                    . frame( width: geometry.size.width/8, height: geometry.size.height/12)
+                                    .cornerRadius(8)
+                                    .border(Color.black, width: 2)
+                                Text("Batal")
+                                    .bold()
+                                    .font(.title)
+                            }
+                            .frame( width: geometry.size.width/8, height: geometry.size.height/12)
                         }
-                        self.close.toggle()
-                        self.cancelList = true
-                    } label: {
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color("GrayMiddleColor"))
-                                . frame( width: geometry.size.width/8, height: geometry.size.height/12)
-                                .cornerRadius(8)
-                                .border(Color.black, width: 2)
-                            Text("OK")
-                                .bold()
-                                .font(.title)
+                        
+                        Button{
+                            if let jumlahInt = Int(jumlahInput), jumlahInt > 0 {
+                                // Tambahkan ke list belanja di view model
+                                viewModel.tambahDetailPenjualan(penjualanId: "", produkId: produk.id, jumlah: jumlahInt)
+                                jumlahInput = "0" // Reset jumlah ke 0
+                                print("Data berhasil ditambahkan!")
+                            }
+                            self.close.toggle()
+                            self.cancelList = true
+                            
+                        } label: {
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color("GrayMiddleColor"))
+                                    . frame( width: geometry.size.width/8, height: geometry.size.height/12)
+                                    .cornerRadius(8)
+                                    .border(Color.black, width: 2)
+                                Text("OK")
+                                    .bold()
+                                    .font(.title)
+                            }
+                            .frame( width: geometry.size.width/8, height: geometry.size.height/12)
                         }
-                        .frame( width: geometry.size.width/8, height: geometry.size.height/12)
                     }
                 }.frame( width: geometry.size.width/1.2, height: geometry.size.height/1.2)
             }

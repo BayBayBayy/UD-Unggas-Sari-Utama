@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ShoppingChartView: View {
     @Binding var showPesanan: Bool
+    @Binding var checkList: Bool
     @EnvironmentObject var penjualanViewModel: PenjualanViewModel
     @State private var reloadList = UUID()
     var body: some View {
@@ -91,6 +92,7 @@ struct ShoppingChartView: View {
                             .font(.system(size: 20))
                         Spacer()
                         Toggle("", isOn: $showPesanan)
+                            .disabled(checkList ? false : true )
                     }.frame(width: geometry.size.width/1.1, height: geometry.size.height/10)
                     
                 }.frame(width: geometry.size.width/1.1, height: geometry.size.height/4)

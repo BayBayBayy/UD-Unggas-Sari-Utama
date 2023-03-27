@@ -12,14 +12,15 @@ struct UD_Unggas_Sari_UtamaApp: App {
     let persistenceController = PersistenceController.shared
     @StateObject var penjualanViewModel = PenjualanViewModel(produkViewModel: ProdukFetcher())
     @StateObject var produkFetcher = ProdukFetcher()
+    @StateObject var pemesananViewModel = PemesananViewModel()
 
     var body: some Scene {
         WindowGroup {
             TabBarView()
-//            test()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(produkFetcher)
                 .environmentObject(penjualanViewModel)
+                .environmentObject(pemesananViewModel)
         }
     }
 }

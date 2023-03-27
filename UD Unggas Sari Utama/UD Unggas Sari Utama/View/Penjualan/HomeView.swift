@@ -33,7 +33,7 @@ struct HomeView: View {
                                     .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
                                 Spacer()
                                     .frame(width: 10)
-                                ShoppingChartView(showPesanan: $checkPesanan, penjualanViewModel: _penjualanViewModel)
+                                ShoppingChartView(showPesanan: $checkPesanan, checkList: $cancelListPenjualan, penjualanViewModel: _penjualanViewModel)
                                     .frame(width: geometry.size.width/2.75, height: geometry.size.height/1.75)
                                     .background(Color("GrayContentColor"))
                                     .overlay(RoundedRectangle(cornerRadius: 10)
@@ -74,7 +74,7 @@ struct HomeView: View {
                             PembayaranPopupView(close: $check)
                                 .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
                         }else if checkPesanan == true{
-                            TambahkanPesananPopupView()
+                            TambahkanPesananPopupView(pesananPopUp: $checkPesanan)
                                 .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
                         }
                         

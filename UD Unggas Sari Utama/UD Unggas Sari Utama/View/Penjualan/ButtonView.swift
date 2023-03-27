@@ -82,10 +82,13 @@ struct ButtonView: View {
                 Button {
                     self.checkOk.toggle()
                     buttonValue = 1
+                    penjualanViewModel.checkout()
+                    penjualanViewModel.clearDetailPenjualanList()
+                    cancelList = false
                 } label: {
                     ZStack{
                         RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.green)
+                            .fill(cancelList ? Color.green : Color.gray)
                             .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
                         VStack {
                             Text("Bayar")
@@ -97,7 +100,7 @@ struct ButtonView: View {
                     }
                     .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
                     .cornerRadius(8)
-                }
+                }.disabled(cancelList ? false : true )
                 
             }.frame(width: geometry.size.width/1, height: geometry.size.height/8)
         }.ignoresSafeArea(.all)
