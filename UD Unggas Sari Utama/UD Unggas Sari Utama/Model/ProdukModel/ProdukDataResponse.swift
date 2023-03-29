@@ -8,15 +8,16 @@
 import Foundation
 
 struct ProdukResponseModel: Codable, Identifiable, Hashable{
-    let id: String
-    let nama_produk: String
-    let satuan: String
-    let produk_kategori: String
-    let image: String
-    let harga: Int
-    let jumlah_produk: Int
-    let produk_ecer: Bool
-    let tanggal_masuk_produk: Date
+    var id: String
+    var nama_produk: String
+    var satuan: String
+    var produk_kategori: String
+    var image: String
+    var harga: Int
+    var jumlah_produk: Int
+    var produk_ecer: Bool
+    var status_produk: Bool
+    var tanggal_masuk_produk: Date
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -27,6 +28,7 @@ struct ProdukResponseModel: Codable, Identifiable, Hashable{
         case harga
         case jumlah_produk
         case produkEcer = "produk_ecer"
+        case status_produk = "produk_status"
         case tanggal_masuk_produk
     }
     
@@ -47,6 +49,12 @@ struct ProdukResponseModel: Codable, Identifiable, Hashable{
         } else {
             self.produk_ecer = false
         }
+        
+        if let status = try values.decodeIfPresent(String.self, forKey: .status_produk) {
+            self.status_produk = status == "0"
+        } else {
+            self.status_produk = true
+        }
     
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -63,6 +71,7 @@ struct ProdukResponseModel: Codable, Identifiable, Hashable{
         try container.encode(harga, forKey: .harga)
         try container.encode(jumlah_produk, forKey: .jumlah_produk)
         try container.encode(produk_ecer, forKey: .produkEcer)
+        try container.encode(status_produk, forKey: .status_produk)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         try container.encode(dateFormatter.string(from: tanggal_masuk_produk), forKey: .tanggal_masuk_produk)

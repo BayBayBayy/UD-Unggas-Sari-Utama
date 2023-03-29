@@ -11,6 +11,7 @@ class ProdukFetcher: ObservableObject {
     //    @Published var produk: [ProdukResponseModel] = []
     @Published var produk: [ProdukResponseModel] = []
     @Published var produkEcer = [ProdukResponseModel]()
+    @Published var produkStatus = [ProdukResponseModel]()
     @Published var selectedProduk: ProdukResponseModel? // tambahkan properti selectedProduk
     @Published var selectedProduct: ProdukResponseModel?
     @Published var selectedProdukId: String?
@@ -70,6 +71,33 @@ class ProdukFetcher: ObservableObject {
             }
         }.resume()
     }
+    
+    // View Data yang terjual
+    func fetchStatusProduk() {
+        guard let url = URL(string: "https://indramaryati.com/bayu/Produk/produkEcer.php") else {
+            print("Invalid URL")
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                print("Error:", error ?? "Unknown error")
+                return
+            }
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            decoder.nonConformingFloatDecodingStrategy = .convertFromString(positiveInfinity: "inf", negativeInfinity: "-inf", nan: "nan")
+            do {
+                let produkStatus = try JSONDecoder().decode([ProdukResponseModel].self, from: data)
+                DispatchQueue.main.async {
+                    self.produkStatus = produkStatus
+                }
+            } catch let error {
+                print("Error decoding JSON:", error)
+            }
+        }.resume()
+    }
+    
     func refreshData() {
         self.produk.removeAll()
         self.produkEcer.removeAll()
@@ -77,6 +105,10 @@ class ProdukFetcher: ObservableObject {
         fetchDataEcer()
     }
     
+    func getProdukById(id: String) -> ProdukResponseModel? {
+        return produk.first(where: { $0.id == id })
+    }
+
     func selectProdukId(withId id: String) {
         self.selectedProdukId = id
     }

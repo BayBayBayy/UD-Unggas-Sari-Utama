@@ -10,7 +10,7 @@ import Foundation
 struct DetailPenjualanModel: Codable, Identifiable, Hashable{
     var id: String
     var penjualan_id: String
-    var nama_produk: String
+    var produk_id: String
     var jumlah: Int
     var harga: Int
     var subTotal: Int
@@ -18,7 +18,7 @@ struct DetailPenjualanModel: Codable, Identifiable, Hashable{
     enum CodingKeys: String, CodingKey {
         case id,
              penjualan_id,
-             nama_produk,
+             produk_id,
              jumlah,
              harga,
              subTotal
@@ -28,7 +28,7 @@ struct DetailPenjualanModel: Codable, Identifiable, Hashable{
         let values = try decoder.container(keyedBy: CodingKeys.self)
         id = try values.decode(String.self, forKey: .id)
         penjualan_id = try values.decode(String.self, forKey: .penjualan_id)
-        nama_produk = try values.decode(String.self, forKey: .nama_produk)
+        produk_id = try values.decode(String.self, forKey: .produk_id)
         let jumlahString = try values.decode(String.self, forKey: .jumlah)
         jumlah = Int(jumlahString) ?? 0
         let hargaString = try values.decode(String.self, forKey: .harga)
@@ -41,7 +41,7 @@ struct DetailPenjualanModel: Codable, Identifiable, Hashable{
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(penjualan_id, forKey: .penjualan_id)
-        try container.encode(nama_produk, forKey: .nama_produk)
+        try container.encode(produk_id, forKey: .produk_id)
         try container.encode(jumlah, forKey: .jumlah)
         try container.encode(harga, forKey: .harga)
         try container.encode(subTotal, forKey: .subTotal)

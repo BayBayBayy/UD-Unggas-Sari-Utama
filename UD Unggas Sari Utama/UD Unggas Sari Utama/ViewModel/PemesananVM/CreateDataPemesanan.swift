@@ -29,12 +29,12 @@ class PemesananViewModel: ObservableObject{
         for detailPenjualan in dataPenjualan.detailPenjualanList {
             let id = UUID().uuidString
             
-            let newDetailPenjualan = DetailPenjualan(id: id, penjualanId: idPesan, namaBarang: detailPenjualan.namaBarang,  jumlah: detailPenjualan.jumlah, harga: detailPenjualan.harga, subHarga: detailPenjualan.subHarga)
+            let newDetailPenjualan = DetailPenjualan(id: id, penjualanId: idPesan, produk_id: detailPenjualan.produk_id,  jumlah: detailPenjualan.jumlah, harga: detailPenjualan.harga, subHarga: detailPenjualan.subHarga)
 
             detailPemesananListToUpload.append([
                 "id": newDetailPenjualan.id,
                 "pemesanan_id": newDetailPenjualan.penjualanId,
-                "nama_produk": newDetailPenjualan.namaBarang,
+                "produk_id": newDetailPenjualan.produk_id,
                 "jumlah_produk": newDetailPenjualan.jumlah,
                 "harga_produk": newDetailPenjualan.harga,
                 "sub_harga": newDetailPenjualan.subHarga

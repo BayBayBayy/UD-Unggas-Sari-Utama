@@ -33,7 +33,7 @@ struct HomeView: View {
                                     .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
                                 Spacer()
                                     .frame(width: 10)
-                                ShoppingChartView(showPesanan: $checkPesanan, checkList: $cancelListPenjualan, penjualanViewModel: _penjualanViewModel)
+                                ShoppingChartView(showPesanan: $checkPesanan, checkList: $cancelListPenjualan, penjualanViewModel: _penjualanViewModel, viewModel: viewModel)
                                     .frame(width: geometry.size.width/2.75, height: geometry.size.height/1.75)
                                     .background(Color("GrayContentColor"))
                                     .overlay(RoundedRectangle(cornerRadius: 10)

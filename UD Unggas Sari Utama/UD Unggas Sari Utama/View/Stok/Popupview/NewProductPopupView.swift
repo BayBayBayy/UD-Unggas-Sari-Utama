@@ -15,7 +15,6 @@ struct NewProductPopupView: View {
     @State var satuanProduk : String = ""
     @State var kategoriProduk : String = ""
     @State var hargaProduk : String = ""
-    @State var image: String = ""
     @State var jumlahProduk : String = ""
     @State var ecer: Bool = false
     @State var tanggal: Date = Date()
@@ -35,19 +34,18 @@ struct NewProductPopupView: View {
                         . frame( height: geometry.size.height/8)
                     satuan
                         . frame( height: geometry.size.height/8)
-                    kategori
-                        . frame( height: geometry.size.height/8)
-                    gambar
+                    PickerKategori(selectedKategori: $kategoriProduk)
                         . frame( height: geometry.size.height/8)
                     harga
                         . frame( height: geometry.size.height/8)
                     jumlah
                         . frame( height: geometry.size.height/8)
-                    CheckToggle(isOn: $ecer, title: "Bisa Ecer")
                     DatePicker("Tanggal Produk", selection: $tanggal, displayedComponents: [.date])
                     
+                    CheckToggle(isOn: $ecer, title: "Bisa Ecer")
+                    
                     HStack{
-                        Button{ vmCreateProduk.simpanProduk(id: id, nama_produk: namaProduk, satuan: satuanProduk, produk_kategori: kategoriProduk, image: image, harga: hargaProduk, jumlah_produk: jumlahProduk, produk_ecer: ecer, tanggal_masuk_produk: tanggal){ response in
+                        Button{ vmCreateProduk.simpanProduk(id: id, nama_produk: namaProduk, satuan: satuanProduk, produk_kategori: kategoriProduk, harga: hargaProduk, jumlah_produk: jumlahProduk, produk_ecer: ecer, tanggal_masuk_produk: tanggal){ response in
                             if response != nil {
                                 print("Data berhasil disimpan")
                             } else {
@@ -121,13 +119,6 @@ extension NewProductPopupView {
        }
        .textFieldStyle(.roundedBorder)
    }
-    var gambar : some View{
-        HStack{
-            Text("gambar :")
-            TextField("", text: $image)
-        }
-        .textFieldStyle(.roundedBorder)
-    }
    var harga : some View{
        HStack{
            Text("Harga :")

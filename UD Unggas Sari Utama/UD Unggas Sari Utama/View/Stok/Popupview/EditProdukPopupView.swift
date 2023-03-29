@@ -16,9 +16,9 @@ struct EditProdukPopupView: View {
     @State var satuanProduk : String
     @State var kategoriProduk : String
     @State var hargaProduk :Int
-    @State var image: String
     @State var jumlahProduk :Int
     @State var ecer: Bool
+    @State var status: Bool
     @State var tanggal: Date
     @Binding var check3: Bool
     
@@ -39,8 +39,6 @@ struct EditProdukPopupView: View {
                         . frame( height: geometry.size.height/12)
                     kategori
                         . frame( height: geometry.size.height/12)
-                    gambar
-                        . frame( height: geometry.size.height/12)
                     harga
                         . frame( height: geometry.size.height/12)
                     jumlah
@@ -48,12 +46,18 @@ struct EditProdukPopupView: View {
                     
                     DatePicker("Tanggal Produk", selection: $tanggal, displayedComponents: [.date])
                     
-                    CheckToggle(isOn: $ecer, title: "Bisa Ecer")
-                        .padding(.bottom, 5)
+                    HStack{
+                        CheckToggle(isOn: $ecer, title: "Bisa Ecer")
+                            .padding(.bottom, 5)
+                        
+                        CheckToggle(isOn: $status, title: status ? "Masih Terjual" : "Tidak Terjual" )
+                            .padding(.bottom, 5)
+                    }
+                    
                     HStack{
                         Button{
                             viewModel.fetchData()
-                            vmEditProduk.editProduk(id: id, namaProduk: namaProduk, satuanProduk: satuanProduk, kategoriProduk: kategoriProduk, imageProduk: image, hargaProduk: "\(hargaProduk)", jumlahProduk: "\(jumlahProduk)", produkEcer: ecer, tanggalMasukProduk: tanggal) { success, message in
+                            vmEditProduk.editProduk(id: id, namaProduk: namaProduk, satuanProduk: satuanProduk, kategoriProduk: kategoriProduk, hargaProduk: "\(hargaProduk)", jumlahProduk: "\(jumlahProduk)", produkEcer: ecer, produkStatus: status, tanggalMasukProduk: tanggal) { success, message in
                                 if success {
                                     // Jika sukses, menampilkan pesan sukses dan menutup tampilan edit produk
                                     print(message)
@@ -105,10 +109,10 @@ struct EditProdukPopupView: View {
                     namaProduk = produk.nama_produk
                     satuanProduk = produk.satuan
                     kategoriProduk = produk.produk_kategori
-                    image = produk.image
                     hargaProduk = produk.harga
                     jumlahProduk = produk.jumlah_produk
                     ecer = produk.produk_ecer
+                    status = produk.status_produk
                     tanggal = produk.tanggal_masuk_produk
                 }
             }
@@ -143,13 +147,6 @@ extension EditProdukPopupView {
         HStack{
             Text("Kategori :")
             TextField("", text: $kategoriProduk)
-        }
-        .textFieldStyle(.roundedBorder)
-    }
-    var gambar : some View{
-        HStack{
-            Text("gambar :")
-            TextField("", text: $image)
         }
         .textFieldStyle(.roundedBorder)
     }

@@ -11,6 +11,7 @@ struct ShoppingChartView: View {
     @Binding var showPesanan: Bool
     @Binding var checkList: Bool
     @EnvironmentObject var penjualanViewModel: PenjualanViewModel
+    var viewModel: ProdukFetcher
     @State private var reloadList = UUID()
     var body: some View {
         GeometryReader{ geometry in
@@ -46,12 +47,14 @@ struct ShoppingChartView: View {
                 ScrollView(){
                     ForEach(penjualanViewModel.detailPenjualanList.indices, id: \.self) { index in
                         let detailPenjualan = penjualanViewModel.detailPenjualanList[index]
+                        let produk = viewModel.getProdukById(id: detailPenjualan.produk_id)
+                        
                         HStack{
                             Text("\(index + 1)")
                                 .bold()
                                 .font(.system(size: 16))
                                 .frame(width: geometry.size.width/10)
-                            Text(detailPenjualan.namaBarang)
+                            Text(produk!.nama_produk)
                                 .bold()
                                 .font(.system(size: 16))
                                 .frame(width: geometry.size.width/5)

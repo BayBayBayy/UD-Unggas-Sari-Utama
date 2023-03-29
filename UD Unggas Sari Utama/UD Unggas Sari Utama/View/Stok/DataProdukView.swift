@@ -92,7 +92,7 @@ struct DataProdukView: View{
                     }
                 }
                 if checkEdit == true{
-                    EditProdukPopupView(produk: viewModel.selectedProduk!, id: viewModel.selectedProduk!.id, namaProduk: viewModel.selectedProduk!.nama_produk, satuanProduk: viewModel.selectedProduk!.satuan, kategoriProduk: viewModel.selectedProduk!.produk_kategori, hargaProduk: viewModel.selectedProduk!.harga, image: viewModel.selectedProduk!.image, jumlahProduk: viewModel.selectedProduk!.jumlah_produk, ecer: viewModel.selectedProduk!.produk_ecer, tanggal: viewModel.selectedProduk!.tanggal_masuk_produk, check3: $checkEdit)
+                    EditProdukPopupView(produk: viewModel.selectedProduk!, id: viewModel.selectedProduk!.id, namaProduk: viewModel.selectedProduk!.nama_produk, satuanProduk: viewModel.selectedProduk!.satuan, kategoriProduk: viewModel.selectedProduk!.produk_kategori, hargaProduk: viewModel.selectedProduk!.harga, jumlahProduk: viewModel.selectedProduk!.jumlah_produk, ecer: viewModel.selectedProduk!.produk_ecer, status: viewModel.selectedProduk!.status_produk, tanggal: viewModel.selectedProduk!.tanggal_masuk_produk, check3: $checkEdit)
                         .frame(width: geometry.size.width/1.2, height: geometry.size.height/1.2)
                 }
             }

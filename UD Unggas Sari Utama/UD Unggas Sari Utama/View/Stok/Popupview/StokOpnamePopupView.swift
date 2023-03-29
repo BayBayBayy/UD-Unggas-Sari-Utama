@@ -10,6 +10,7 @@ import SwiftUI
 struct StokOpnamePopupView: View {
     @State var jumlah : String = ""
     @State var keterangan : String = ""
+    @State var produkSelect : String = ""
     @Binding var check1: Bool
     @ObservedObject var viewModel = ProdukFetcher()
     
@@ -23,7 +24,7 @@ struct StokOpnamePopupView: View {
                 VStack (alignment: .center, spacing: .zero) {
                     title
                         . frame( height: geometry.size.height/8)
-                    PickerProduk(viewModel: viewModel)
+                    PickerProduk(viewModel: viewModel, selectedProduk: $produkSelect)
                         . frame( height: geometry.size.height/6)
                     choiceSituation
                         . frame( height: geometry.size.height/6)

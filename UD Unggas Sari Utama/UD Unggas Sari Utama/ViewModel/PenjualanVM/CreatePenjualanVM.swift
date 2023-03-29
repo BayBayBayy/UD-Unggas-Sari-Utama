@@ -43,7 +43,7 @@ class PenjualanViewModel: ObservableObject {
             return
         }
         let subHarga = produk.harga * jumlah
-        let detailPenjualan = DetailPenjualan(id: UUID().uuidString, penjualanId: penjualanId, namaBarang: produk.nama_produk, jumlah: jumlah, harga: produk.harga, subHarga: subHarga)
+        let detailPenjualan = DetailPenjualan(id: UUID().uuidString, penjualanId: penjualanId, produk_id: produk.id, jumlah: jumlah, harga: produk.harga, subHarga: subHarga)
         detailPenjualanList.append(detailPenjualan)
         reloadList.toggle()
         objectWillChange.send()
@@ -65,12 +65,12 @@ class PenjualanViewModel: ObservableObject {
         for detailPenjualan in detailPenjualanList {
             let id = UUID().uuidString
             
-            let newDetailPenjualan = DetailPenjualan(id: id, penjualanId: penjualanId, namaBarang: detailPenjualan.namaBarang,  jumlah: detailPenjualan.jumlah, harga: detailPenjualan.harga, subHarga: detailPenjualan.subHarga)
+            let newDetailPenjualan = DetailPenjualan(id: id, penjualanId: penjualanId, produk_id: detailPenjualan.produk_id,  jumlah: detailPenjualan.jumlah, harga: detailPenjualan.harga, subHarga: detailPenjualan.subHarga)
 
             detailPenjualanListToUpload.append([
                 "id": newDetailPenjualan.id,
                 "penjualan_id": newDetailPenjualan.penjualanId,
-                "nama_produk": newDetailPenjualan.namaBarang,
+                "produk_id": newDetailPenjualan.produk_id,
                 "jumlah_produk": newDetailPenjualan.jumlah,
                 "harga_produk": newDetailPenjualan.harga,
                 "sub_harga": newDetailPenjualan.subHarga
@@ -88,9 +88,9 @@ class PenjualanViewModel: ObservableObject {
             
             let jsonData = try? JSONSerialization.data(withJSONObject: [
                 "penjualan": [
-                    "id": penjualanId,
+                    "penjualan_id": penjualanId,
                     "total_harga": totalHarga,
-                    "tanggal": tanggal
+                    "tanggal_penjualan": tanggal
                 ],
                 "detail_penjualan_list": detailPenjualanListToUpload
             ])
@@ -143,7 +143,7 @@ struct Penjualan: Identifiable {
 struct DetailPenjualan: Identifiable {
     var id: String
     var penjualanId: String
-    var namaBarang: String
+    var produk_id: String
     var jumlah: Int
     var harga: Int
     var subHarga: Int
