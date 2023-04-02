@@ -28,7 +28,7 @@ struct ProdukResponseModel: Codable, Identifiable, Hashable{
         case harga
         case jumlah_produk
         case produkEcer = "produk_ecer"
-        case status_produk = "produk_status"
+        case status_produk = "status_produk"
         case tanggal_masuk_produk
     }
     
@@ -51,9 +51,9 @@ struct ProdukResponseModel: Codable, Identifiable, Hashable{
         }
         
         if let status = try values.decodeIfPresent(String.self, forKey: .status_produk) {
-            self.status_produk = status == "0"
+            self.status_produk = status == "1"
         } else {
-            self.status_produk = true
+            self.status_produk = false
         }
     
         let dateFormatter = DateFormatter()

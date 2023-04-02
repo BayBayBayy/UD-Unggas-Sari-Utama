@@ -10,7 +10,7 @@ import SwiftUI
 struct PemesananView: View {
     @State var favoriteCards: [pesananDummy] = pesananDummy.sampleData
     @State var checkPemesanan: Bool = false
-    @ObservedObject var VM = fetchPemesanan()
+    @ObservedObject var VM = FetchPemesanan()
 
     var body: some View {
         if #available(iOS 16.0, *) {

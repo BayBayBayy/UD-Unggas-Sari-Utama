@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CardPemesananView: View {
-    @ObservedObject var pemesananVM = fetchPemesanan()
+    @ObservedObject var pemesananVM = FetchPemesanan()
     @State var dummy: [pesananDummy] = pesananDummy.sampleData
     @Binding var check: Bool
     let columns = [

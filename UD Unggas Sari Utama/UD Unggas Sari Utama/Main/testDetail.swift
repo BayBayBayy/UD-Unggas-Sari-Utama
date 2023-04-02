@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct testDetail: View {
-    @ObservedObject var viewModelPenjualan = FethcerPenjualan()
+    @ObservedObject var viewModelPenjualan = FetchPemesanan()
+    
     var body: some View {
-        ForEach(viewModelPenjualan.dataDetail, id: \.id){ detail in
+        ForEach(viewModelPenjualan.detailPemesanan, id: \.id){ detail in
             HStack{
                 Text("id")
                 Text(detail.id)

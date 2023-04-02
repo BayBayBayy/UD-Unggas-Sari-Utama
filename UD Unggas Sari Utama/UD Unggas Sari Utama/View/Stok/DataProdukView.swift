@@ -44,7 +44,7 @@ struct DataProdukView: View{
                         Text("Jumlah")
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
-                        Text("Tanggal")
+                        Text("Status")
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
                         Text("Opsi")
@@ -69,7 +69,7 @@ struct DataProdukView: View{
                                     .frame(maxWidth: .infinity)
                                 Text(String(product.jumlah_produk))
                                     .frame(maxWidth: .infinity)
-                                Text(dateFormatter.string(from: product.tanggal_masuk_produk))
+                                Text(product.status_produk ? "Masih Terjual" : "Tidak Dijual")
                                     .frame(maxWidth: .infinity)
                                 Button(action: {
                                     self.checkEdit = true
@@ -87,7 +87,7 @@ struct DataProdukView: View{
                                 }.frame(maxWidth: .infinity)
                             }
                             .padding(.vertical, 8)
-                            .background(Color.white)
+                            .background(product.status_produk ? Color.white : Color("RedPlain"))
                             .cornerRadius(8)
                         }
                     }

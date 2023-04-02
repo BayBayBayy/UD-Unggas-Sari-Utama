@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LaporanPemesananView: View {
+    @ObservedObject var viewModel = FetchPemesanan()
     @State var indexTabs = Int()
     @State var selectedDate = Date()
     let dateFormatter: DateFormatter = {
@@ -31,20 +32,34 @@ struct LaporanPemesananView: View {
                 }
                 .frame(width: geometry.size.width/1, height: geometry.size.height/6)
                 
-                HStack(spacing: 80){
-                    CardLaporanPemesanan(title: "Produk Terbanyak Di Pesan", hasil: "Ayam Broiller")
-                        .frame(width: geometry.size.width/3, height: geometry.size.height/8)
-                    CardLaporanPemesanan(title: "Total Pesanan", hasil: "120")
-                        .frame(width: geometry.size.width/4.2, height: geometry.size.height/8)
-                    CardLaporanPemesanan(title: "Rata-Rata Pesanan", hasil: "120")
-                        .frame(width: geometry.size.width/4.2, height: geometry.size.height/8)
-
+                HStack(spacing: 80) {
+                    cardLaporanPenjualan(title: "Nama Produk Laris", hasil: viewModel.namaProdukLaris)
+                        .frame(width: geometry.size.width/4, height: geometry.size.height/8)
+                    cardLaporanPenjualan(title: "Total Transaksi", hasil: "Rp. \(viewModel.totalTransaksi(for: selectedDate).formattedWithSeparator())")
+                        .frame(width: geometry.size.width/4, height: geometry.size.height/8)
+                    cardLaporanPenjualan(title: "Rata-Rata Transaksi", hasil: "Rp. \(viewModel.rataTransaksi(for: selectedDate).formattedWithSeparator())")
+                        .frame(width: geometry.size.width/4, height: geometry.size.height/8)
                 }
+
                 .frame(width: geometry.size.width/1, height: geometry.size.height/3.5)
-             
                 
-                Spacer()
-                    .frame(width: geometry.size.width/1, height: geometry.size.height/2.5)
+                if viewModel.dataPemesanan.isEmpty {
+                    ProgressView()
+                } else {
+                    ChartPemesananView(data: viewModel.dataChartProduk, selectedDate: selectedDate)
+                        .frame(width: geometry.size.width/1.5, height: geometry.size.height/2.5)
+                        .background(Color("GrayContentColor"))
+                        .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color(.sRGB, red: 150/255, green: 150/255, blue: 150/255), lineWidth: 1)
+                            .shadow(radius: 1))
+                }
+                
+            }
+            .onAppear(){
+                viewModel.fetchData()
+            }
+            .onChange(of: selectedDate) { newValue in
+                viewModel.generateChartData(for: newValue)
             }
             .navigationTitle("Laporan Pemesanan")
             .navigationBarTitleDisplayMode(.inline)
@@ -53,8 +68,21 @@ struct LaporanPemesananView: View {
     }
 }
 
-struct LaporanPemesananView_Previews: PreviewProvider {
-    static var previews: some View {
-        LaporanPemesananView()
+extension Int {
+    func formattedWithSeparator() -> String {
+        let formatter = NumberFormatter()
+        formatter.groupingSeparator = "."
+        formatter.numberStyle = .decimal
+        return formatter.string(from: NSNumber(value: self)) ?? ""
     }
 }
+
+extension Double {
+    func formattedWithSeparator() -> String {
+        let formatter = NumberFormatter()
+        formatter.groupingSeparator = ","
+        formatter.numberStyle = .decimal
+        return formatter.string(from: NSNumber(value: self)) ?? "\(self)"
+    }
+}
+

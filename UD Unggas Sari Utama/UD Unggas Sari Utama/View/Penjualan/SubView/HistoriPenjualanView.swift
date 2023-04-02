@@ -19,6 +19,7 @@ struct HistoriPenjualanView: View {
         return formatter
     }()
     @State var viewDetail: Bool = false
+//    @State private var selectedSale: ? = nil
     
     var body: some View {
         GeometryReader{ geometry in
@@ -84,13 +85,28 @@ struct HistoriPenjualanView: View {
                     dateFormatter.dateFormat = "dd-MM-yyyy" // format tanggal dari data
                     viewModelPenjualan.fetchData()
                 }
+                .simultaneousGesture(
+                    TapGesture().onEnded {
+                        dismiss()
+                    })
                 
-//                if checkDetail == true {
-//                    DetailPenjualanView(penjualan: viewModelPenjualan.selectedPenjualan!, dataDetailPenjualan: viewModelPenjualan.selectedDetail!, dataProduk: vmProduk, close: $checkDetail)
-//                        .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
-//                }
+                if checkDetail == true{
+                    Spacer()
+                        .background(.gray)
+                        .opacity(0.5)
+                        .frame(width: geometry.size.width/1, height: geometry.size.height/1)
+                }
+                
+                if checkDetail == true {
+                    let saleDetail = viewModelPenjualan.dataDetail.filter { $0.penjualan_id == viewModelPenjualan.selectedPenjualan!.penjualan_id }
+                    DetailPenjualanView(penjualan: viewModelPenjualan.selectedPenjualan!, dataDetailPenjualan: saleDetail, dataProduk: vmProduk, close: $checkDetail)
+                        .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
+                }
             }
             .frame(width: geometry.size.width/1, height: geometry.size.height/1)
         }.edgesIgnoringSafeArea(.all)
+    }
+    private func dismiss(){
+        self.checkDetail = false
     }
 }

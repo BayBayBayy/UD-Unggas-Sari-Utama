@@ -65,7 +65,7 @@ struct cardLaporanPenjualan: View{
     var body: some View{
         ZStack{
             RoundedRectangle(cornerRadius: 8)
-                .fill(Color.white)
+                .fill(Color("GrayContentColor"))
             VStack{
                 Text(title)
                     .foregroundColor(.gray)

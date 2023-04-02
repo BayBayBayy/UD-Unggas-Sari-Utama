@@ -10,7 +10,7 @@ import SwiftUI
 struct DetailPenjualanView: View {
     let penjualan: PenjualanResponseModel
     let dataDetailPenjualan: [DetailPenjualanModel]
-    let dataProduk: ProdukFetcher
+    @ObservedObject var dataProduk: ProdukFetcher
     @Binding var close: Bool
     
 
@@ -27,21 +27,26 @@ struct DetailPenjualanView: View {
                         Text("No")
                             .bold()
                             .font(.system(size: 16))
+                            .frame(maxWidth: .infinity)
                         Text("Nama")
                             .bold()
                             .font(.system(size: 16))
                             .frame(width: geometry.size.width/5)
+                            .frame(maxWidth: .infinity)
                         Text("Jumlah")
                             .bold()
                             .font(.system(size: 16))
+                            .frame(maxWidth: .infinity)
                             .padding()
                         Text("Harga")
                             .bold()
                             .font(.system(size: 16))
+                            .frame(maxWidth: .infinity)
                             .padding()
                         Text("Total")
                             .bold()
                             .font(.system(size: 16))
+                            .frame(maxWidth: .infinity)
                             .padding()
                     }.frame(width: geometry.size.width/1.1, height: geometry.size.height/12)
                 }.frame(width: geometry.size.width/1.1, height: geometry.size.height/6)
@@ -54,24 +59,28 @@ struct DetailPenjualanView: View {
                             Text(index.produk_id)
                                 .bold()
                                 .font(.system(size: 16))
-                                .frame(width: geometry.size.width/10)
+                                .frame(maxWidth: .infinity)
                             Text(produk!.nama_produk)
                                 .bold()
                                 .font(.system(size: 16))
-                                .frame(width: geometry.size.width/5)
+                                .frame(maxWidth: .infinity)
                             Text("\(index.jumlah_produk)")
                                 .bold()
                                 .font(.system(size: 16))
-                                .frame(width: geometry.size.width/5)
+                                .frame(maxWidth: .infinity)
                             Text("\(index.harga_produk)")
                                 .bold()
                                 .font(.system(size: 16))
-                                .frame(width: geometry.size.width/6)
+                                .frame(maxWidth: .infinity)
                             Text("\(index.sub_harga)")
                                 .bold()
                                 .font(.system(size: 16))
-                                .frame(width: geometry.size.width/5)
-                        }.frame(width: geometry.size.width/1.1, height: geometry.size.height/8)
+                                .frame(maxWidth: .infinity)
+                        }
+                        
+                        .frame(width: geometry.size.width/1.1, height: geometry.size.height/8)
+                        .background(Color("GrayContentColor"))
+                        .cornerRadius(10)       
                     }
                 }.frame(width: geometry.size.width/1.1, height: geometry.size.height/2)
                 
