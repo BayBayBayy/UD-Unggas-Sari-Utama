@@ -9,15 +9,25 @@ import SwiftUI
 
 struct LaporanPemesananView: View {
     @State var indexTabs = Int()
+    @State var selectedDate = Date()
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        return formatter
+    }()
     var body: some View {
         GeometryReader{ geometry in
             VStack{
                 HStack{
                     Spacer()
-                        .frame(width: geometry.size.width/2.3, height: geometry.size.height/14)
-    
-                    ButtonLaporanPemesan(tabIndex: $indexTabs)
-                        .frame(width: geometry.size.width/2, height: geometry.size.height/14)
+                        .frame(width: geometry.size.width/3, height: 1)
+                    Text("Berdasarkan Tanggal : ")
+                        .bold()
+                        .font(.system(size: 36))
+                        .frame(width: geometry.size.width/3, height: 10)
+                    DatePicker("", selection: $selectedDate, displayedComponents: .date)
+                        .scaleEffect(1.5)
+                        .frame(width: geometry.size.width/8, height: geometry.size.height/10)
                 }
                 .frame(width: geometry.size.width/1, height: geometry.size.height/6)
                 

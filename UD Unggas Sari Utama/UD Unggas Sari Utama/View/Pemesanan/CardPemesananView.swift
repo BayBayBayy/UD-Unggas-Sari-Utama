@@ -22,7 +22,7 @@ struct CardPemesananView: View {
             VStack{
                 ScrollView{
                     LazyVGrid(columns: columns, alignment: .center, spacing: 10){
-                        ForEach(pemesananVM.dataPemesanan, id:\.id){ card in
+                        ForEach(pemesananVM.dataPemesanan, id:\.pemesanan_id){ card in
                             
                             cardPView(cards: card, check: $check)
                                 .frame(width: geometry.size.width/4.5, height: geometry.size.height/5)
@@ -81,7 +81,7 @@ struct cardPView : View{
                         
                         Spacer()
                             .frame(width: geometry.size.width/1, height: geometry.size.height/4)
-                        Text(cards.id)
+                        Text(cards.pemesanan_id)
                             .multilineTextAlignment(.leading)
                             .bold()
                             .font(.system(size: 24))

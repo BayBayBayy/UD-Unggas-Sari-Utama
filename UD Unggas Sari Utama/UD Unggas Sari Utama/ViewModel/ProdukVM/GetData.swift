@@ -121,6 +121,7 @@ class ProdukFetcher: ObservableObject {
             return nil
         }
     }
+    
 
 
     func getProdukById(id: String) -> ProdukResponseModel? {

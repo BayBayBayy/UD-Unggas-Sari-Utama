@@ -109,7 +109,7 @@ extension TambahkanPesananPopupView{
     }
     var tanggal : some View{
         HStack{
-            Text("Tanggal Prngambilan :")
+            Text("Tanggal Pengambilan :")
             DatePicker("", selection: $selectedDate, displayedComponents: .date)
         }
         .textFieldStyle(.roundedBorder)

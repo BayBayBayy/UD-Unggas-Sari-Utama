@@ -46,3 +46,7 @@ struct  PenjualanResponseModel: Codable, Hashable{
     
 }
 
+struct PenjualanPerProdukModel {
+    var namaProduk: String
+    var jumlahTerjual: Int
+}

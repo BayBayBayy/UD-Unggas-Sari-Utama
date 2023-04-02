@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct PemesananResponseModel: Codable, Identifiable, Hashable{
-    var id: String
+struct PemesananResponseModel: Codable, Hashable{
+    var pemesanan_id: String
     var total_harga: Int
     var nama_pembeli: String
     var no_hp: Int
@@ -20,7 +20,7 @@ struct PemesananResponseModel: Codable, Identifiable, Hashable{
     
     
     enum CodingKeys: String, CodingKey {
-        case id,
+        case pemesanan_id,
              total_harga,
              nama_pembeli,
              no_hp,
@@ -33,7 +33,7 @@ struct PemesananResponseModel: Codable, Identifiable, Hashable{
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        id = try values.decode(String.self, forKey: .id)
+        pemesanan_id = try values.decode(String.self, forKey: .pemesanan_id)
         let hargaString = try values.decode(String.self, forKey: .total_harga)
         total_harga = Int(hargaString) ?? 0
         nama_pembeli = try values.decode(String.self, forKey: .nama_pembeli)
@@ -55,7 +55,7 @@ struct PemesananResponseModel: Codable, Identifiable, Hashable{
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
+        try container.encode(pemesanan_id, forKey: .pemesanan_id)
         try container.encode(total_harga, forKey: .total_harga)
         try container.encode(nama_pembeli, forKey: .nama_pembeli)
         try container.encode(no_hp, forKey: .no_hp)

@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct TabBarView: View {
-
+    @ObservedObject var produkVM = ProdukFetcher()
+    @ObservedObject var penjualanVM = FethcerPenjualan()
+    @ObservedObject var pemesananVM = fetchPemesanan()
     init(){
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.backgroundColor = UIColor(Color("OrangeColorSet"))
@@ -28,6 +30,7 @@ struct TabBarView: View {
                         Text("Penjualan")
                     }
                     .accentColor(.purple)
+
                 PemesananView()
                     .tabItem {
 //                        Label("Pesanan", systemImage: "list.bullet.clipboard.fill")
