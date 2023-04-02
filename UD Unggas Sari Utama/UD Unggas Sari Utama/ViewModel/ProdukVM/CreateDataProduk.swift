@@ -31,9 +31,9 @@ class ProdukManager {
             case "Peralatan Unggas":
                 return "peralatan-unggas.png"
             case "Lain-lain":
-                return "lain-lain.png"
+                return "UD-Amerta-Yoga.png"
             default:
-                return "default.png"
+                return "UD-Amerta-Yoga.png"
             }
         }
         let status = "1"
@@ -59,21 +59,19 @@ class ProdukManager {
                 completionHandler(responseString)
             }
         }
-        
         task.resume()
     }
     
-    func editProduk(id: String, namaProduk: String, satuanProduk: String, kategoriProduk: String, hargaProduk: String, jumlahProduk: String, produkEcer: Bool, produkStatus: Bool, tanggalMasukProduk: Date, completionHandler: @escaping (Bool, String) -> Void) {
-        
+    func editProduk(id: String, nama_produk: String, satuan: String, produk_kategori: String, harga: String, produk_ecer: Bool, status: Bool, tanggalMasukProduk: Date, completionHandler: @escaping (Bool, String) -> Void) {
         // URL endpoint untuk edit produk
         let url = URL(string: "https://indramaryati.com/bayu/Produk/updateProduk.php")!
-        
+            
         // Buat request dengan metode HTTP POST
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        
+            
         var imageName: String {
-            switch kategoriProduk {
+            switch produk_kategori {
             case "Daging Unggas":
                 return "daging-unggas.png"
             case "Bibit Unggas":
@@ -93,44 +91,31 @@ class ProdukManager {
             }
         }
         
+        let ecerString = produk_ecer ? "1" : "0"
+        let statusString = status ? "1" : "0"
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let tanggalString = dateFormatter.string(from: tanggalMasukProduk)
-        
+            
         // Menyiapkan data yang akan dikirim
-        let parameters: [String: Any] = [
-            "id": id,
-            "nama_produk": namaProduk,
-            "satuan": satuanProduk,
-            "produk_kategori": kategoriProduk,
-            "image": imageName,
-            "harga": hargaProduk,
-            "jumlah_produk": jumlahProduk,
-            "produk_ecer": produkEcer ? "1" : "0",
-            "produk_ecer": produkStatus ? "1" : "0",
-            "tanggal_masuk_produk": tanggalString
-        ]
+        let parameters = "id=\(id)&nama_produk=\(nama_produk)&satuan=\(satuan)&produk_kategori=\(produk_kategori)&image=\(imageName)&harga=\(harga)&produk_ecer=\(ecerString)&status_produk=\(statusString)&tanggal_masuk_produk=\(tanggalString)"
+            
         print("ini paramaternya : \(parameters)")
-        do {
-            // Encode data menjadi format JSON dan memasukkan ke dalam body request
-            let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: [])
-            request.httpBody = jsonData
-            print("ini jsonData: \(jsonData)")
-        } catch {
-            completionHandler(false, "Terjadi kesalahan saat mengirim data")
-            return
-        }
+        
+        // Set data pada body request
+        request.httpBody = parameters.data(using: .utf8)
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         
         // Kirim request ke server menggunakan URLSession
         let session = URLSession.shared
         let task = session.dataTask(with: request) { (data, response, error) in
-            
+                
             // Handle response dari server
             guard let data = data, let response = response as? HTTPURLResponse, error == nil else {
                 completionHandler(false, "Terjadi kesalahan saat mengirim data")
                 return
             }
-            
+                
             if response.statusCode == 200 {
                 // Response dari server sukses
                 completionHandler(true, "Data produk berhasil diubah")
@@ -143,5 +128,96 @@ class ProdukManager {
         task.resume()
     }
     
+    func konversiProduk(id_asal: String, id_jadi: String, jumlah_asal: String, jumlah_jadi: String,  completionHandler: @escaping (Bool, String) -> Void){
+        
+        let url = URL(string: "https://indramaryati.com/bayu/Produk/konversiProduk.php")!
+            
+        // Buat request dengan metode HTTP POST
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let tanggal = dateFormatter.string(from: Date())
+        let id = UUID().uuidString
+        
+        let asalID = produkManager.getIdFromName(productName: id_asal, viewModel: produkManager)
+        let jadiID = produkManager.getIdFromName(productName: id_jadi, viewModel: produkManager)
+        
+        let parameters = "id=\(id)&id_asal=\(asalID ?? "")&id_jadi=\(jadiID ?? "" )&jumlah_asal=\(jumlah_asal)&jumlah_jadi=\(jumlah_jadi)&tanggal_konversi=\(tanggal)"
+        
+        print("ini paramaternya : \(parameters)")
+        
+        // Set data pada body request
+        request.httpBody = parameters.data(using: .utf8)
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        
+        // Kirim request ke server menggunakan URLSession
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { (data, response, error) in
+                
+            // Handle response dari server
+            guard let data = data, let response = response as? HTTPURLResponse, error == nil else {
+                completionHandler(false, "Terjadi kesalahan saat mengirim data")
+                return
+            }
+                
+            if response.statusCode == 200 {
+                // Response dari server sukses
+                completionHandler(true, "Data produk berhasil diubah")
+            } else {
+                // Response dari server gagal
+                completionHandler(false, "Terjadi kesalahan pada server")
+            }
+            print(data)
+        }
+        task.resume()
+    }
     
+    func stokOpname(id_produk: String, keterangan: String, produkBertambah: Bool, produkBerkurang: Bool, jumlah: String, completionHandler: @escaping (Bool, String) -> Void){
+        
+        let url = URL(string: "https://indramaryati.com/bayu/Produk/stokOpname.php")!
+            
+        // Buat request dengan metode HTTP POST
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let tanggal = dateFormatter.string(from: Date())
+        let id = UUID().uuidString
+        let produkID = produkManager.getIdFromName(productName: id_produk, viewModel: produkManager)
+        let bertambah = produkBertambah ? "1" : "0"
+        let berkurang = produkBerkurang ? "1" : "0"
+        let stok = 0
+        
+        let parameters = "id=\(id)&produk_id=\(produkID ?? "")&keterangan=\(keterangan )&produk_bertambah=\(bertambah)&produk_berkurang=\(berkurang)&jumlah=\(jumlah)&stok_final=\(stok)&tanggal_stok_opname=\(tanggal)"
+        
+        print("ini paramaternya : \(parameters)")
+        
+        // Set data pada body request
+        request.httpBody = parameters.data(using: .utf8)
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        
+        // Kirim request ke server menggunakan URLSession
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { (data, response, error) in
+                
+            // Handle response dari server
+            guard let data = data, let response = response as? HTTPURLResponse, error == nil else {
+                completionHandler(false, "Terjadi kesalahan saat mengirim data")
+                return
+            }
+                
+            if response.statusCode == 200 {
+                // Response dari server sukses
+                completionHandler(true, "Data produk berhasil diubah")
+            } else {
+                // Response dari server gagal
+                completionHandler(false, "Terjadi kesalahan pada server")
+            }
+            print(data)
+        }
+        task.resume()
+    }
 }

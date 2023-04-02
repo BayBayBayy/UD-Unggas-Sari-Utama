@@ -16,7 +16,6 @@ struct EditProdukPopupView: View {
     @State var satuanProduk : String
     @State var kategoriProduk : String
     @State var hargaProduk :Int
-    @State var jumlahProduk :Int
     @State var ecer: Bool
     @State var status: Bool
     @State var tanggal: Date
@@ -37,11 +36,11 @@ struct EditProdukPopupView: View {
                         . frame( height: geometry.size.height/12)
                     satuan
                         . frame( height: geometry.size.height/12)
-                    kategori
-                        . frame( height: geometry.size.height/12)
+                    
+                    PickerKategori(selectedKategori: $kategoriProduk)
+                        . frame( height: geometry.size.height/8)
+                    
                     harga
-                        . frame( height: geometry.size.height/12)
-                    jumlah
                         . frame( height: geometry.size.height/12)
                     
                     DatePicker("Tanggal Produk", selection: $tanggal, displayedComponents: [.date])
@@ -57,7 +56,7 @@ struct EditProdukPopupView: View {
                     HStack{
                         Button{
                             viewModel.fetchData()
-                            vmEditProduk.editProduk(id: id, namaProduk: namaProduk, satuanProduk: satuanProduk, kategoriProduk: kategoriProduk, hargaProduk: "\(hargaProduk)", jumlahProduk: "\(jumlahProduk)", produkEcer: ecer, produkStatus: status, tanggalMasukProduk: tanggal) { success, message in
+                            vmEditProduk.editProduk(id: id, nama_produk: namaProduk, satuan: satuanProduk, produk_kategori: kategoriProduk, harga: "\(hargaProduk)", produk_ecer: ecer, status: status, tanggalMasukProduk: tanggal) { success, message in
                                 if success {
                                     // Jika sukses, menampilkan pesan sukses dan menutup tampilan edit produk
                                     print(message)
@@ -110,7 +109,6 @@ struct EditProdukPopupView: View {
                     satuanProduk = produk.satuan
                     kategoriProduk = produk.produk_kategori
                     hargaProduk = produk.harga
-                    jumlahProduk = produk.jumlah_produk
                     ecer = produk.produk_ecer
                     status = produk.status_produk
                     tanggal = produk.tanggal_masuk_produk
@@ -157,14 +155,5 @@ extension EditProdukPopupView {
                 .keyboardType(.numberPad)
         }
         .textFieldStyle(.roundedBorder)
-    }
-    var jumlah : some View{
-        HStack{
-            Text("Jumlah :")
-            TextField("", value: $jumlahProduk,  formatter: NumberFormatter())
-                .keyboardType(.numberPad)
-        }
-        .textFieldStyle(.roundedBorder)
-    }
-    
+    }    
 }

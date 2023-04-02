@@ -34,7 +34,7 @@ struct LaporanPenjualanView: View {
                 }
                 .frame(width: geometry.size.width/1, height: geometry.size.height/3.5)
                 
-                ChartPenjualanView(data: salesData.dataChart)
+                ChartPenjualanView(data: salesData.dataChartProduk)
                     .frame(width: geometry.size.width/1.5, height: geometry.size.height/2.5)
                     .background(Color("GrayContentColor"))
                     .overlay(RoundedRectangle(cornerRadius: 10)

@@ -15,37 +15,42 @@ struct PickerProduk: View {
         HStack{
             Text("Pilih Berdasarkan")
             Picker("Pilih", selection: $selectedProduk) {
+                Text("Pilih Produk")
+                    .tag("")
                 ForEach(viewModel.produk, id: \.id) { produk in
                     Text(produk.nama_produk)
-                        .tag(produk)
+                        .tag(produk.nama_produk)
                 }
             }
             .pickerStyle(.wheel)
         }
         .onAppear(){
             self.viewModel.fetchData()
+            self.selectedProduk = ""
         }
     }
 }
 
 struct PickerProdukEcer: View {
-    
-    @ObservedObject var viewModel : ProdukFetcher
+    @ObservedObject var viewModel: ProdukFetcher
     @Binding var selectedEcer: String
-    
+
     var body: some View {
         HStack{
             Text("Pilih Berdasarkan")
             Picker("Pilih", selection: $selectedEcer) {
+                Text("Pilih Produk")
+                    .tag("")
                 ForEach(viewModel.produkEcer, id: \.id) { produk in
                     Text(produk.nama_produk)
-                        .tag(produk)
+                        .tag(produk.nama_produk)
                 }
             }
             .pickerStyle(.wheel)
         }
         .onAppear(){
             self.viewModel.fetchData()
+            self.selectedEcer = "" // Set opsi default ketika tampilan muncul
         }
     }
 }
@@ -59,6 +64,8 @@ struct PickerKategori: View {
         HStack{
             Text("Pilih Berdasarkan")
             Picker("Pilih", selection: $selectedKategori) {
+                Text("Pilih Kategori")
+                    .tag("")
                 ForEach(kategori, id: \.self) {
                     Text($0)
                 }

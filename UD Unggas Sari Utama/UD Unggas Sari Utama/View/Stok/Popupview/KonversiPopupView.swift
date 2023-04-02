@@ -14,6 +14,7 @@ struct KonversiPopupView: View {
     @State var produkAsal: String = ""
     @State var produkJadi: String = ""
     @ObservedObject var viewModel = ProdukFetcher()
+    let vmProduk = ProdukManager()
     
     var body: some View {
         GeometryReader{ geometry in
@@ -47,19 +48,47 @@ struct KonversiPopupView: View {
                         . frame( height: geometry.size.height/6)
                     fieldJumlahSetelah
                         . frame( height: geometry.size.height/8)
-                    Button(action: generateStokOpname) {
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color("GrayMiddleColor"))
-                                . frame( width: geometry.size.width/8, height: geometry.size.height/12)
-                                .cornerRadius(8)
-                                .border(Color.black, width: 2)
-                            Text("OK")
-                                .bold()
-                                .font(.title)
+                    HStack{
+                        Button{
+                            check2 = false
+                        } label: {
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color("GrayMiddleColor"))
+                                    . frame( width: geometry.size.width/8, height: geometry.size.height/12)
+                                    .cornerRadius(8)
+                                    .border(Color.black, width: 2)
+                                Text("Batal")
+                                    .bold()
+                                    .font(.title)
+                            }
+                            . frame( width: geometry.size.width/8, height: geometry.size.height/12)
                         }
-                        . frame( width: geometry.size.width/8, height: geometry.size.height/12)
-                    }  
+                        Button{
+                            vmProduk.konversiProduk(id_asal: produkAsal, id_jadi: produkJadi, jumlah_asal: jumlahSebelum, jumlah_jadi: jumlahSetelah){ success, message in
+                                if success {
+                                    // Jika sukses, menampilkan pesan sukses dan menutup tampilan edit produk
+                                    print(message)
+                                   check2 = false
+                                } else {
+                                    // Jika gagal, menampilkan pesan error
+                                    print(message)
+                                }
+                            }
+                        } label: {
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color("GrayMiddleColor"))
+                                    . frame( width: geometry.size.width/8, height: geometry.size.height/12)
+                                    .cornerRadius(8)
+                                    .border(Color.black, width: 2)
+                                Text("OK")
+                                    .bold()
+                                    .font(.title)
+                            }
+                            . frame( width: geometry.size.width/8, height: geometry.size.height/12)
+                        }
+                    }
                 }
                 .frame(width: geometry.size.width/1.2, height: geometry.size.height/1.2)
             }

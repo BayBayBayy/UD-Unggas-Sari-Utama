@@ -14,6 +14,7 @@ struct HomeView: View {
     @State var checkPesanan: Bool = false
     @State var value = Int()
     @State var cancelListPenjualan: Bool = false
+    @State private var keyboardHeight: CGFloat = 0
     
     @EnvironmentObject var penjualanViewModel: PenjualanViewModel
     @ObservedObject var viewModel = ProdukFetcher()
@@ -94,6 +95,7 @@ struct HomeView: View {
             }
             .edgesIgnoringSafeArea(.all)
             .ignoresSafeArea()
+            .modifier(KeyboardAwareModifier())
         } else{
             // not allowed
         }

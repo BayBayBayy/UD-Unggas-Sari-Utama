@@ -12,7 +12,7 @@ struct UD_Unggas_Sari_UtamaApp: App {
     let persistenceController = PersistenceController.shared
     @StateObject var penjualanViewModel = PenjualanViewModel(produkViewModel: ProdukFetcher())
     @StateObject var produkFetcher = ProdukFetcher()
-    @StateObject var pemesananViewModel = PemesananViewModel()
+    @StateObject var pemesananViewModel = PemesananViewModel(penjualanViewModel: PenjualanViewModel(produkViewModel: ProdukFetcher()))
 
     var body: some Scene {
         WindowGroup {

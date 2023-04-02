@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TambahBarangPopupView: View {
-    @State private var jumlahInput = "0"
+    @State private var jumlahInput = ""
     @EnvironmentObject var viewModel: PenjualanViewModel
     let produk: ProdukResponseModel
     
@@ -118,7 +118,8 @@ extension TambahBarangPopupView{
     var jumlah : some View{
         HStack{
             Text("jumlah :")
-            TextField("", text: $jumlahInput)
+            TextField("0", text: $jumlahInput)
+                .foregroundColor(.black)
                 .keyboardType(.numberPad)
             
         }

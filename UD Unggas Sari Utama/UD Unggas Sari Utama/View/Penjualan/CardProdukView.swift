@@ -108,7 +108,7 @@ struct cardView : View{
                         Image(cards.image)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: geometry.size.width/2.2, height: geometry.size.height/2)
+                            .frame(width: geometry.size.width/1.8, height: geometry.size.height/1.6)
                         
                         Text(cards.nama_produk)
                             .multilineTextAlignment(.leading)

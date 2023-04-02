@@ -10,13 +10,18 @@ import Foundation
 class FethcerPenjualan: ObservableObject{
     @Published var dataPenjualan = [PenjualanResponseModel]()
     @Published var selectedPenjualan: PenjualanResponseModel?
+    @Published var dataDetail = [DetailPenjualanModel]()
+    @Published var selectedDetail: DetailPenjualanModel?
     @Published var dataChart: [(String, Double)] = []
+    @Published var dataChartProduk: [(String, Double)] = []
     @Published var totalSales = 0
     
     init(){
         fetchData()
+        fetchDataDetail()
     }
     
+    //penjualan
     func fetchData() {
         guard let url = URL(string: "https://indramaryati.com/bayu/Penjualan/penjualan.php") else {
             print("Invalid URL")
@@ -37,7 +42,7 @@ class FethcerPenjualan: ObservableObject{
                     let formatter = DateFormatter()
                     formatter.dateStyle = .short
                     self.dataPenjualan = penjualan
-                    self.dataChart = penjualan.map { (formatter.string(from: $0.tanggal_pembelian), Double($0.total_harga)) }
+                    self.dataChart = penjualan.map { (formatter.string(from: $0.tanggal_penjualan), Double($0.total_harga)) }
                     self.objectWillChange.send()
 //                    self.totalSales = decodedResponse.reduce(0) { $0 + ($1.price * $1.quantity) }
                 }
@@ -47,6 +52,46 @@ class FethcerPenjualan: ObservableObject{
         }.resume()
     }
     
+    //detailPenjualan
+    func fetchDataDetail() {
+        guard let url = URL(string: "https://indramaryati.com/bayu/Penjualan/detailPenjualan.php") else {
+            print("Invalid URL")
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                print("Error:", error ?? "Unknown error")
+                return
+            }
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            decoder.nonConformingFloatDecodingStrategy = .convertFromString(positiveInfinity: "inf", negativeInfinity: "-inf", nan: "nan")
+            do {
+                let detail = try JSONDecoder().decode([DetailPenjualanModel].self, from: data)
+                DispatchQueue.main.async {
+                    self.dataDetail = detail
+                    self.dataChartProduk = detail.map { (String($0.penjualan_id), Double($0.subTotal)) }
+                    self.objectWillChange.send()
+                }
+            } catch let error {
+                print("Error decoding JSON:", error)
+            }
+        }.resume()
+    }
+    
+    func getDetailPenjualan(for id: String) -> DetailPenjualanModel? {
+           return dataDetail.first(where: { $0.id == id })
+       }
+    
+    func selectDetail(detail: DetailPenjualanModel) {
+        self.selectedDetail = detail
+    }
+    
+    func resetSelectedDetail() {
+        self.selectedDetail = nil
+    }
+
     func selectPenjualan(penjualan: PenjualanResponseModel) {
         self.selectedPenjualan = penjualan
     }

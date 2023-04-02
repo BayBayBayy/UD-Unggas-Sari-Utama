@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 class ProdukFetcher: ObservableObject {
     //    @Published var produk: [ProdukResponseModel] = []
@@ -15,13 +16,18 @@ class ProdukFetcher: ObservableObject {
     @Published var selectedProduk: ProdukResponseModel? // tambahkan properti selectedProduk
     @Published var selectedProduct: ProdukResponseModel?
     @Published var selectedProdukId: String?
+    private var cancellable: AnyCancellable?
+    var data1 = CurrentValueSubject<String, Never>("Data awal")
     
     init(){
         fetchData()
         fetchDataEcer()
     }
+    
+    
     // View Data
     func fetchData() {
+        
         guard let url = URL(string: "https://indramaryati.com/bayu/Produk/viewProduk.php") else {
             print("Invalid URL")
             return
@@ -39,6 +45,7 @@ class ProdukFetcher: ObservableObject {
                 let produk = try JSONDecoder().decode([ProdukResponseModel].self, from: data)
                 DispatchQueue.main.async {
                     self.produk = produk
+                    self.data1.send("Data baru")
                 }
             } catch let error {
                 print("Error decoding JSON:", error)
@@ -65,6 +72,7 @@ class ProdukFetcher: ObservableObject {
                 let produkEcer = try JSONDecoder().decode([ProdukResponseModel].self, from: data)
                 DispatchQueue.main.async {
                     self.produkEcer = produkEcer
+                    self.data1.send("Data baru")
                 }
             } catch let error {
                 print("Error decoding JSON:", error)
@@ -91,6 +99,7 @@ class ProdukFetcher: ObservableObject {
                 let produkStatus = try JSONDecoder().decode([ProdukResponseModel].self, from: data)
                 DispatchQueue.main.async {
                     self.produkStatus = produkStatus
+                    self.data1.send("Data baru")
                 }
             } catch let error {
                 print("Error decoding JSON:", error)
@@ -105,10 +114,19 @@ class ProdukFetcher: ObservableObject {
         fetchDataEcer()
     }
     
+    func getIdFromName(productName: String, viewModel: ProdukFetcher) -> String? {
+        if let index = viewModel.produk.firstIndex(where: { $0.nama_produk == productName }) {
+            return viewModel.produk[index].id
+        } else {
+            return nil
+        }
+    }
+
+
     func getProdukById(id: String) -> ProdukResponseModel? {
         return produk.first(where: { $0.id == id })
     }
-
+    
     func selectProdukId(withId id: String) {
         self.selectedProdukId = id
     }
@@ -123,46 +141,6 @@ class ProdukFetcher: ObservableObject {
     
     func resetSelectedProduk() {
         self.selectedProduk = nil
-    }
-    
-    
-    func createProduct(completion: @escaping (String) -> Void) {
-        let url = URL(string: "http://your-api-url/create_product.php")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        
-        do {
-            let data = try encoder.encode(self.produk)
-            request.httpBody = data
-        } catch {
-            completion("Error: \(error.localizedDescription)")
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion("Error: \(error.localizedDescription)")
-                return
-            }
-            
-            guard let data = data, let response = response as? HTTPURLResponse else {
-                completion("Error: Invalid response")
-                return
-            }
-            
-            if response.statusCode == 200 {
-                completion("Product created successfully")
-            } else {
-                completion("Error: \(response.statusCode)")
-            }
-        }
-        
-        task.resume()
-    }
-    
-    
+    }   
 }
 

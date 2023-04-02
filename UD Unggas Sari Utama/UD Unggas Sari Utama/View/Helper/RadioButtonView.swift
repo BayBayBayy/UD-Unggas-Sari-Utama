@@ -26,7 +26,7 @@ struct RadioButtonField: View {
         textSize: CGFloat = 14,
         isMarked: Bool = false,
         callback: @escaping (String)->()
-        ) {
+    ) {
         self.id = id
         self.label = label
         self.size = size
@@ -56,43 +56,53 @@ struct RadioButtonField: View {
 }
 
 //MARK:- Group of Radio Buttons
-enum Gender: String {
-    case male = "Bertambah"
-    case female = "Berkurang"
+enum Status: String {
+    case bertambah = "Bertambah"
+    case berkurang = "Berkurang"
 }
 
 struct RadioButtonGroups: View {
     let callback: (String) -> ()
     
     @State var selectedId: String = ""
+    @Binding var statusBertambah: Bool
+    @Binding var statusBerkurang: Bool
     
     var body: some View {
         HStack {
-            radioMaleMajority
-            radioFemaleMajority
+            radioBertambah
+            radioBerkurang
         }
     }
     
-    var radioMaleMajority: some View {
+    var radioBertambah: some View {
         RadioButtonField(
-            id: Gender.male.rawValue,
-            label: Gender.male.rawValue,
-            isMarked: selectedId == Gender.male.rawValue ? true : false,
+            id: Status.bertambah.rawValue,
+            label:Status.bertambah.rawValue,
+            isMarked: selectedId == Status.bertambah.rawValue ? true : false,
             callback: radioGroupCallback
         )
+        
     }
     
-    var radioFemaleMajority: some View {
+    var radioBerkurang: some View {
         RadioButtonField(
-            id: Gender.female.rawValue,
-            label: Gender.female.rawValue,
-            isMarked: selectedId == Gender.female.rawValue ? true : false,
+            id: Status.berkurang.rawValue,
+            label: Status.berkurang.rawValue,
+            isMarked: selectedId == Status.berkurang.rawValue ? true : false,
             callback: radioGroupCallback
         )
     }
     
     func radioGroupCallback(id: String) {
         selectedId = id
+        if id == Status.bertambah.rawValue {
+            statusBertambah = true
+            statusBerkurang = false
+        } else {
+            statusBertambah = false
+            statusBerkurang = true
+        }
         callback(id)
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HistoriPenjualanView: View {
     @ObservedObject var viewModelPenjualan = FethcerPenjualan()
+    @ObservedObject var vmProduk = ProdukFetcher()
     @Binding var checkDetail: Bool
     let dateFormatter = DateFormatter()
     let numberFormatter: NumberFormatter = {
@@ -17,6 +18,7 @@ struct HistoriPenjualanView: View {
         formatter.locale = Locale(identifier: "id_ID")
         return formatter
     }()
+    @State var viewDetail: Bool = false
     
     var body: some View {
         GeometryReader{ geometry in
@@ -40,33 +42,35 @@ struct HistoriPenjualanView: View {
                     .background(Color.gray.opacity(0.3))
                     .cornerRadius(8)
                     ScrollView {
-                        ForEach(viewModelPenjualan.dataPenjualan) { data in
-                            HStack {
-                                Text(data.id)
-                                    .frame(maxWidth: .infinity)
-                                Text(numberFormatter.string(from: NSNumber(value: data.total_harga)) ?? "")
-                                    .frame(maxWidth: .infinity)
-                                Text(dateFormatter.string(from: data.tanggal_pembelian))
-                                    .frame(maxWidth: .infinity)
-                                Button(action: {
-                                    self.checkDetail = true
-                                    self.viewModelPenjualan.selectPenjualan(penjualan: data)
-                                }) {
-                                    ZStack{
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .fill(Color("OrangeColorSet"))
-                                            .frame(width: 80, height: 40)
-                                        Text("Detail")
-                                            .font(.title3)
-                                            .bold()
-                                            .foregroundColor(.black)
-                                    }
-                                }.frame(maxWidth: .infinity)
+                        ForEach(viewModelPenjualan.dataPenjualan, id: \.penjualan_id) { data in
+                                HStack {
+                                    Text(data.penjualan_id)
+                                        .frame(maxWidth: .infinity)
+                                    Text(numberFormatter.string(from: NSNumber(value: data.total_harga)) ?? "")
+                                        .frame(maxWidth: .infinity)
+                                    Text(dateFormatter.string(from: data.tanggal_penjualan))
+                                        .frame(maxWidth: .infinity)
+                                    Button(action: {
+                                        self.checkDetail = true
+                                        viewModelPenjualan.selectedPenjualan = data
+                                       
+                                    }) {
+                                        ZStack{
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .fill(Color("OrangeColorSet"))
+                                                .frame(width: 80, height: 40)
+                                            Text("Detail")
+                                                .font(.title3)
+                                                .bold()
+                                                .foregroundColor(.black)
+                                        }
+                                    }.frame(maxWidth: .infinity)
+                                }
+                                .padding(.vertical, 8)
+                                .background(Color.white)
+                                .cornerRadius(8)
                             }
-                            .padding(.vertical, 8)
-                            .background(Color.white)
-                            .cornerRadius(8)
-                        }
+                        
                     }
                     .background(Color("GrayContentColor"))
                 }
@@ -80,6 +84,11 @@ struct HistoriPenjualanView: View {
                     dateFormatter.dateFormat = "dd-MM-yyyy" // format tanggal dari data
                     viewModelPenjualan.fetchData()
                 }
+                
+//                if checkDetail == true {
+//                    DetailPenjualanView(penjualan: viewModelPenjualan.selectedPenjualan!, dataDetailPenjualan: viewModelPenjualan.selectedDetail!, dataProduk: vmProduk, close: $checkDetail)
+//                        .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
+//                }
             }
             .frame(width: geometry.size.width/1, height: geometry.size.height/1)
         }.edgesIgnoringSafeArea(.all)

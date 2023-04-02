@@ -56,8 +56,8 @@ struct TambahkanPesananPopupView: View {
                             self.pesananPopUp.toggle()
                             let noHpInt = Int(noHp) ?? 0
                             let dpDibayarInt = Int(dpDibayar) ?? 0
-                            viewModel.tambahPemesanan(namaPembeli: namaPemesan, nohp: noHpInt, dp: dpDibayarInt, tanggalAmbil: selectedDate)
-                            self.penjualanViewModel.clearDetailPenjualanList()
+                            penjualanViewModel.tambahPemesanan(namaPembeli: namaPemesan, nohp: noHpInt, dp: dpDibayarInt, tanggalAmbil: selectedDate)
+                            penjualanViewModel.clearDetailPenjualanList()
                         } label: {
                             ZStack{
                                 RoundedRectangle(cornerRadius: 8)

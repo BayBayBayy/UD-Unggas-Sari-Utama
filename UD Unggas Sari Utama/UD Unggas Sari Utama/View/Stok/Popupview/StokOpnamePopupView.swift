@@ -11,8 +11,11 @@ struct StokOpnamePopupView: View {
     @State var jumlah : String = ""
     @State var keterangan : String = ""
     @State var produkSelect : String = ""
+    @State var statusBertambah: Bool = false
+    @State var statusBerkurang: Bool = false
     @Binding var check1: Bool
     @ObservedObject var viewModel = ProdukFetcher()
+    let vmCreateProduk = ProdukManager()
     
     var body: some View {
         GeometryReader { geometry in
@@ -32,7 +35,18 @@ struct StokOpnamePopupView: View {
                         . frame( height: geometry.size.height/6)
                     fieldKeterangan
                         . frame( height: geometry.size.height/6)
-                    Button(action: generateStokOpname) {
+                    Button{
+                        vmCreateProduk.stokOpname(id_produk: produkSelect, keterangan: keterangan, produkBertambah: statusBertambah, produkBerkurang: statusBerkurang, jumlah: jumlah){ success, message in
+                            if success {
+                                // Jika sukses, menampilkan pesan sukses dan menutup tampilan edit produk
+                                print(message)
+                               check1 = false
+                            } else {
+                                // Jika gagal, menampilkan pesan error
+                                print(message)
+                            }
+                        }
+                    } label:{
                         ZStack{
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(Color("GrayMiddleColor"))
@@ -61,10 +75,9 @@ struct StokOpnamePopupView: View {
     var choiceSituation : some View{
         HStack{
             Text("Produk :")
-            RadioButtonGroups { selected in
-                print("Selected Gender is: \(selected)")
-            }
-            Spacer()
+            RadioButtonGroups(callback: { selectedId in
+                // Lakukan sesuatu saat radio button dipilih
+            }, selectedId: "",statusBertambah: $statusBertambah, statusBerkurang: $statusBerkurang)
         }
     }
      var fieldJumlah : some View{

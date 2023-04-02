@@ -45,13 +45,14 @@ struct NewProductPopupView: View {
                     CheckToggle(isOn: $ecer, title: "Bisa Ecer")
                     
                     HStack{
-                        Button{ vmCreateProduk.simpanProduk(id: id, nama_produk: namaProduk, satuan: satuanProduk, produk_kategori: kategoriProduk, harga: hargaProduk, jumlah_produk: jumlahProduk, produk_ecer: ecer, tanggal_masuk_produk: tanggal){ response in
-                            if response != nil {
-                                print("Data berhasil disimpan")
-                            } else {
-                                print("Terjadi kesalahan saat menyimpan data")
+                        Button{
+                            vmCreateProduk.simpanProduk(id: id, nama_produk: namaProduk, satuan: satuanProduk, produk_kategori: kategoriProduk, harga: hargaProduk, jumlah_produk: jumlahProduk, produk_ecer: ecer, tanggal_masuk_produk: tanggal){ response in
+                                if response != nil {
+                                    print("Data berhasil disimpan")
+                                } else {
+                                    print("Terjadi kesalahan saat menyimpan data")
+                                }
                             }
-                        }
                             viewModel.fetchData()
                             check3.toggle()
                             
@@ -104,36 +105,36 @@ extension NewProductPopupView {
         }
         .textFieldStyle(.roundedBorder)
     }
-   var satuan : some View{
-       HStack{
-           Text("Satuan :")
-           TextField("", text: $satuanProduk)
-               
-       }
-       .textFieldStyle(.roundedBorder)
-   }
-   var kategori : some View{
-       HStack{
-           Text("Kategori :")
-           TextField("", text: $kategoriProduk)
-       }
-       .textFieldStyle(.roundedBorder)
-   }
-   var harga : some View{
-       HStack{
-           Text("Harga :")
-           TextField("", text: $hargaProduk)
-               .keyboardType(.numberPad)
-       }
-       .textFieldStyle(.roundedBorder)
-   }
-   var jumlah : some View{
-       HStack{
-           Text("Jumlah :")
-           TextField("", text: $jumlahProduk)
-               .keyboardType(.numberPad)
-       }
-       .textFieldStyle(.roundedBorder)
-   }
-
+    var satuan : some View{
+        HStack{
+            Text("Satuan :")
+            TextField("", text: $satuanProduk)
+            
+        }
+        .textFieldStyle(.roundedBorder)
+    }
+    var kategori : some View{
+        HStack{
+            Text("Kategori :")
+            TextField("", text: $kategoriProduk)
+        }
+        .textFieldStyle(.roundedBorder)
+    }
+    var harga : some View{
+        HStack{
+            Text("Harga :")
+            TextField("", text: $hargaProduk)
+                .keyboardType(.numberPad)
+        }
+        .textFieldStyle(.roundedBorder)
+    }
+    var jumlah : some View{
+        HStack{
+            Text("Jumlah :")
+            TextField("", text: $jumlahProduk)
+                .keyboardType(.numberPad)
+        }
+        .textFieldStyle(.roundedBorder)
+    }
+    
 }

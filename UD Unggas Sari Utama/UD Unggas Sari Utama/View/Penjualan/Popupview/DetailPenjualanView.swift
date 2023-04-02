@@ -1,18 +1,19 @@
 //
-//  ShoppingChartView.swift
+//  DetailPenjualanView.swift
 //  UD Unggas Sari Utama
 //
-//  Created by I Wayan Adnyana on 08/02/23.
+//  Created by I Wayan Adnyana on 29/03/23.
 //
 
 import SwiftUI
 
-struct ShoppingChartView: View {
-    @Binding var showPesanan: Bool
-    @Binding var checkList: Bool
-    @EnvironmentObject var penjualanViewModel: PenjualanViewModel
-    var viewModel: ProdukFetcher
-    @State private var reloadList = UUID()
+struct DetailPenjualanView: View {
+    let penjualan: PenjualanResponseModel
+    let dataDetailPenjualan: [DetailPenjualanModel]
+    let dataProduk: ProdukFetcher
+    @Binding var close: Bool
+    
+
     
     var body: some View {
         GeometryReader{ geometry in
@@ -46,12 +47,11 @@ struct ShoppingChartView: View {
                 }.frame(width: geometry.size.width/1.1, height: geometry.size.height/6)
                 
                 ScrollView(){
-                    ForEach(penjualanViewModel.detailPenjualanList.indices, id: \.self) { index in
-                        let detailPenjualan = penjualanViewModel.detailPenjualanList[index]
-                        let produk = viewModel.getProdukById(id: detailPenjualan.produk_id)
+                    ForEach(dataDetailPenjualan, id: \.id) { index in
+                        let produk = dataProduk.getProdukById(id: index.produk_id)
                         
                         HStack{
-                            Text("\(index + 1)")
+                            Text(index.produk_id)
                                 .bold()
                                 .font(.system(size: 16))
                                 .frame(width: geometry.size.width/10)
@@ -59,15 +59,15 @@ struct ShoppingChartView: View {
                                 .bold()
                                 .font(.system(size: 16))
                                 .frame(width: geometry.size.width/5)
-                            Text("\(detailPenjualan.jumlah)")
+                            Text("\(index.jumlah)")
                                 .bold()
                                 .font(.system(size: 16))
                                 .frame(width: geometry.size.width/5)
-                            Text("\(detailPenjualan.harga)")
+                            Text("\(index.harga)")
                                 .bold()
                                 .font(.system(size: 16))
                                 .frame(width: geometry.size.width/6)
-                            Text("\(detailPenjualan.subHarga)")
+                            Text("\(index.subTotal)")
                                 .bold()
                                 .font(.system(size: 16))
                                 .frame(width: geometry.size.width/5)
@@ -84,24 +84,36 @@ struct ShoppingChartView: View {
                             .bold()
                             .font(.system(size: 20))
                         Spacer()
-                        Text("\(penjualanViewModel.totalHarga)")
+                        
+                        Text("\(penjualan.total_harga)")
                             .bold()
                             .font(.system(size: 20))
+                        
                     }.frame(width: geometry.size.width/1.1, height: geometry.size.height/10)
                     Spacer()
                         .frame(width: geometry.size.width/1.1, height: geometry.size.height/18)
-                    HStack{
-                        Text("Pesanan")
-                            .bold()
-                            .font(.system(size: 20))
-                        Spacer()
-                        Toggle("", isOn: $showPesanan)
-                            .disabled(checkList ? false : true )
-                    }.frame(width: geometry.size.width/1.1, height: geometry.size.height/10)
                     
+                    Button{
+                        close = false
+                    } label: {
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color("GrayMiddleColor"))
+                                . frame( width: geometry.size.width/8, height: geometry.size.height/12)
+                                .cornerRadius(8)
+                                .border(Color.black, width: 2)
+                            Text("OK")
+                                .bold()
+                                .font(.title)
+                        }
+                        .frame( width: geometry.size.width/8, height: geometry.size.height/12)
+                    }
                 }.frame(width: geometry.size.width/1.1, height: geometry.size.height/4)
             }
             .frame(width: geometry.size.width/1, height: geometry.size.height/1)
+            .background(Color("GrayBackgroundColor"))
         }.edgesIgnoringSafeArea(.all)
+        
     }
 }
+
