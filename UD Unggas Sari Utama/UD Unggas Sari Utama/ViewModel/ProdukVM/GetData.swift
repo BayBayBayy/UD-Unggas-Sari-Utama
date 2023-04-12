@@ -7,23 +7,18 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 class ProdukFetcher: ObservableObject {
     //    @Published var produk: [ProdukResponseModel] = []
     @Published var produk: [ProdukResponseModel] = []
-    @Published var produkEcer = [ProdukResponseModel]()
-    @Published var produkStatus = [ProdukResponseModel]()
     @Published var selectedProduk: ProdukResponseModel? // tambahkan properti selectedProduk
     @Published var selectedProduct: ProdukResponseModel?
     @Published var selectedProdukId: String?
-    private var cancellable: AnyCancellable?
-    var data1 = CurrentValueSubject<String, Never>("Data awal")
     
     init(){
         fetchData()
-        fetchDataEcer()
     }
-    
     
     // View Data
     func fetchData() {
@@ -45,61 +40,6 @@ class ProdukFetcher: ObservableObject {
                 let produk = try JSONDecoder().decode([ProdukResponseModel].self, from: data)
                 DispatchQueue.main.async {
                     self.produk = produk
-                    self.data1.send("Data baru")
-                }
-            } catch let error {
-                print("Error decoding JSON:", error)
-            }
-        }.resume()
-    }
-    
-    // View Data Ecer
-    func fetchDataEcer() {
-        guard let url = URL(string: "https://indramaryati.com/bayu/Produk/produkEcer.php") else {
-            print("Invalid URL")
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else {
-                print("Error:", error ?? "Unknown error")
-                return
-            }
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            decoder.nonConformingFloatDecodingStrategy = .convertFromString(positiveInfinity: "inf", negativeInfinity: "-inf", nan: "nan")
-            do {
-                let produkEcer = try JSONDecoder().decode([ProdukResponseModel].self, from: data)
-                DispatchQueue.main.async {
-                    self.produkEcer = produkEcer
-                    self.data1.send("Data baru")
-                }
-            } catch let error {
-                print("Error decoding JSON:", error)
-            }
-        }.resume()
-    }
-    
-    // View Data yang terjual
-    func fetchStatusProduk() {
-        guard let url = URL(string: "https://indramaryati.com/bayu/Produk/produkEcer.php") else {
-            print("Invalid URL")
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else {
-                print("Error:", error ?? "Unknown error")
-                return
-            }
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            decoder.nonConformingFloatDecodingStrategy = .convertFromString(positiveInfinity: "inf", negativeInfinity: "-inf", nan: "nan")
-            do {
-                let produkStatus = try JSONDecoder().decode([ProdukResponseModel].self, from: data)
-                DispatchQueue.main.async {
-                    self.produkStatus = produkStatus
-                    self.data1.send("Data baru")
                 }
             } catch let error {
                 print("Error decoding JSON:", error)
@@ -109,9 +49,7 @@ class ProdukFetcher: ObservableObject {
     
     func refreshData() {
         self.produk.removeAll()
-        self.produkEcer.removeAll()
         fetchData()
-        fetchDataEcer()
     }
     
     func getIdFromName(productName: String, viewModel: ProdukFetcher) -> String? {
@@ -122,8 +60,8 @@ class ProdukFetcher: ObservableObject {
         }
     }
     
-
-
+    
+    
     func getProdukById(id: String) -> ProdukResponseModel? {
         return produk.first(where: { $0.id == id })
     }
@@ -142,6 +80,6 @@ class ProdukFetcher: ObservableObject {
     
     func resetSelectedProduk() {
         self.selectedProduk = nil
-    }   
+    }
 }
 

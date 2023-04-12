@@ -27,14 +27,14 @@ struct CardProdukView: View {
                     ScrollView{
                         LazyVGrid(columns: columns, alignment: .center, spacing: 10){
                             ForEach(produkVM.produk, id:\.id){ card in
-                                
-                                cardView(cards: card, selectedProduk: $produkVM.selectedProduk, check: $cloeThis)
-                                    .onTapGesture {
-                                        self.produkVM.selectProduct(card)
-                                    }
-                                    .frame(width: geometry.size.width/3.5, height: geometry.size.height/4)
-                                    .padding()
-                                
+                                if card.status_produk == true{
+                                    cardView(cards: card, selectedProduk: $produkVM.selectedProduk, check: $cloeThis)
+                                        .onTapGesture {
+                                            self.produkVM.selectProduct(card)
+                                        }
+                                        .frame(width: geometry.size.width/3.5, height: geometry.size.height/4)
+                                        .padding()
+                                }
                             }
                         }
                     }.frame(width: geometry.size.width, height: geometry.size.height)
@@ -47,7 +47,7 @@ struct CardProdukView: View {
                         .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                 }
                 if cloeThis {
-                    TambahBarangPopupView(viewModel: _penjualanViewModel, produk: produkVM.selectedProduk!, close: $cloeThis, cancelList: $cancelList)
+                    TambahBarangPopupView(viewModel: _penjualanViewModel, produk: produkVM.selectedProduk!, vmProduk: produkVM, close: $cloeThis, cancelList: $cancelList)
                         .environmentObject(penjualanViewModel)
                         .frame(width: geometry.size.width, height: geometry.size.height)
                         .transition(.move(edge: .bottom))
@@ -55,8 +55,15 @@ struct CardProdukView: View {
                 
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
-            .onAppear(){
-                self.produkVM.fetchData()
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                    produkVM.fetchData()
+                }
+            }
+            .onChange(of: cancelList){ newValue in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+                    produkVM.fetchData()
+                }
             }
             .frame(width: geometry.size.width/1, height: geometry.size.height/1)
             .background(Color("GrayContentColor"))
@@ -72,7 +79,6 @@ struct CardProdukView: View {
 struct cardView : View{
     //    var card: produkDummy
     var cards: ProdukResponseModel
-    @EnvironmentObject var viewModel: ProdukFetcher
     @Binding private var selectedProduk: ProdukResponseModel?
     @Binding var check: Bool
     
@@ -87,7 +93,6 @@ struct cardView : View{
         GeometryReader{ geometry in
             
             Button {
-                viewModel.selectProduct(cards)
                 selectedProduk = cards
                 self.check.toggle()
             } label: {

@@ -12,12 +12,12 @@ struct ButtonLaporanPemesan: View {
     
     var body: some View {
         HStack{
-            buttonView(isSelect: .constant(tabIndex == 0), title: "Hari Ini")
-                .onTapGesture { onButtonTapped(index: 0) }
-            buttonView(isSelect: .constant(tabIndex == 1), title: "Minggu Ini")
-                .onTapGesture { onButtonTapped(index: 1) }
-            buttonView(isSelect: .constant(tabIndex == 2), title: "Bulan Ini")
-                .onTapGesture { onButtonTapped(index: 2) }
+//            buttonView(isSelect: .constant(tabIndex == 0), title: "Hari Ini")
+//                .onTapGesture { onButtonTapped(index: 0) }
+//            buttonView(isSelect: .constant(tabIndex == 1), title: "Minggu Ini")
+//                .onTapGesture { onButtonTapped(index: 1) }
+//            buttonView(isSelect: .constant(tabIndex == 2), title: "Bulan Ini")
+//                .onTapGesture { onButtonTapped(index: 2) }
         }
     }
 }

@@ -9,8 +9,6 @@ import SwiftUI
 
 struct DataProdukView: View{
     @ObservedObject var viewModel = ProdukFetcher()
-    @State var productList: [ProdukResponseModel] = []
-    @State var selectedProduct: ProdukResponseModel? = nil
     let dateFormatter = DateFormatter()
     @State var checkEdit: Bool = false
     let numberFormatter: NumberFormatter = {
@@ -19,7 +17,32 @@ struct DataProdukView: View{
         formatter.locale = Locale(identifier: "id_ID")
         return formatter
     }()
-    @State private var newData = ""
+    @ObservedObject var pemesananVM = FetchPemesanan()
+    
+    var jumlahProdukTersedia: [String: Int] {
+        var stok: [String: Int] = [:]
+        
+        // Menghitung jumlah stok awal
+        for produk in self.viewModel.produk {
+            stok[produk.id] = produk.jumlah_produk
+        }
+        
+        // Mengurangi stok sesuai jumlah pesanan yang belum terpenuhi pada tanggal pengambilan yang sama dengan tanggal saat ini
+        let currentDate = Date()
+        let filteredPemesanan = pemesananVM.dataPemesanan.filter { $0.tanggal_pengambilan == currentDate && $0.status == false }
+        for pemesanan in filteredPemesanan {
+            let filteredDetailPemesanan = pemesananVM.detailPemesanan.filter { $0.pemesanan_id == pemesanan.pemesanan_id }
+            for detail in filteredDetailPemesanan {
+                let produkId = detail.produk_id
+                let jumlah = detail.jumlah_produk
+                
+                if let currentCount = stok[produkId] {
+                    stok[produkId] = currentCount - jumlah
+                }
+            }
+        }
+        return stok
+    }
     
     var body: some View {
         GeometryReader{ geometry in
@@ -56,6 +79,7 @@ struct DataProdukView: View{
                     .cornerRadius(8)
                     ScrollView {
                         ForEach(viewModel.produk, id:\.id) { product in
+                            let jumlahTersedia = jumlahProdukTersedia[product.id] ?? product.jumlah_produk
                             HStack {
                                 Text(product.id)
                                     .frame(maxWidth: .infinity)
@@ -67,7 +91,7 @@ struct DataProdukView: View{
                                     .frame(maxWidth: .infinity)
                                 Text(numberFormatter.string(from: NSNumber(value: product.harga)) ?? "")
                                     .frame(maxWidth: .infinity)
-                                Text(String(product.jumlah_produk))
+                                Text(String(jumlahTersedia))
                                     .frame(maxWidth: .infinity)
                                 Text(product.status_produk ? "Masih Terjual" : "Tidak Dijual")
                                     .frame(maxWidth: .infinity)
@@ -98,16 +122,19 @@ struct DataProdukView: View{
                 }
             }
             .onAppear {
-                viewModel.fetchData()
-                dateFormatter.dateFormat = "dd-MM-yyyy" // format tanggal dari data
-                viewModel.refreshData()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                    viewModel.fetchData()
+                    pemesananVM.fetchData()
+                    pemesananVM.fetchDataDetail()
+                }
             }
-            .onDisappear(){
-                viewModel.fetchData()
-                dateFormatter.dateFormat = "dd-MM-yyyy" // format tanggal dari data
-                viewModel.refreshData()
+            .onChange(of: checkEdit){ newValue in
+                    if !newValue{
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+                        viewModel.fetchData()
+                    }
+                }
             }
-         
         }
     }
 }

@@ -83,7 +83,10 @@ struct HistoriPenjualanView: View {
                     .shadow(radius: 1))
                 .onAppear {
                     dateFormatter.dateFormat = "dd-MM-yyyy" // format tanggal dari data
-                    viewModelPenjualan.fetchData()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                        viewModelPenjualan.fetchData()
+                        viewModelPenjualan.fetchDataDetail()
+                    }
                 }
                 .simultaneousGesture(
                     TapGesture().onEnded {

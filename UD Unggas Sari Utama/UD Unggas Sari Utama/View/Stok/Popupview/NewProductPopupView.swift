@@ -9,7 +9,6 @@ import SwiftUI
 
 struct NewProductPopupView: View {
     let vmCreateProduk = ProdukManager()
-    @ObservedObject var viewModel = ProdukFetcher()
     @State var id : String = " "
     @State var namaProduk : String = ""
     @State var satuanProduk : String = ""
@@ -19,6 +18,8 @@ struct NewProductPopupView: View {
     @State var ecer: Bool = false
     @State var tanggal: Date = Date()
     @Binding var check3: Bool
+    @State private var showingAlert = false
+    
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
@@ -29,54 +30,39 @@ struct NewProductPopupView: View {
                 VStack (alignment: .center, spacing: .zero) {
                     
                     title
-                        . frame( height: geometry.size.height/6)
+                        .frame(maxHeight: .infinity)
+                        .padding(.vertical, 10)
                     nama
-                        . frame( height: geometry.size.height/8)
+                        .frame(maxHeight: .infinity)
+                        .padding(.vertical, 10)
                     satuan
-                        . frame( height: geometry.size.height/8)
+                        .frame(maxHeight: .infinity)
+                        .padding(.vertical, 10)
                     PickerKategori(selectedKategori: $kategoriProduk)
                         . frame( height: geometry.size.height/8)
+                        .padding(.vertical, 10)
                     harga
-                        . frame( height: geometry.size.height/8)
+                        .frame(maxHeight: .infinity)
+                        .padding(.vertical, 10)
                     jumlah
-                        . frame( height: geometry.size.height/8)
+                        .frame(maxHeight: .infinity)
+                        .padding(.vertical, 10)
                     DatePicker("Tanggal Produk", selection: $tanggal, displayedComponents: [.date])
+                        .frame(maxHeight: .infinity)
+                        .padding(.vertical, 10)
+                    CheckToggle(isOn: $ecer, title: "Eceran")
+                        .frame(maxHeight: .infinity)
+                        .padding(.vertical, 10)
                     
-                    CheckToggle(isOn: $ecer, title: "Bisa Ecer")
+                    Spacer()
                     
                     HStack{
-                        Button{
-                            vmCreateProduk.simpanProduk(id: id, nama_produk: namaProduk, satuan: satuanProduk, produk_kategori: kategoriProduk, harga: hargaProduk, jumlah_produk: jumlahProduk, produk_ecer: ecer, tanggal_masuk_produk: tanggal){ response in
-                                if response != nil {
-                                    print("Data berhasil disimpan")
-                                } else {
-                                    print("Terjadi kesalahan saat menyimpan data")
-                                }
-                            }
-                            viewModel.fetchData()
-                            check3.toggle()
-                            
-                        } label:{
-                            ZStack{
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(Color("GrayMiddleColor"))
-                                    . frame( width: geometry.size.width/8, height: geometry.size.height/12)
-                                    .cornerRadius(8)
-                                    .border(Color.black, width: 2)
-                                Text("OK")
-                                    .bold()
-                                    .font(.title)
-                            }
-                            . frame( width: geometry.size.width/8, height: geometry.size.height/12)
-                        }
-                        
                         Button{
                             check3 = false
                         } label:{
                             ZStack{
                                 RoundedRectangle(cornerRadius: 8)
                                     .fill(Color("GrayMiddleColor"))
-                                    . frame( width: geometry.size.width/8, height: geometry.size.height/12)
                                     .cornerRadius(8)
                                     .border(Color.black, width: 2)
                                 Text("Batal")
@@ -85,9 +71,41 @@ struct NewProductPopupView: View {
                             }
                             . frame( width: geometry.size.width/8, height: geometry.size.height/12)
                         }
-                    }
-                }.frame(width: geometry.size.width/1.5, height: geometry.size.height/1.5)
-            }.frame(width: geometry.size.width/1, height: geometry.size.height/1)
+                        
+                        Button{
+                            if namaProduk != "" && satuanProduk != "" && kategoriProduk != "" && hargaProduk != "" && jumlahProduk != ""{
+                                vmCreateProduk.simpanProduk(id: id, nama_produk: namaProduk, satuan: satuanProduk, produk_kategori: kategoriProduk, harga: hargaProduk, jumlah_produk: jumlahProduk, produk_ecer: ecer, tanggal_masuk_produk: tanggal){ response in
+                                    if response != nil {
+                                        print("Data berhasil disimpan")
+                                        check3.toggle()
+                                    } else {
+                                        print("Terjadi kesalahan saat menyimpan data")
+                                    }
+                                }
+                            } else{
+                                showingAlert = true
+                            }
+                            
+                        } label:{
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color("GrayMiddleColor"))
+                                    .cornerRadius(8)
+                                    .border(Color.black, width: 2)
+                                Text("OK")
+                                    .bold()
+                                    .font(.title)
+                            }
+                            . frame( width: geometry.size.width/8, height: geometry.size.height/12)
+                        }
+                    }.padding(.bottom, 10)
+                    
+                }.frame(width: geometry.size.width/1.5, height: geometry.size.height/1.3)
+            }
+            .frame(width: geometry.size.width/1, height: geometry.size.height/1)
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text("Peringatan"), message: Text("Informasi produk tidak boleh kosong!"), dismissButton: .default(Text("OK")))
+            }
         }.edgesIgnoringSafeArea(.all)
     }
 }

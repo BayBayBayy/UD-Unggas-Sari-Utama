@@ -9,18 +9,19 @@ import SwiftUI
 
 @main
 struct UD_Unggas_Sari_UtamaApp: App {
-    let persistenceController = PersistenceController.shared
+//    let persistenceController = PersistenceController.shared
     @StateObject var penjualanViewModel = PenjualanViewModel(produkViewModel: ProdukFetcher())
-    @StateObject var produkFetcher = ProdukFetcher()
+//    @StateObject var produkFetcher = ProdukFetcher()
     @StateObject var pemesananViewModel = PemesananViewModel(penjualanViewModel: PenjualanViewModel(produkViewModel: ProdukFetcher()))
 
     var body: some Scene {
         WindowGroup {
             TabBarView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .environmentObject(produkFetcher)
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+//                .environmentObject(produkFetcher)
                 .environmentObject(penjualanViewModel)
                 .environmentObject(pemesananViewModel)
+//            ContactView()
         }
     }
 }

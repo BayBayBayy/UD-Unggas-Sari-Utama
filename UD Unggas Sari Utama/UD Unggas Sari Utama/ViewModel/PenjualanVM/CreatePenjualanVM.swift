@@ -7,6 +7,8 @@
 
 import Foundation
 import Combine
+import CoreBluetooth
+import UIKit
 
 class PenjualanViewModel: ObservableObject {
     @Published var penjualanList = [Penjualan]()
@@ -86,15 +88,15 @@ class PenjualanViewModel: ObservableObject {
         if let url = URL(string: "https://indramaryati.com/bayu/Penjualan/createPenjualan.php") {
             var urlRequest = URLRequest(url: url)
             urlRequest.httpMethod = "POST"
-            
+   
             let jsonData = try? JSONSerialization.data(withJSONObject: [
                 "penjualan": [
                     "penjualan_id": penjualanId,
                     "total_harga": totalHarga,
                     "tanggal_penjualan": tanggal
-                ],
+                ] as [String : Any],
                 "detail_penjualan_list": detailPenjualanListToUpload
-            ])
+            ] as [String : Any])
             
             urlRequest.httpBody = jsonData
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -113,7 +115,6 @@ class PenjualanViewModel: ObservableObject {
                 if let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                     print("Response:", responseJSON)
                     DispatchQueue.main.async {
-                        self.clearDetailPenjualanList()
                         print("produk berhasil ditambahkan")
                         
                     }
@@ -124,12 +125,77 @@ class PenjualanViewModel: ObservableObject {
         }
     }
     
+    func cetakNota() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let tanggal = dateFormatter.string(from: Date())
+
+        let printInfo = UIPrintInfo.printInfo()
+        printInfo.outputType = .general
+        
+        let printController = UIPrintInteractionController.shared
+        printController.printInfo = printInfo
+        
+        let printFormatter = UIMarkupTextPrintFormatter(markupText: "")
+        
+        // header nota
+        let tokoImage = UIImage(named: "UD-Amerta-Yoga.png")!
+        let tokoImageData = tokoImage.pngData()!
+        let tokoBase64 = tokoImageData.base64EncodedString()
+        
+        let headerHTML = """
+        <div style="text-align: center;">
+            <img src="data:image/png;base64,\(tokoBase64)" alt="Toko Image" width="200" height="200">
+            <h1>UD. Amerta Yoga</h1>
+            <p>Br. Demulih, Susut, Bangli</p>
+            <p>081</p>
+            <hr>
+        </div>
+        """
+        printFormatter.markupText = headerHTML
+        
+        // detail penjualan
+        var detailHTML = "<table style='margin: 50 auto;'>"
+        detailHTML += "<tr><th>Nama Produk</th><th>Satuan</th><th>Jumlah</th><th>Harga</th><th>Subtotal</th></tr>"
+        for detail in detailPenjualanList {
+            if let produk = produkViewModel.produk.first(where: { $0.id == detail.produk_id }) {
+                detailHTML += "<tr>"
+                detailHTML += "<td>\(produk.nama_produk)</td>"
+                detailHTML += "<td>\(produk.satuan)</td>"
+                detailHTML += "<td>\(detail.jumlah)</td>"
+                detailHTML += "<td>\(produk.harga)</td>"
+                detailHTML += "<td>\(detail.subHarga)</td>"
+                detailHTML += "</tr>"
+            } else {
+                // Handle the case where the element is not found or produkList is nil
+                print("produk nil")
+            }
+        }
+        detailHTML += "</table>"
+        printFormatter.markupText! += detailHTML
+        
+        // footer nota
+        let footerHTML = """
+        <div style="text-align: center;">
+            <hr>
+            <p>Total Harga: \(totalHarga)</p>
+            <p>Tanggal: \(tanggal)</p>
+        </div>
+        """
+        printFormatter.markupText! += footerHTML
+        
+        printController.printFormatter = printFormatter
+        
+        printController.present(animated: true, completionHandler: nil)
+    }
+
+
     
     func clearDetailPenjualanList() {
         detailPenjualanList = []
     }
     
-    func tambahPemesanan(namaPembeli: String, nohp: Int, dp: Int, tanggalAmbil: Date) {
+    func tambahPemesanan(namaPembeli: String, nohp: String, dp: Int, tanggalAmbil: Date) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let tanggal = dateFormatter.string(from: Date())
@@ -175,9 +241,9 @@ class PenjualanViewModel: ObservableObject {
                     "status": status,
                     "tanggal_pemesanan": tanggal,
                     "tanggal_pengambilan": tanggalAmbilPesan
-                ],
+                ] as [String : Any],
                 "detail_pemesanan_list": detailPemesananListToUpload
-            ])
+            ] as [String : Any])
             
             urlRequest.httpBody = jsonData
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -217,7 +283,7 @@ struct Pemesanan: Identifiable {
     var id: String
     var total_harga: Int
     var nama_pembeli: String
-    var no_hp: Int
+    var no_hp: String
     var dp_dibayar: Int
     var sisa_pembayaran: Int
     var status: Int

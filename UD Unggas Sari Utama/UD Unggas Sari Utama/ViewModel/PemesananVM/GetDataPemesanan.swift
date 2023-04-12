@@ -8,10 +8,11 @@
 import Foundation
 
 class FetchPemesanan: ObservableObject{
-    @Published var dataPemesanan = [PemesananResponseModel]()
+    @Published var dataPemesanan: [PemesananResponseModel] = []
     @Published var selectedPemesanan: PemesananResponseModel?
-    @Published var detailPemesanan = [DetailPemesananModel]()
+    @Published var detailPemesanan: [DetailPemesananModel]  = []
     @Published var selectedDetailPemesanan: DetailPemesananModel?
+    @Published var selectedProduk: ProdukResponseModel?
     @Published var pesananChart: [(String, Double)] = []
     @Published var dataChartProduk: [(String, Double)] = []
     @Published var totalSales = 0
@@ -19,7 +20,9 @@ class FetchPemesanan: ObservableObject{
     @Published var totalTransaksi: Int = 0
     @Published var jumlahTransaksi: Int = 0
     @Published var rataTransaksi: Double = 0
+    @Published var sisaProduk: [Int: Int] = [:]
     private let produkViewModel = ProdukFetcher()
+    
     init(){
         fetchData()
         fetchDataDetail()
@@ -42,11 +45,7 @@ class FetchPemesanan: ObservableObject{
             do {
                 let pemesanan = try JSONDecoder().decode([PemesananResponseModel].self, from: data)
                 DispatchQueue.main.async {
-                    let formatter = DateFormatter()
-                    formatter.dateStyle = .short
                     self.dataPemesanan = pemesanan
-                    self.pesananChart = pemesanan.map { (formatter.string(from: $0.tanggal_pemesanan), Double($0.total_harga)) }
-                    self.objectWillChange.send()
                 }
             } catch let error {
                 print("Error decoding JSON:", error)
@@ -59,6 +58,7 @@ class FetchPemesanan: ObservableObject{
             print("Invalid URL")
             return
         }
+        
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else {
@@ -73,7 +73,6 @@ class FetchPemesanan: ObservableObject{
                 DispatchQueue.main.async {
                     self.detailPemesanan = detail
                     self.generateChartData(for: Date())
-                    self.objectWillChange.send()
                 }
             } catch let error {
                 print("Error decoding JSON:", error)
@@ -130,7 +129,7 @@ class FetchPemesanan: ObservableObject{
                     penjualanPerProduk[penjualan.produk_id] = penjualan.jumlah_produk
                 }
             }
-
+            
             // Dapatkan nama_produk dari produk yang paling banyak terjual pada tanggal tersebut
             let sortedPenjualan = penjualanPerProduk.sorted { $0.value > $1.value }
             if let idProduk = sortedPenjualan.first?.key, let produk = self.produkViewModel.produk.first(where: { $0.id == idProduk }) {
@@ -138,35 +137,57 @@ class FetchPemesanan: ObservableObject{
             } else {
                 self.namaProdukLaris = ""
             }
-  
+            
             // Hitung totalTransaksi, jumlahTransaksi, dan rataTransaksi
             self.totalTransaksi = filteredPenjualan.reduce(0, { $0 + $1.total_harga })
             self.jumlahTransaksi = filteredPenjualan.count
             self.rataTransaksi = Double(self.totalTransaksi) / Double(self.jumlahTransaksi)
         }
     }
-
+    
+    func keepProduk(produkId: Int, jumlahPemesanan: Int) {
+        // jika sisa produk belum dihitung, kembalikan
+        guard let sisaProduk = self.sisaProduk[produkId] else { return }
+        
+        // jika jumlah pemesanan lebih besar dari sisa produk, kembalikan
+        if jumlahPemesanan > sisaProduk {
+            return
+        }
+        
+        // update sisa produk dengan mengurangi jumlah pemesanan
+        self.sisaProduk[produkId] = sisaProduk - jumlahPemesanan
+    }
+    
+    
     func namaProdukLaris(for selectedDate: Date) -> String {
         calculatePenjualan(for: selectedDate)
         return namaProdukLaris
     }
-
+    
     func totalTransaksi(for selectedDate: Date) -> Int {
         calculatePenjualan(for: selectedDate)
         return totalTransaksi
     }
-
+    
     func jumlahTransaksi(for selectedDate: Date) -> Int {
         calculatePenjualan(for: selectedDate)
         return jumlahTransaksi
     }
-
+    
     func rataTransaksi(for selectedDate: Date) -> Double {
         calculatePenjualan(for: selectedDate)
         return rataTransaksi
     }
-
+    
     func getNamaProduk(for id: String) -> String? {
         return produkViewModel.produk.first(where: { $0.id == id })?.nama_produk
+    }
+    
+    func selectProduct(_ product: ProdukResponseModel) {
+        self.selectedProduk = product
+    }
+    
+    func selectPemesanan(_ pemesanan: PemesananResponseModel) {
+        self.selectedPemesanan = pemesanan
     }
 }

@@ -13,8 +13,8 @@ struct KonversiPopupView: View {
     @Binding var check2: Bool
     @State var produkAsal: String = ""
     @State var produkJadi: String = ""
-    @ObservedObject var viewModel = ProdukFetcher()
     let vmProduk = ProdukManager()
+    @State private var showingAlert = false
     
     var body: some View {
         GeometryReader{ geometry in
@@ -34,7 +34,7 @@ struct KonversiPopupView: View {
                         Spacer()
                     }.frame( height: geometry.size.height/10)
                     
-                    PickerProdukEcer(viewModel: viewModel, selectedEcer: $produkAsal)
+                    PickerProdukEcer( selectedEcer: $produkAsal)
                         . frame( height: geometry.size.height/6)
                     fieldJumlahSebelum
                         . frame( height: geometry.size.height/8)
@@ -44,7 +44,7 @@ struct KonversiPopupView: View {
                             .font(.system(size: 28))
                         Spacer()
                     }.frame( height: geometry.size.height/10)
-                    PickerProdukEcer(viewModel: viewModel, selectedEcer: $produkJadi)
+                    PickerProdukEcer( selectedEcer: $produkJadi)
                         . frame( height: geometry.size.height/6)
                     fieldJumlahSetelah
                         . frame( height: geometry.size.height/8)
@@ -65,16 +65,21 @@ struct KonversiPopupView: View {
                             . frame( width: geometry.size.width/8, height: geometry.size.height/12)
                         }
                         Button{
-                            vmProduk.konversiProduk(id_asal: produkAsal, id_jadi: produkJadi, jumlah_asal: jumlahSebelum, jumlah_jadi: jumlahSetelah){ success, message in
-                                if success {
-                                    // Jika sukses, menampilkan pesan sukses dan menutup tampilan edit produk
-                                    print(message)
-                                   check2 = false
-                                } else {
-                                    // Jika gagal, menampilkan pesan error
-                                    print(message)
+                            if jumlahSebelum != "" && jumlahSetelah != "" && produkAsal != "" && produkJadi != ""{
+                                vmProduk.konversiProduk(id_asal: produkAsal, id_jadi: produkJadi, jumlah_asal: jumlahSebelum, jumlah_jadi: jumlahSetelah){ success, message in
+                                    if success {
+                                        // Jika sukses, menampilkan pesan sukses dan menutup tampilan edit produk
+                                        print(message)
+                                       check2 = false
+                                    } else {
+                                        // Jika gagal, menampilkan pesan error
+                                        print(message)
+                                    }
                                 }
+                            }else {
+                                showingAlert = true
                             }
+
                         } label: {
                             ZStack{
                                 RoundedRectangle(cornerRadius: 8)
@@ -93,6 +98,9 @@ struct KonversiPopupView: View {
                 .frame(width: geometry.size.width/1.2, height: geometry.size.height/1.2)
             }
             .frame(width: geometry.size.width/1, height: geometry.size.height/1)
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text("Peringatan"), message: Text("Informasi produk tidak boleh kosong!"), dismissButton: .default(Text("OK")))
+            }
         }
         .edgesIgnoringSafeArea(.all)
     }

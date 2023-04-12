@@ -8,12 +8,11 @@
 import Foundation
 
 class FethcerPenjualan: ObservableObject{
-    @Published var dataPenjualan = [PenjualanResponseModel]()
+    @Published var dataPenjualan: [PenjualanResponseModel]  = []
     @Published var selectedPenjualan: PenjualanResponseModel?
-    @Published var dataDetail = [DetailPenjualanModel]()
-    @Published var penjualanPerProdukList = [PenjualanPerProdukModel]()
+    @Published var dataDetail: [DetailPenjualanModel]  = []
+    @Published var penjualanPerProdukList: [PenjualanPerProdukModel] = []
     @Published var selectedDetail: DetailPenjualanModel?
-    //    @Published var dataChart: [(String, Double)] = []
     @Published var dataChartProduk: [(String, Double)] = []
     @Published var totalSales = 0
     @Published var totalTransaksi: Int = 0
@@ -47,12 +46,7 @@ class FethcerPenjualan: ObservableObject{
             do {
                 let penjualan = try JSONDecoder().decode([PenjualanResponseModel].self, from: data)
                 DispatchQueue.main.async {
-                    let formatter = DateFormatter()
-                    formatter.dateStyle = .short
                     self.dataPenjualan = penjualan
-                    //                    self.dataChart = penjualan.map { (formatter.string(from: $0.tanggal_penjualan), Double($0.total_harga)) }
-                    self.objectWillChange.send()
-                    //                    self.totalSales = decodedResponse.reduce(0) { $0 + ($1.price * $1.quantity) }
                 }
             } catch let error {
                 print("Error decoding JSON:", error)
@@ -80,7 +74,6 @@ class FethcerPenjualan: ObservableObject{
                 DispatchQueue.main.async {
                     self.dataDetail = detail
                     self.generateChartData(for: Date())
-                    self.objectWillChange.send()
                 }
             } catch let error {
                 print("Error decoding JSON:", error)

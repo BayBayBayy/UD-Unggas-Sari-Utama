@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State var favoriteCards: [produkDummy] = produkDummy.sampleData
     @State var check: Bool = false
     @State var checkCard: Bool = false
     @State var checkPesanan: Bool = false
@@ -18,7 +17,6 @@ struct HomeView: View {
     
     @EnvironmentObject var penjualanViewModel: PenjualanViewModel
     @ObservedObject var viewModel = ProdukFetcher()
-    @ObservedObject var vmPenjualan = PenjualanViewModel(produkViewModel: ProdukFetcher())
     
     var body: some View {
         if #available(iOS 16.0, *) {
@@ -75,16 +73,11 @@ struct HomeView: View {
                             PembayaranPopupView(close: $check)
                                 .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
                         }else if checkPesanan == true{
-                            TambahkanPesananPopupView(pesananPopUp: $checkPesanan)
+                            TambahkanPesananPopupView(pesananPopUp: $checkPesanan, cancelList: $cancelListPenjualan)
                                 .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
                         }
                         
                         
-                    }
-                    
-                    
-                    .onAppear(){
-                        self.viewModel.fetchData()
                     }
                     .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                     
@@ -93,9 +86,9 @@ struct HomeView: View {
                 .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                 .accentColor(Color("OrangeColorSet"))
             }
+            .scrollDismissesKeyboard(.interactively)
             .edgesIgnoringSafeArea(.all)
             .ignoresSafeArea()
-            .modifier(KeyboardAwareModifier())
         } else{
             // not allowed
         }

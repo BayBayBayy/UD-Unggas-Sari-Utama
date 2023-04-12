@@ -35,11 +35,11 @@ struct LaporanPenjualanView: View {
                 
                 
                 HStack(spacing: 80) {
-                    cardLaporanPenjualan(title: "Total Revenue", hasil: viewModel.totalTransaksi(for: selectedDate).formattedAsCurrency())
+                    CardDetailPenjualan(title: "Total Revenue", value: viewModel.totalTransaksi(for: selectedDate).formattedAsCurrency())
                         .frame(width: geometry.size.width/4, height: geometry.size.height/8)
-                    cardLaporanPenjualan(title: "Total Transaksi", hasil: "\(viewModel.jumlahTransaksi(for: selectedDate)) Transaksi")
+                    CardDetailPenjualan(title: "Total Transaksi", value: "\(viewModel.jumlahTransaksi(for: selectedDate)) Transaksi")
                         .frame(width: geometry.size.width/4, height: geometry.size.height/8)
-                    cardLaporanPenjualan(title: "Rata-Rata Transaksi", hasil: viewModel.rataTransaksi(for: selectedDate).formattedAsCurrency)
+                    CardDetailPenjualan(title: "Rata-Rata Transaksi", value: viewModel.rataTransaksi(for: selectedDate).formattedAsCurrency)
                         .frame(width: geometry.size.width/4, height: geometry.size.height/8)
                 }
                 .frame(width: geometry.size.width/1, height: geometry.size.height/3.5)
@@ -57,10 +57,16 @@ struct LaporanPenjualanView: View {
                 
             }
             .onAppear(){
-                viewModel.fetchData()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                    viewModel.fetchData()
+                    viewModel.fetchDataDetail()
+                }
             }
             .onChange(of: selectedDate) { newValue in
-                viewModel.generateChartData(for: newValue)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                    viewModel.fetchData()
+                    viewModel.generateChartData(for: newValue)
+                }
             }
             .background(Color("GrayBackgroundColor"))
             .navigationTitle("Laporan Penjualan")

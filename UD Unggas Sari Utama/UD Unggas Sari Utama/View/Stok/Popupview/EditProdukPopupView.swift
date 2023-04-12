@@ -46,7 +46,7 @@ struct EditProdukPopupView: View {
                     DatePicker("Tanggal Produk", selection: $tanggal, displayedComponents: [.date])
                     
                     HStack{
-                        CheckToggle(isOn: $ecer, title: "Bisa Ecer")
+                        CheckToggle(isOn: $ecer, title: "Eceran")
                             .padding(.bottom, 5)
                         
                         CheckToggle(isOn: $status, title: status ? "Masih Terjual" : "Tidak Terjual" )

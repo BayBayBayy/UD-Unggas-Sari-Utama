@@ -13,8 +13,6 @@ struct DetailPenjualanView: View {
     @ObservedObject var dataProduk: ProdukFetcher
     @Binding var close: Bool
     
-
-    
     var body: some View {
         GeometryReader{ geometry in
             VStack{

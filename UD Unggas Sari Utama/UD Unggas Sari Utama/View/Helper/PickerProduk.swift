@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PickerProduk: View {
     
-    @ObservedObject var viewModel : ProdukFetcher
+    @ObservedObject var viewModel = ProdukFetcher()
     @Binding var selectedProduk: String 
     var body: some View {
         HStack{
@@ -32,7 +32,7 @@ struct PickerProduk: View {
 }
 
 struct PickerProdukEcer: View {
-    @ObservedObject var viewModel: ProdukFetcher
+    @ObservedObject var viewModel = ProdukFetcher()
     @Binding var selectedEcer: String
 
     var body: some View {
@@ -41,9 +41,11 @@ struct PickerProdukEcer: View {
             Picker("Pilih", selection: $selectedEcer) {
                 Text("Pilih Produk")
                     .tag("")
-                ForEach(viewModel.produkEcer, id: \.id) { produk in
-                    Text(produk.nama_produk)
-                        .tag(produk.nama_produk)
+                ForEach(viewModel.produk, id: \.id) { produk in
+                    if produk.produk_ecer == true{
+                        Text(produk.nama_produk)
+                            .tag(produk.nama_produk)
+                    }
                 }
             }
             .pickerStyle(.wheel)

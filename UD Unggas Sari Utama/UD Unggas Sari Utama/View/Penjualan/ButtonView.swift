@@ -83,7 +83,6 @@ struct ButtonView: View {
                     self.checkOk.toggle()
                     buttonValue = 1
                     penjualanViewModel.checkout()
-                    penjualanViewModel.clearDetailPenjualanList()
                     cancelList = false
                 } label: {
                     ZStack{

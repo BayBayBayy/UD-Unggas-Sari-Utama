@@ -8,10 +8,28 @@
 import SwiftUI
 
 struct DetailPesananPopupview: View {
-    @State var namaPemesan1: String = ""
-    @State var noHp1: String = ""
-    @State var dpDibayar1: String = ""
-    @State var selectedDate1 = Date()
+    @EnvironmentObject var viewModel : PemesananViewModel
+    @ObservedObject var dataProduk: ProdukFetcher
+    @Binding var close: Bool
+    @State private var isAlertShown = false
+    let dateFormatter = DateFormatter()
+    let pemesanan: PemesananResponseModel
+    let dataDetailPemesnan: [DetailPemesananModel]
+    
+    var formattedDatePengambilan: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        return dateFormatter.string(from: pemesanan.tanggal_pengambilan)
+        
+    }
+    var formattedDatePemesanan: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        return dateFormatter.string(from: pemesanan.tanggal_pemesanan)
+        
+    }
+    
+    
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
@@ -20,169 +38,211 @@ struct DetailPesananPopupview: View {
                     .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.2)
                     .border(Color(.black))
                 VStack (alignment: .center, spacing: .zero) {
-                    
                     title
-                        .frame( height: geometry.size.height/10)
+                        .frame(maxWidth: .infinity)
                     Spacer()
                         .frame( height: geometry.size.height/12)
                     VStack{
                         HStack{
                             Text("No Pesanan :")
-                            Spacer()
-                                .frame(width: geometry.size.width/18)
-                            Text("No pesanan")
+                            
+                            Text(pemesanan.pemesanan_id)
                                 .bold()
+                            
                             Spacer()
-                        }.frame( height: geometry.size.height/24)
+                                .frame(maxWidth: .infinity)
+                        }.frame(maxHeight: .infinity)
                         HStack{
                             Text("Nama :")
-                            Spacer()
-                                .frame(width: geometry.size.width/18)
-                            Text("nama pembeli")
+                            
+                            Text(pemesanan.nama_pembeli)
                                 .bold()
+                            
                             Spacer()
-                        }.frame( height: geometry.size.height/24)
+                                .frame(maxWidth: .infinity)
+                        }.frame(maxHeight: .infinity)
                         HStack{
                             Text("No HP :")
-                            Spacer()
-                                .frame(width: geometry.size.width/18)
-                            Text("No HP PEMbeli")
+                            
+                            Text(pemesanan.no_hp)
                                 .bold()
+                            
                             Spacer()
-                        }.frame( height: geometry.size.height/24)
-                        HStack{
-                            Text("Tanggal diambil :")
-                            Spacer()
-                                .frame(width: geometry.size.width/18)
-                            Text("Tanggal diambil")
-                                .bold()
-                            Spacer()
-                        }.frame( height: geometry.size.height/24)
+                                .frame(maxWidth: .infinity)
+                        }.frame(maxHeight: .infinity)
                         HStack{
                             Text("Tanggal pemesanan :")
-                            Spacer()
-                                .frame(width: geometry.size.width/18)
-                            Text("Tanggal pemesanan")
+                            
+                            Text(formattedDatePemesanan)
                                 .bold()
                             Spacer()
-                        }.frame( height: geometry.size.height/24)
+                                .frame(maxWidth: .infinity)
+                            
+                        }.frame(maxHeight: .infinity)
+                        HStack{
+                            Text("Tanggal diambil :")
+                            
+                            Text(formattedDatePengambilan)
+                                .bold()
+                            
+                            Spacer()
+                                .frame(maxWidth: .infinity)
+                            
+                        }.frame(maxHeight: .infinity)
                     }.frame( height: geometry.size.height/12)
                     
                     Spacer()
                         .frame( height: geometry.size.height/12)
-    
+                    
                     VStack{
                         HStack{
                             Text("No")
                                 .bold()
                                 .font(.system(size: 16))
-                                .frame(width: geometry.size.width/10)
+                                .frame(maxWidth: .infinity)
                             Text("Nama")
                                 .bold()
                                 .font(.system(size: 16))
-                                .frame(width: geometry.size.width/9)
+                                .frame(maxWidth: .infinity)
                             Text("Jumlah")
                                 .bold()
                                 .font(.system(size: 16))
-                                .frame(width: geometry.size.width/10)
+                                .frame(maxWidth: .infinity)
                             Text("Harga")
                                 .bold()
                                 .font(.system(size: 16))
-                                .frame(width: geometry.size.width/10)
+                                .frame(maxWidth: .infinity)
                             Text("Total")
                                 .bold()
                                 .font(.system(size: 16))
-                                .frame(width: geometry.size.width/10)
-                        }.frame(width: geometry.size.width/2, height: geometry.size.height/20)
+                                .frame(maxWidth: .infinity)
+                        }.frame(height: geometry.size.height/20)
                         
-                        ScrollView{
-                            HStack{
-                                Spacer()
-                                    .frame(width: geometry.size.width/20)
-                                Text("1")
-                                    .bold()
-                                    .font(.system(size: 16))
-                                    .frame(width: geometry.size.width/10)
-                                Text("Ayam Broiler")
-                                    .bold()
-                                    .font(.system(size: 16))
-                                    .frame(width: geometry.size.width/9)
-                                Text("2")
-                                    .bold()
-                                    .font(.system(size: 16))
-                                    .frame(width: geometry.size.width/10)
-                                Text("12000")
-                                    .bold()
-                                    .font(.system(size: 16))
-                                    .frame(width: geometry.size.width/10)
-                                Text("24000")
-                                    .bold()
-                                    .font(.system(size: 16))
-                                    .frame(width: geometry.size.width/10)
-                                Spacer()
-                                    .frame(width: geometry.size.width/28)
-                            }.frame(width: geometry.size.width/2, height: geometry.size.height/16)
-                        }.frame(width: geometry.size.width/2, height: geometry.size.height/6)
-  
-                    }.frame(width: geometry.size.width/1.75, height: geometry.size.height/4)
-
+                        ForEach(dataDetailPemesnan, id:\.id) { model in
+                            let produk = dataProduk.getProdukById(id: model.produk_id)
+                            
+                            ScrollView{
+                                HStack{
+                                    Text(model.id)
+                                        .bold()
+                                        .font(.system(size: 16))
+                                        .frame(maxWidth: .infinity)
+                                    Text(produk!.nama_produk)
+                                        .bold()
+                                        .font(.system(size: 16))
+                                        .frame(maxWidth: .infinity)
+                                    Text("\(model.jumlah_produk)")
+                                        .bold()
+                                        .font(.system(size: 16))
+                                        .frame(maxWidth: .infinity)
+                                    Text("\(model.harga_produk)")
+                                        .bold()
+                                        .font(.system(size: 16))
+                                        .frame(maxWidth: .infinity)
+                                    Text("\(model.sub_harga)")
+                                        .bold()
+                                        .font(.system(size: 16))
+                                        .frame(maxWidth: .infinity)
+                                }
+                            }
+                        }
+                        
+                    }.frame(height: geometry.size.height/4)
+                    
+                    RoundedRectangle(cornerRadius: 0.1)
+                        .fill(.black)
+                        .frame(width: geometry.size.width/1.75, height: 2)
+                    
+                    Spacer()
+                    
                     VStack{
-                        RoundedRectangle(cornerRadius: 0.1)
-                            .fill(.black)
-                            .frame(width: geometry.size.width/1.75, height: 2)
                         HStack{
                             Text("Harga Total")
                                 .bold()
                                 .font(.system(size: 18))
                             Spacer()
-                            Text("24000")
+                            Text("\(pemesanan.total_harga)")
                                 .bold()
                                 .font(.system(size: 18))
-                        }.frame(width: geometry.size.width/2, height: geometry.size.height/20)
+                        }.frame(maxHeight: .infinity)
                         
                         HStack{
                             Text("DP Dibayar")
                                 .bold()
                                 .font(.system(size: 18))
                             Spacer()
-                            Text("12000")
+                            Text("\(pemesanan.dp_dibayar)")
                                 .bold()
                                 .font(.system(size: 18))
-                        }.frame(width: geometry.size.width/2, height: geometry.size.height/20)
+                        }.frame(maxHeight: .infinity)
                         
                         HStack{
                             Text("Sisa Pembayaran")
                                 .bold()
                                 .font(.system(size: 18))
                             Spacer()
-                            Text("12000")
+                            Text("\(pemesanan.sisa_pembayaran)")
                                 .bold()
                                 .font(.system(size: 18))
-                        }.frame(width: geometry.size.width/2, height: geometry.size.height/20)
-                    }.frame(width: geometry.size.width/2, height: geometry.size.height/14)
+                            
+                        }.frame(maxHeight: .infinity)
+                    }
+                    
                     Spacer()
-                        .frame(width: geometry.size.width/1.6, height: geometry.size.height/16)
-
-                    Button(action: generatePesanan) {
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color("GrayMiddleColor"))
-                                . frame( width: geometry.size.width/8, height: geometry.size.height/12)
-                                .cornerRadius(8)
-                                .border(Color.black, width: 2)
-                            Text("SELESAI")
-                                .bold()
-                                .font(.title2)
+                    HStack{
+                        Button{
+                            self.close.toggle()
+                        } label: {
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color("GrayMiddleColor"))
+                                    . frame( width: geometry.size.width/10, height: geometry.size.height/16)
+                                    .cornerRadius(8)
+                                    .border(Color.black, width: 2)
+                                Text("Kembali")
+                                    .bold()
+                            }
                         }
-                        .frame( width: geometry.size.width/14, height: geometry.size.height/18)
-                    }.frame( width: geometry.size.width/14, height: geometry.size.height/18)
-                    
-                    Spacer()
-                        .frame(width: geometry.size.width/1.6, height: geometry.size.height/14)
-                    
-                }.frame( width: geometry.size.width/2, height: geometry.size.height/1.6)
-                   
-            }.frame( width: geometry.size.width/1, height: geometry.size.height/1)
+                        Button{
+                            for model in dataDetailPemesnan {
+                                if let produk = dataProduk.getProdukById(id: model.produk_id), model.jumlah_produk > produk.jumlah_produk {
+                                    isAlertShown = true
+                                    break
+                                } else{
+                                    let status = "1"
+                                    viewModel.pesananSelesai(id: pemesanan.pemesanan_id, status: status ){ success, message in
+                                        if success {
+                                            // Jika sukses, menampilkan pesan sukses dan menutup tampilan edit produk
+                                            print(message)
+                                            close = false
+                                        } else {
+                                            // Jika gagal, menampilkan pesan error
+                                            print(message)
+                                        }
+                                    }
+                                }
+                            }
+                        } label: {
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color("GrayMiddleColor"))
+                                    . frame( width: geometry.size.width/10, height: geometry.size.height/16)
+                                    .cornerRadius(8)
+                                    .border(Color.black, width: 2)
+                                Text("Selesai")
+                                    .bold()
+                            }
+                        }
+                    }
+                }.frame( width: geometry.size.width/2, height: geometry.size.height/1.3)
+                
+            }.onAppear(){
+                dateFormatter.dateFormat = "dd-MM-yyyy" // format tanggal dari data
+            }
+            .alert(isPresented: $isAlertShown) {
+                Alert(title: Text("Peringatan"), message: Text("Jumlah yang dibeli melebihi stok yang ada!"), dismissButton: .default(Text("OK")))
+            }
+            .frame( width: geometry.size.width/1, height: geometry.size.height/1)
             Spacer()
                 .frame( width: geometry.size.width/1, height: geometry.size.height/14)
         }.edgesIgnoringSafeArea(.all)
@@ -197,31 +257,4 @@ extension DetailPesananPopupview{
             .font(.system(size: 40))
     }
     
-    var tanggal : some View{
-        HStack{
-            Text("Tanggal Prngambilan :")
-            DatePicker("", selection: $selectedDate1, displayedComponents: .date)
-        }
-        .textFieldStyle(.roundedBorder)
-    }
-}
-
-struct buttonPopup: View{
-    var body: some View{
-        GeometryReader{ geometry in
-            Button(action: generatePesanan) {
-                ZStack{
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(Color("GrayMiddleColor"))
-                        . frame( width: geometry.size.width/8, height: geometry.size.height/12)
-                        .cornerRadius(8)
-                        .border(Color.black, width: 2)
-                    Text("SELESAI")
-                        .bold()
-                        .font(.title2)
-                }
-                .frame( width: geometry.size.width/14, height: geometry.size.height/18)
-            }.frame( width: geometry.size.width/14, height: geometry.size.height/18)
-        }
-    }
 }

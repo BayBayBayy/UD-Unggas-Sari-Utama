@@ -7,11 +7,10 @@
 
 import SwiftUI
 struct StockView: View {
-    @ObservedObject var viewModel = ProdukFetcher()
     @State var keyValueButton = Int()
     @State var isRefreshing = false
     @State var check: Bool = false
-    
+    @ObservedObject var viewModel = ProdukFetcher()
     
     var body: some View {
         if #available(iOS 16.0, *) {
@@ -50,29 +49,19 @@ struct StockView: View {
                                 .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
                         }else if self.check == true && keyValueButton == 2{
                             NewProductPopupView(check3: $check)
-                                .frame(width: geometry.size.width/1.5, height: geometry.size.height/1.5)
+                                .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.35)
                         }else if self.check == true && keyValueButton == 3{
                             KonversiPopupView( check2: $check)
                                 .frame(width: geometry.size.width/1.75, height: geometry.size.height/1.75)
                         }
                         
                     }
-                    .frame(width: geometry.size.width/1, height: geometry.size.height/1)
-                }
-                .onReceive(NotificationCenter.default.publisher(for: .refreshData)) { _ in
-                    viewModel.refreshData()
-                }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            isRefreshing = true
-                            viewModel.refreshData()
-                            isRefreshing = false
-                        }, label: {
-                            Label("Refresh", systemImage: "arrow.clockwise")
-                        })
-                        .disabled(isRefreshing)
+                    .onChange(of: check){newValue in 
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+                            viewModel.fetchData()
+                        }
                     }
+                    .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                 }
                 .frame(width: geometry.size.width/1, height: geometry.size.height/1)
                 .accentColor(Color("OrangeColorSet"))
@@ -89,16 +78,6 @@ struct StockView: View {
 }
 extension Notification.Name {
     static let refreshData = Notification.Name("refreshData")
-}
-
-struct stokOpname: View{
-    var body: some View{
-        GeometryReader{ geometry in
-            VStack{
-                Text("blank")
-            }
-        }
-    }
 }
 
 

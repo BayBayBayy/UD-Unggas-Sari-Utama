@@ -33,11 +33,11 @@ struct LaporanPemesananView: View {
                 .frame(width: geometry.size.width/1, height: geometry.size.height/6)
                 
                 HStack(spacing: 80) {
-                    cardLaporanPenjualan(title: "Nama Produk Laris", hasil: viewModel.namaProdukLaris)
+                    CardDetailPenjualan(title: "Nama Produk Laris", value: viewModel.namaProdukLaris)
                         .frame(width: geometry.size.width/4, height: geometry.size.height/8)
-                    cardLaporanPenjualan(title: "Total Transaksi", hasil: "Rp. \(viewModel.totalTransaksi(for: selectedDate).formattedWithSeparator())")
+                    CardDetailPenjualan(title: "Total Transaksi", value: "Rp. \(viewModel.totalTransaksi(for: selectedDate).formattedWithSeparator())")
                         .frame(width: geometry.size.width/4, height: geometry.size.height/8)
-                    cardLaporanPenjualan(title: "Rata-Rata Transaksi", hasil: "Rp. \(viewModel.rataTransaksi(for: selectedDate).formattedWithSeparator())")
+                    CardDetailPenjualan(title: "Rata-Rata Transaksi", value: "Rp. \(viewModel.rataTransaksi(for: selectedDate).formattedWithSeparator())")
                         .frame(width: geometry.size.width/4, height: geometry.size.height/8)
                 }
 
@@ -56,10 +56,15 @@ struct LaporanPemesananView: View {
                 
             }
             .onAppear(){
-                viewModel.fetchData()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                    viewModel.fetchData()
+                }
             }
             .onChange(of: selectedDate) { newValue in
-                viewModel.generateChartData(for: newValue)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                    viewModel.fetchData()
+                    viewModel.generateChartData(for: newValue)
+                }
             }
             .navigationTitle("Laporan Pemesanan")
             .navigationBarTitleDisplayMode(.inline)

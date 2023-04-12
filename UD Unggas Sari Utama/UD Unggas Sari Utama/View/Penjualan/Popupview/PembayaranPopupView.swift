@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PembayaranPopupView: View {
     @Binding var close: Bool
+    @EnvironmentObject var penjualanViewModel: PenjualanViewModel
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
@@ -27,6 +28,7 @@ struct PembayaranPopupView: View {
                     HStack{
                         Button{
                             dismiss()
+                            penjualanViewModel.clearDetailPenjualanList()
                         } label: {
                         ZStack{
                             RoundedRectangle(cornerRadius: 8)
@@ -43,7 +45,10 @@ struct PembayaranPopupView: View {
                         Spacer()
                             .frame( width: geometry.size.width/20)
                         
-                        Button(action: pembelianBarang) {
+                        Button{
+                            penjualanViewModel.cetakNota()
+                            penjualanViewModel.clearDetailPenjualanList()
+                        } label:{
                             ZStack{
                                 RoundedRectangle(cornerRadius: 8)
                                     .fill(Color("GrayMiddleColor"))

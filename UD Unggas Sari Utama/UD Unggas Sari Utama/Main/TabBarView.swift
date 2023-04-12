@@ -8,9 +8,6 @@
 import SwiftUI
 
 struct TabBarView: View {
-    @ObservedObject var produkVM = ProdukFetcher()
-    @ObservedObject var penjualanVM = FethcerPenjualan()
-    @ObservedObject var pemesananVM = FetchPemesanan()
     
     init(){
         let tabBarAppearance = UITabBarAppearance()

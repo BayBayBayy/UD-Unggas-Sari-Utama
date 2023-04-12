@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct TambahkanPesananPopupView: View {
-    @EnvironmentObject var viewModel: PemesananViewModel
     @EnvironmentObject var penjualanViewModel: PenjualanViewModel
+    @State private var showingAlert = false
     @State var namaPemesan: String = ""
     @State var noHp: String = ""
     @State var dpDibayar: String = ""
     @State var selectedDate = Date()
     @Binding var pesananPopUp: Bool
+    @Binding var cancelList: Bool
     
     var body: some View {
         GeometryReader{ geometry in
@@ -53,11 +54,15 @@ struct TambahkanPesananPopupView: View {
                         }
                         
                         Button{
-                            self.pesananPopUp.toggle()
-                            let noHpInt = Int(noHp) ?? 0
-                            let dpDibayarInt = Int(dpDibayar) ?? 0
-                            penjualanViewModel.tambahPemesanan(namaPembeli: namaPemesan, nohp: noHpInt, dp: dpDibayarInt, tanggalAmbil: selectedDate)
-                            penjualanViewModel.clearDetailPenjualanList()
+                            if namaPemesan != "" && noHp != "" {
+                                let dpDibayarInt = Int(dpDibayar) ?? 0
+                                penjualanViewModel.tambahPemesanan(namaPembeli: namaPemesan, nohp: noHp, dp: dpDibayarInt, tanggalAmbil: selectedDate)
+                                penjualanViewModel.clearDetailPenjualanList()
+                                self.pesananPopUp.toggle()
+                                cancelList = false
+                            } else{
+                                showingAlert = true
+                            }
                         } label: {
                             ZStack{
                                 RoundedRectangle(cornerRadius: 8)
@@ -72,7 +77,11 @@ struct TambahkanPesananPopupView: View {
                             .frame( width: geometry.size.width/8, height: geometry.size.height/12)
                         }
                     }
-                }.frame( width: geometry.size.width/1.2, height: geometry.size.height/1.2)
+                }
+                .frame( width: geometry.size.width/1.2, height: geometry.size.height/1.2)
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text("Peringatan"), message: Text("Informasi Pembeli tidak boleh kosong!"), dismissButton: .default(Text("OK")))
+                }
             }.frame( width: geometry.size.width/1, height: geometry.size.height/1)
         }.edgesIgnoringSafeArea(.all)
         
@@ -92,13 +101,13 @@ extension TambahkanPesananPopupView{
         }
         .textFieldStyle(.roundedBorder)
     }
-   var no : some View{
-       HStack{
-           Text("No HP :")
-           TextField("", text: $noHp)
-       }
-       .textFieldStyle(.roundedBorder)
-   }
+    var no : some View{
+        HStack{
+            Text("No HP :")
+            TextField("", text: $noHp)
+        }
+        .textFieldStyle(.roundedBorder)
+    }
     var dp : some View{
         HStack{
             Text("DP Dibayar :")
@@ -110,7 +119,8 @@ extension TambahkanPesananPopupView{
     var tanggal : some View{
         HStack{
             Text("Tanggal Pengambilan :")
-            DatePicker("", selection: $selectedDate, displayedComponents: .date)
+            DatePicker("", selection: $selectedDate, in: Date()..., displayedComponents: .date)
+                
         }
         .textFieldStyle(.roundedBorder)
     }

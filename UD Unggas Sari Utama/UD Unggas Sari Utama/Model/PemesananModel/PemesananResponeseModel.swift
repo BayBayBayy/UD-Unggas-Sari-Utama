@@ -11,10 +11,10 @@ struct PemesananResponseModel: Codable, Hashable{
     var pemesanan_id: String
     var total_harga: Int
     var nama_pembeli: String
-    var no_hp: Int
+    var no_hp: String
     var dp_dibayar: Int
     var sisa_pembayaran: Int
-    var status: Int
+    var status: Bool
     var tanggal_pemesanan: Date
     var tanggal_pengambilan: Date
     
@@ -26,7 +26,7 @@ struct PemesananResponseModel: Codable, Hashable{
              no_hp,
              dp_dibayar,
              sisa_pembayaran,
-             status,
+             status = "status",
              tanggal_pemesanan,
              tanggal_pengambilan
     }
@@ -37,14 +37,16 @@ struct PemesananResponseModel: Codable, Hashable{
         let hargaString = try values.decode(String.self, forKey: .total_harga)
         total_harga = Int(hargaString) ?? 0
         nama_pembeli = try values.decode(String.self, forKey: .nama_pembeli)
-        let noHP = try values.decode(String.self, forKey: .no_hp)
-        no_hp = Int(noHP) ?? 0
+        no_hp = try values.decode(String.self, forKey: .no_hp)
         let dp = try values.decode(String.self, forKey: .dp_dibayar)
         dp_dibayar = Int(dp) ?? 0
         let sisa = try values.decode(String.self, forKey: .sisa_pembayaran)
         sisa_pembayaran = Int(sisa) ?? 0
-        let cek = try values.decode(String.self, forKey: .status)
-        status = Int(cek) ?? 0
+        if let produkEcer = try values.decodeIfPresent(String.self, forKey: .status) {
+            self.status = produkEcer == "1"
+        } else {
+            self.status = false
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         tanggal_pemesanan = try dateFormatter.date(from: values.decode(String.self, forKey: .tanggal_pemesanan)) ?? Date()
