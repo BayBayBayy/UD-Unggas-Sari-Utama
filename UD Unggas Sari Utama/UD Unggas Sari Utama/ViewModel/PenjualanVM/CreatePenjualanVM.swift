@@ -79,10 +79,6 @@ class PenjualanViewModel: ObservableObject {
                 "sub_harga": newDetailPenjualan.subHarga
             ])
             print(detailPenjualanListToUpload)
-            //conect to jumlah stok
-//            if let produkIndex = produkList.firstIndex(where: { $0.id == detailPenjualan.produk.id }) {
-//                produkList[produkIndex] -= detailPenjualan.jumlah
-//            }
         }
         
         if let url = URL(string: "https://indramaryati.com/bayu/Penjualan/createPenjualan.php") {

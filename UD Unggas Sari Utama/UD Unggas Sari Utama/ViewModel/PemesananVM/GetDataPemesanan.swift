@@ -80,6 +80,25 @@ class FetchPemesanan: ObservableObject{
         }.resume()
     }
     
+    func getDetailPemesananHariIni() -> [DetailPemesananModel] {
+        let currentDate = Date() // tanggal hari ini
+        let filteredPemesanan = dataPemesanan.filter { $0.tanggal_pengambilan == currentDate && $0.status == false }
+        print("ini filter \(filteredPemesanan)")
+        let detailPemesananToday = filteredPemesanan.reduce(into: [DetailPemesananModel]()) { result, pemesanan in
+            let filteredDetailPemesanan = detailPemesanan.filter { $0.pemesanan_id == pemesanan.pemesanan_id }
+            print("INI DETAIL \(filteredDetailPemesanan)")
+            for detailPemesanan in filteredDetailPemesanan {
+                if let index = result.firstIndex(where: { $0.produk_id == detailPemesanan.produk_id }) {
+                    result[index].jumlah_produk += detailPemesanan.jumlah_produk
+                } else {
+                    result.append(detailPemesanan)
+                }
+            }
+        }
+        
+        return detailPemesananToday
+    }
+    
     func generateChartData(for date: Date) {
         var chartData = [String: Double]()
         let selectedDate = Calendar.current.startOfDay(for: date)
@@ -144,20 +163,6 @@ class FetchPemesanan: ObservableObject{
             self.rataTransaksi = Double(self.totalTransaksi) / Double(self.jumlahTransaksi)
         }
     }
-    
-    func keepProduk(produkId: Int, jumlahPemesanan: Int) {
-        // jika sisa produk belum dihitung, kembalikan
-        guard let sisaProduk = self.sisaProduk[produkId] else { return }
-        
-        // jika jumlah pemesanan lebih besar dari sisa produk, kembalikan
-        if jumlahPemesanan > sisaProduk {
-            return
-        }
-        
-        // update sisa produk dengan mengurangi jumlah pemesanan
-        self.sisaProduk[produkId] = sisaProduk - jumlahPemesanan
-    }
-    
     
     func namaProdukLaris(for selectedDate: Date) -> String {
         calculatePenjualan(for: selectedDate)

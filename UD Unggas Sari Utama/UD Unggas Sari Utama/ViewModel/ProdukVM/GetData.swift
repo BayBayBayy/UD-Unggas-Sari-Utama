@@ -10,12 +10,11 @@ import Combine
 import SwiftUI
 
 class ProdukFetcher: ObservableObject {
-    //    @Published var produk: [ProdukResponseModel] = []
     @Published var produk: [ProdukResponseModel] = []
     @Published var selectedProduk: ProdukResponseModel? // tambahkan properti selectedProduk
     @Published var selectedProduct: ProdukResponseModel?
     @Published var selectedProdukId: String?
-    
+
     init(){
         fetchData()
     }
@@ -60,8 +59,8 @@ class ProdukFetcher: ObservableObject {
         }
     }
     
-    
-    
+
+
     func getProdukById(id: String) -> ProdukResponseModel? {
         return produk.first(where: { $0.id == id })
     }
