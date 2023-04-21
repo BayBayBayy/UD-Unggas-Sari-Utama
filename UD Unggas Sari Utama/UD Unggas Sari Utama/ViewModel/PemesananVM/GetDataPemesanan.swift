@@ -143,9 +143,9 @@ class FetchPemesanan: ObservableObject{
             var penjualanPerProduk = [String: Int]()
             for penjualan in filteredDetailPenjualan {
                 if let jumlah = penjualanPerProduk[penjualan.produk_id] {
-                    penjualanPerProduk[penjualan.produk_id] = jumlah + penjualan.jumlah_produk
+                    penjualanPerProduk[penjualan.produk_id] = jumlah + Int(penjualan.jumlah_produk)
                 } else {
-                    penjualanPerProduk[penjualan.produk_id] = penjualan.jumlah_produk
+                    penjualanPerProduk[penjualan.produk_id] = Int(penjualan.jumlah_produk)
                 }
             }
             

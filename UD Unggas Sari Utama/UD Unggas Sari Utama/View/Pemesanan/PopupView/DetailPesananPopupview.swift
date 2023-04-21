@@ -118,12 +118,12 @@ struct DetailPesananPopupview: View {
                                 .frame(maxWidth: .infinity)
                         }.frame(height: geometry.size.height/20)
                         
-                        ForEach(dataDetailPemesnan, id:\.id) { model in
-                            let produk = dataProduk.getProdukById(id: model.produk_id)
-                            
-                            ScrollView{
-                                HStack{
-                                    Text(model.id)
+                        ScrollView{
+                            ForEach(Array(dataDetailPemesnan.enumerated()), id: \.1.id) { index, model in
+                                   let produk = dataProduk.getProdukById(id: model.produk_id)
+                                   let nomorUrut = index + 1
+                                   HStack{
+                                       Text("\(nomorUrut)")
                                         .bold()
                                         .font(.system(size: 16))
                                         .frame(maxWidth: .infinity)
@@ -131,7 +131,7 @@ struct DetailPesananPopupview: View {
                                         .bold()
                                         .font(.system(size: 16))
                                         .frame(maxWidth: .infinity)
-                                    Text("\(model.jumlah_produk)")
+                                    Text(String(format: "%1g", model.jumlah_produk))
                                         .bold()
                                         .font(.system(size: 16))
                                         .frame(maxWidth: .infinity)
@@ -145,9 +145,11 @@ struct DetailPesananPopupview: View {
                                         .frame(maxWidth: .infinity)
                                 }
                             }
+                            
                         }
-                        
-                    }.frame(height: geometry.size.height/4)
+                    }
+                    .frame(height: geometry.size.height/4)
+                    
                     
                     RoundedRectangle(cornerRadius: 0.1)
                         .fill(.black)

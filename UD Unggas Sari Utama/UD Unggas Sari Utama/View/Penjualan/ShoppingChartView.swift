@@ -49,7 +49,6 @@ struct ShoppingChartView: View {
                     ForEach(penjualanViewModel.detailPenjualanList.indices, id: \.self) { index in
                         let detailPenjualan = penjualanViewModel.detailPenjualanList[index]
                         let produk = viewModel.getProdukById(id: detailPenjualan.produk_id)
-                        
                         HStack{
                             Text("\(index + 1)")
                                 .bold()
@@ -59,7 +58,7 @@ struct ShoppingChartView: View {
                                 .bold()
                                 .font(.system(size: 16))
                                 .frame(width: geometry.size.width/5)
-                            Text("\(detailPenjualan.jumlah)")
+                            Text(String(format: "%1g", detailPenjualan.jumlah))
                                 .bold()
                                 .font(.system(size: 16))
                                 .frame(width: geometry.size.width/5)

@@ -11,7 +11,7 @@ struct DetailPenjualanModel: Codable, Hashable{
     var id: String
     var penjualan_id: String
     var produk_id: String
-    var jumlah_produk: Int
+    var jumlah_produk: Float
     var harga_produk: Int
     var sub_harga: Int
     
@@ -30,7 +30,7 @@ struct DetailPenjualanModel: Codable, Hashable{
         penjualan_id = try values.decode(String.self, forKey: .penjualan_id)
         produk_id = try values.decode(String.self, forKey: .produk_id)
         let jumlahString = try values.decode(String.self, forKey: .jumlah_produk)
-        jumlah_produk = Int(jumlahString) ?? 0
+        jumlah_produk = Float(jumlahString) ?? 0
         let hargaString = try values.decode(String.self, forKey: .harga_produk)
         harga_produk = Int(hargaString) ?? 0
         let totalString = try values.decode(String.self, forKey: .sub_harga)

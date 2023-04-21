@@ -13,10 +13,10 @@ struct LaporanStokProdukModel: Codable, Hashable{
     var produk_kategori: String
     var satuan: String
     var harga: Int
-    var total_stok: Int
-    var stok_terjual: Int
-    var stok_selisih: Int
-    var stok_sisa: Int
+    var total_stok: Float
+    var stok_terjual: Float
+    var stok_selisih: Float
+    var stok_sisa: Float
     var tanggal_barang_masuk: Date
     
     enum CodingKeys: String, CodingKey {
@@ -41,13 +41,13 @@ struct LaporanStokProdukModel: Codable, Hashable{
         let hargaString = try values.decode(String.self, forKey: .harga)
         harga = Int(hargaString) ?? 0
         let jumlahString = try values.decode(String.self, forKey: .total_stok)
-        total_stok = Int(jumlahString) ?? 0
+        total_stok = Float(jumlahString) ?? 0
         let jumlahTerjual = try values.decode(String.self, forKey: .stok_terjual)
-        stok_terjual = Int(jumlahTerjual) ?? 0
+        stok_terjual = Float(jumlahTerjual) ?? 0
         let jumlahSelisih = try values.decode(String.self, forKey: .stok_selisih)
-        stok_selisih = Int(jumlahSelisih) ?? 0
+        stok_selisih = Float(jumlahSelisih) ?? 0
         let jumlahSisa = try values.decode(String.self, forKey: .stok_sisa)
-        stok_sisa = Int(jumlahSisa) ?? 0
+        stok_sisa = Float(jumlahSisa) ?? 0
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         tanggal_barang_masuk = try dateFormatter.date(from: values.decode(String.self, forKey: .tanggal_barang_masuk)) ?? Date()
@@ -67,7 +67,5 @@ struct LaporanStokProdukModel: Codable, Hashable{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         try container.encode(dateFormatter.string(from: tanggal_barang_masuk), forKey: .tanggal_barang_masuk)
-        
-    }
-    
+    }    
 }

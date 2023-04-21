@@ -65,7 +65,7 @@ struct DataProdukView: View{
                                     .frame(maxWidth: .infinity)
                                 Text(numberFormatter.string(from: NSNumber(value: product.harga)) ?? "")
                                     .frame(maxWidth: .infinity)
-                                Text(String(product.jumlah_produk))
+                                Text(String(format: "%1g", product.jumlah_produk))
                                     .frame(maxWidth: .infinity)
                                 Text(product.status_produk ? "Masih Terjual" : "Tidak Dijual")
                                     .frame(maxWidth: .infinity)

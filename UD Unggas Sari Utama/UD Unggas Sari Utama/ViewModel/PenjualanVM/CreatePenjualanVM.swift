@@ -21,7 +21,7 @@ class PenjualanViewModel: ObservableObject {
         return detailPenjualanList.count
     }
     var totalHarga: Int {
-        return detailPenjualanList.reduce(0) { $0 + ($1.harga * $1.jumlah) }
+        return Int(detailPenjualanList.reduce(0) { $0 + (Float($1.harga) * $1.jumlah) })
     }
     private var cancellables = Set<AnyCancellable>()
     
@@ -41,12 +41,13 @@ class PenjualanViewModel: ObservableObject {
     }
     
     // Menambahkan data detail penjualan
-    func tambahDetailPenjualan(penjualanId: String, produkId: String, jumlah: Int) {
+    func tambahDetailPenjualan(penjualanId: String, produkId: String, jumlah: Float) {
         guard let produk = produkViewModel.produk.first(where: { $0.id == produkId }) else {
             return
         }
-        let subHarga = produk.harga * jumlah
-        let detailPenjualan = DetailPenjualan(id: UUID().uuidString, penjualanId: penjualanId, produk_id: produk.id, jumlah: jumlah, harga: produk.harga, subHarga: subHarga)
+        let hargaFloat = Float(produk.harga)
+        let subHarga = hargaFloat * jumlah
+        let detailPenjualan = DetailPenjualan(id: UUID().uuidString, penjualanId: penjualanId, produk_id: produk.id, jumlah: Float(jumlah), harga: produk.harga, subHarga: Int(subHarga))
         detailPenjualanList.append(detailPenjualan)
         reloadList.toggle()
         objectWillChange.send()
@@ -60,7 +61,7 @@ class PenjualanViewModel: ObservableObject {
         let tanggal = dateFormatter.string(from: Date())
         
         let penjualanId = UUID().uuidString
-        let newPenjualan = Penjualan(id: penjualanId, totalHarga: totalHarga, tanggal: Date())
+        let newPenjualan = Penjualan(id: penjualanId, totalHarga: Int(totalHarga), tanggal: Date())
         penjualanList.append(newPenjualan)
         print(newPenjualan)
         
@@ -197,11 +198,11 @@ class PenjualanViewModel: ObservableObject {
         let tanggal = dateFormatter.string(from: Date())
         let tanggalAmbilPesan = dateFormatter.string(from: tanggalAmbil)
         
-        let sisaPembayaran = totalHarga - dp
+        let sisaPembayaran = Int(totalHarga) - dp
         let status = 0
         let idPesan = UUID().uuidString
         
-        let pesanan = Pemesanan(id: idPesan, total_harga: totalHarga, nama_pembeli: namaPembeli, no_hp: nohp, dp_dibayar: dp, sisa_pembayaran: sisaPembayaran, status: status, tanggal_pemesanan: Date(), tanggal_pengambilan: tanggalAmbil)
+        let pesanan = Pemesanan(id: idPesan, total_harga: Int(totalHarga), nama_pembeli: namaPembeli, no_hp: nohp, dp_dibayar: dp, sisa_pembayaran: sisaPembayaran, status: status, tanggal_pemesanan: Date(), tanggal_pengambilan: tanggalAmbil)
         dataPemesanan.append(pesanan)
         print(pesanan)
         
@@ -302,11 +303,8 @@ struct DetailPenjualan: Identifiable {
     var id: String
     var penjualanId: String
     var produk_id: String
-    var jumlah: Int
+    var jumlah: Float
     var harga: Int
     var subHarga: Int
     
-    mutating func updateJumlah(_ newJumlah: Int) {
-        jumlah = newJumlah
-    }
 }

@@ -14,7 +14,7 @@ struct ProdukResponseModel: Codable, Identifiable, Hashable{
     var produk_kategori: String
     var image: String
     var harga: Int
-    var jumlah_produk: Int
+    var jumlah_produk: Float
     var produk_ecer: Bool
     var status_produk: Bool
     var tanggal_masuk_produk: Date
@@ -42,7 +42,7 @@ struct ProdukResponseModel: Codable, Identifiable, Hashable{
         harga = Int(hargaString) ?? 0
         image = try values.decode(String.self, forKey: .image)
         let jumlahString = try values.decode(String.self, forKey: .jumlah_produk)
-        jumlah_produk = Int(jumlahString) ?? 0
+        jumlah_produk = Float(jumlahString) ?? 0
         
         if let produkEcer = try values.decodeIfPresent(String.self, forKey: .produkEcer) {
             self.produk_ecer = produkEcer == "1"

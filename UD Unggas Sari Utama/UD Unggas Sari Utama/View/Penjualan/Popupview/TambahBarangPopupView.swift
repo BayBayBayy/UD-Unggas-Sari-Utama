@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct TambahBarangPopupView: View {
-    @State private var jumlahInput = ""
+    @State private var jumlahInput: Float = 0
+    @State private var valueString: String = ""
     @EnvironmentObject var viewModel: PenjualanViewModel
     let produk: ProdukResponseModel
     @State private var showingAlert = false
@@ -17,21 +18,28 @@ struct TambahBarangPopupView: View {
     var vmProduk: ProdukFetcher
     @ObservedObject var pemesananVM = FetchPemesanan()
     
-
+    let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 1
+        formatter.maximumFractionDigits = 2
+        formatter.decimalSeparator = Locale.current.decimalSeparator
+        return formatter
+    }()
     
     func validateJumlah() {
-        if let jumlah = Int(jumlahInput), jumlah > 0 {
+        if jumlahInput > 0 {
             guard let jumlahTersedia = jumlahProdukTersedia(id: produk.id) else {
                 print("Error: failed to get jumlah produk tersedia")
                 return
             }
-            if jumlah > produk.jumlah_produk || jumlah > jumlahTersedia {
+            if Int(jumlahInput) > Int(produk.jumlah_produk) || Int(jumlahInput) > jumlahTersedia {
                 alertMessage = "Jumlah melebihi stok yang tersedia, periksa jumlah produk dan pesanan hari ini!"
                 isAlertPesanan = true
             } else {
                 // Tambahkan ke list belanja di view model
-                viewModel.tambahDetailPenjualan(penjualanId: "", produkId: produk.id, jumlah: jumlah)
-                jumlahInput = "0" // Reset jumlah ke 0
+                viewModel.tambahDetailPenjualan(penjualanId: "", produkId: produk.id, jumlah: Float(jumlahInput))
+                jumlahInput = 0 // Reset jumlah ke 0
                 print("Data berhasil ditambahkan!")
                 self.close.toggle()
                 self.cancelList = true
@@ -60,7 +68,7 @@ struct TambahBarangPopupView: View {
             let filteredDetailPemesanan = pemesananVM.detailPemesanan.filter { $0.pemesanan_id == pemesanan.pemesanan_id }
             for detailPemesanan in filteredDetailPemesanan {
                 if detailPemesanan.produk_id == id {
-                    jumlahTerjual += detailPemesanan.jumlah_produk
+                    jumlahTerjual += Int(detailPemesanan.jumlah_produk)
                 }
             }
         }
@@ -69,9 +77,9 @@ struct TambahBarangPopupView: View {
         if let produk = vmProduk.getProdukById(id: id) {
             let totalProduk = produk.jumlah_produk
             print("ini total produk\(totalProduk)")
-            let tersedia = totalProduk - jumlahTerjual
+            let tersedia = totalProduk - Float(jumlahTerjual)
             print("ini jumlah tersedia\(tersedia)")
-            return tersedia > 0 ? tersedia : 0
+            return tersedia > 0 ? Int(tersedia) : 0
         }
         
         return 0
@@ -79,11 +87,11 @@ struct TambahBarangPopupView: View {
 
     
     func onTambahKePesananTapped() {
-        if jumlahInput != "" {
-            if let jumlahInt = Int(jumlahInput), jumlahInt > 0 {
+        if jumlahInput != Float("") {
+            if jumlahInput > 0 {
                 // Tambahkan ke list belanja di view model
-                viewModel.tambahDetailPenjualan(penjualanId: "", produkId: produk.id, jumlah: jumlahInt)
-                jumlahInput = "0" // Reset jumlah ke 0
+                viewModel.tambahDetailPenjualan(penjualanId: "", produkId: produk.id, jumlah: Float(jumlahInput))
+                jumlahInput = 0 // Reset jumlah ke 0
                 print("Data berhasil ditambahkan!")
             }
             self.close.toggle()
@@ -101,6 +109,7 @@ struct TambahBarangPopupView: View {
         formatter.locale = Locale(identifier: "id_ID")
         return formatter
     }()
+    
     @Binding var close: Bool
     @Binding var cancelList: Bool
     
@@ -208,9 +217,23 @@ extension TambahBarangPopupView{
     var jumlah : some View{
         HStack{
             Text("jumlah :")
-            TextField("0", text: $jumlahInput)
+            TextField("0", text: $valueString)
                 .foregroundColor(.black)
-                .keyboardType(.numberPad)
+                .keyboardType(.decimalPad)
+                        .onChange(of: valueString) { newValue in
+                            let formatter = NumberFormatter()
+                            formatter.numberStyle = .decimal
+                            formatter.minimumFractionDigits = 1
+                            formatter.maximumFractionDigits = 1
+                            formatter.roundingMode = .halfUp
+                            formatter.decimalSeparator = ","
+
+                            if let number = formatter.number(from: newValue) {
+                                jumlahInput = number.floatValue
+                            }
+
+
+                        }
             
         }
         .textFieldStyle(.roundedBorder)

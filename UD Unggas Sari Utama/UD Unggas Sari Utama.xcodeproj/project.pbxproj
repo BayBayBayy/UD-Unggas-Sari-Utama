@@ -7,21 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C007F7329DF1B9800625E7E /* Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C007F7229DF1B9800625E7E /* Picker.swift */; };
-		4C007F7529DF1BAE00625E7E /* customerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C007F7429DF1BAE00625E7E /* customerModel.swift */; };
-		4C007F7B29DF1BF600625E7E /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C007F7629DF1BF500625E7E /* ContactView.swift */; };
-		4C007F7C29DF1BF600625E7E /* detailContactCust.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C007F7729DF1BF500625E7E /* detailContactCust.swift */; };
-		4C007F7D29DF1BF600625E7E /* editCustomerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C007F7829DF1BF500625E7E /* editCustomerView.swift */; };
-		4C007F7E29DF1BF600625E7E /* inputCustomerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C007F7929DF1BF500625E7E /* inputCustomerView.swift */; };
-		4C007F7F29DF1BF600625E7E /* CustomerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C007F7A29DF1BF600625E7E /* CustomerView.swift */; };
-		4C007F8129DF1C4200625E7E /* customerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C007F8029DF1C4200625E7E /* customerViewModel.swift */; };
-		4C007F8329DF1CDB00625E7E /* funcEditDataCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C007F8229DF1CDB00625E7E /* funcEditDataCustomer.swift */; };
-		4C007F8529DF1D0500625E7E /* funcInsertContactCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C007F8429DF1D0500625E7E /* funcInsertContactCustomer.swift */; };
 		4C59236D298E099500472336 /* RadioButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C59236C298E099500472336 /* RadioButtonView.swift */; };
 		4C5C01BD29C5AB4700FBF184 /* DetailPenjualanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C01BC29C5AB4700FBF184 /* DetailPenjualanModel.swift */; };
 		4C5C01BF29C5B6F100FBF184 /* EditProdukPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C01BE29C5B6F100FBF184 /* EditProdukPopupView.swift */; };
 		4C5C846229A7DC46005185E9 /* ButtonLaporanPemesan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C846129A7DC46005185E9 /* ButtonLaporanPemesan.swift */; };
-		4C5E5E0929DDEF0000536D00 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E5E0829DDEF0000536D00 /* test.swift */; };
 		4C5F7DC629D8A782001F4707 /* KeyboardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F7DC529D8A782001F4707 /* KeyboardModifier.swift */; };
 		4C6209F2298203E7007BE841 /* DummyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6209F1298203E7007BE841 /* DummyModel.swift */; };
 		4C62735E29977A8C00DA8595 /* PembayaranPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C62735D29977A8C00DA8595 /* PembayaranPopupView.swift */; };
@@ -78,21 +67,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4C007F7229DF1B9800625E7E /* Picker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Picker.swift; path = ../../../../../Downloads/Picker.swift; sourceTree = "<group>"; };
-		4C007F7429DF1BAE00625E7E /* customerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = customerModel.swift; path = ../../../../../Downloads/customerModel.swift; sourceTree = "<group>"; };
-		4C007F7629DF1BF500625E7E /* ContactView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactView.swift; path = ../../../../../Downloads/ContactView.swift; sourceTree = "<group>"; };
-		4C007F7729DF1BF500625E7E /* detailContactCust.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = detailContactCust.swift; path = ../../../../../Downloads/detailContactCust.swift; sourceTree = "<group>"; };
-		4C007F7829DF1BF500625E7E /* editCustomerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = editCustomerView.swift; path = ../../../../../Downloads/editCustomerView.swift; sourceTree = "<group>"; };
-		4C007F7929DF1BF500625E7E /* inputCustomerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = inputCustomerView.swift; path = ../../../../../Downloads/inputCustomerView.swift; sourceTree = "<group>"; };
-		4C007F7A29DF1BF600625E7E /* CustomerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomerView.swift; path = ../../../../../Downloads/CustomerView.swift; sourceTree = "<group>"; };
-		4C007F8029DF1C4200625E7E /* customerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = customerViewModel.swift; path = ../../../../../Downloads/customerViewModel.swift; sourceTree = "<group>"; };
-		4C007F8229DF1CDB00625E7E /* funcEditDataCustomer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = funcEditDataCustomer.swift; path = ../../../../../Downloads/funcEditDataCustomer.swift; sourceTree = "<group>"; };
-		4C007F8429DF1D0500625E7E /* funcInsertContactCustomer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = funcInsertContactCustomer.swift; path = ../../../../../Downloads/funcInsertContactCustomer.swift; sourceTree = "<group>"; };
 		4C59236C298E099500472336 /* RadioButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonView.swift; sourceTree = "<group>"; };
 		4C5C01BC29C5AB4700FBF184 /* DetailPenjualanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPenjualanModel.swift; sourceTree = "<group>"; };
 		4C5C01BE29C5B6F100FBF184 /* EditProdukPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProdukPopupView.swift; sourceTree = "<group>"; };
 		4C5C846129A7DC46005185E9 /* ButtonLaporanPemesan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonLaporanPemesan.swift; sourceTree = "<group>"; };
-		4C5E5E0829DDEF0000536D00 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		4C5F7DC529D8A782001F4707 /* KeyboardModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardModifier.swift; sourceTree = "<group>"; };
 		4C6209F1298203E7007BE841 /* DummyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyModel.swift; sourceTree = "<group>"; };
 		4C62735D29977A8C00DA8595 /* PembayaranPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PembayaranPopupView.swift; sourceTree = "<group>"; };
@@ -205,24 +183,6 @@
 				4C9297EF29D986A900BBB2E6 /* testDetail.swift */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		4C5E5E0729DDEEEC00536D00 /* Connection */ = {
-			isa = PBXGroup;
-			children = (
-				4C007F7629DF1BF500625E7E /* ContactView.swift */,
-				4C007F8029DF1C4200625E7E /* customerViewModel.swift */,
-				4C007F7A29DF1BF600625E7E /* CustomerView.swift */,
-				4C007F7729DF1BF500625E7E /* detailContactCust.swift */,
-				4C007F7829DF1BF500625E7E /* editCustomerView.swift */,
-				4C007F8229DF1CDB00625E7E /* funcEditDataCustomer.swift */,
-				4C007F7929DF1BF500625E7E /* inputCustomerView.swift */,
-				4C007F8429DF1D0500625E7E /* funcInsertContactCustomer.swift */,
-				4C5E5E0829DDEF0000536D00 /* test.swift */,
-				4C007F7429DF1BAE00625E7E /* customerModel.swift */,
-				4C007F7229DF1B9800625E7E /* Picker.swift */,
-			);
-			path = Connection;
 			sourceTree = "<group>";
 		};
 		4C6209E82980C042007BE841 /* Model */ = {
@@ -436,7 +396,6 @@
 			children = (
 				4C9B3A1629A0F0C800C25F99 /* UD Unggas Sari Utama.entitlements */,
 				4CAA87AB299BDF6D0093FF76 /* UD-Unggas-Sari-Utama-Info.plist */,
-				4C5E5E0729DDEEEC00536D00 /* Connection */,
 				4CAA87B4299D46300093FF76 /* ViewModel */,
 				4C5DACDB298D551500CA04D1 /* Main */,
 				4C6209E82980C042007BE841 /* Model */,
@@ -533,7 +492,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C007F7D29DF1BF600625E7E /* editCustomerView.swift in Sources */,
 				4C78E1E529B728940006C4F5 /* CreateDataProduk.swift in Sources */,
 				4C5F7DC629D8A782001F4707 /* KeyboardModifier.swift in Sources */,
 				4C6FF6E3298E4E7C001FE696 /* PickerProduk.swift in Sources */,
@@ -550,19 +508,15 @@
 				4C77376629CAE9130008E9F4 /* CreatePenjualanVM.swift in Sources */,
 				4C9529E72994999E000042D0 /* DummyPemesananModel.swift in Sources */,
 				4C94F0AB29DFF045006743CC /* CardDetailPenjualan.swift in Sources */,
-				4C007F8529DF1D0500625E7E /* funcInsertContactCustomer.swift in Sources */,
 				4C5C01BF29C5B6F100FBF184 /* EditProdukPopupView.swift in Sources */,
 				4C9529DA2993F053000042D0 /* LaporanPemesananView.swift in Sources */,
-				4C007F7529DF1BAE00625E7E /* customerModel.swift in Sources */,
 				4C852C4A2995418300655137 /* CardPemesananView.swift in Sources */,
-				4C007F7E29DF1BF600625E7E /* inputCustomerView.swift in Sources */,
 				4C6FB75329A0D178003E3A7C /* GetData.swift in Sources */,
 				4C853C80298CDE91004FA781 /* StokOpnamePopupView.swift in Sources */,
 				4C7D690B297B9BF9003A9949 /* HomeView.swift in Sources */,
 				4CAA87B3299D44DC0093FF76 /* ProdukDataResponse.swift in Sources */,
 				4CB0BC5129D46E3E0097BC87 /* DetailPenjualanView.swift in Sources */,
 				4C945DC52991543100D5CA5A /* CardProdukView.swift in Sources */,
-				4C007F8129DF1C4200625E7E /* customerViewModel.swift in Sources */,
 				4C6273602997810A00DA8595 /* TambahBarangPopupView.swift in Sources */,
 				4CB6C7BC29D1E1A10003D229 /* CreateDataPemesanan.swift in Sources */,
 				4CC9428B295C0259006725E9 /* Persistence.swift in Sources */,
@@ -577,25 +531,19 @@
 				4C65EF80298EB12300D7182A /* TabButtonActionStok.swift in Sources */,
 				4C78E1E829B795F50006C4F5 /* GetDataPemesanan.swift in Sources */,
 				4CAA87BA299DCD6B0093FF76 /* DataProdukView.swift in Sources */,
-				4C007F7329DF1B9800625E7E /* Picker.swift in Sources */,
 				4C9297F029D986A900BBB2E6 /* testDetail.swift in Sources */,
 				4C9529DE2993F1FC000042D0 /* HistoriPenjualanView.swift in Sources */,
 				4C7D6900297A2B9C003A9949 /* TabBarView.swift in Sources */,
 				4C7DF04629D9CD4300DF8A05 /* ChartPemesananView.swift in Sources */,
 				4C8CA39729A49AE600F2C62F /* GetDataPenjualan.swift in Sources */,
-				4C007F7F29DF1BF600625E7E /* CustomerView.swift in Sources */,
 				4C5C01BD29C5AB4700FBF184 /* DetailPenjualanModel.swift in Sources */,
-				4C5E5E0929DDEF0000536D00 /* test.swift in Sources */,
 				4C5C846229A7DC46005185E9 /* ButtonLaporanPemesan.swift in Sources */,
-				4C007F8329DF1CDB00625E7E /* funcEditDataCustomer.swift in Sources */,
 				4C9529EA29949B39000042D0 /* ButtonActionView.swift in Sources */,
-				4C007F7C29DF1BF600625E7E /* detailContactCust.swift in Sources */,
 				4C945DCC2992BF3200D5CA5A /* ButtonPemesananView.swift in Sources */,
 				4C9529E02993F256000042D0 /* LaporanStokView.swift in Sources */,
 				4CC94282295C0257006725E9 /* UD_Unggas_Sari_UtamaApp.swift in Sources */,
 				4C8CA39529A4989A00F2C62F /* PenjualanResponseModel.swift in Sources */,
 				4C9529D629933E76000042D0 /* DetailPesananPopupview.swift in Sources */,
-				4C007F7B29DF1BF600625E7E /* ContactView.swift in Sources */,
 				4CCD2BA629C309D900F5974A /* CheckToggle.swift in Sources */,
 				4C852C4C299541CF00655137 /* PesananDummy.swift in Sources */,
 				4CDD5E6F29DACA50000009FF /* LaporanStokProdukModel.swift in Sources */,
