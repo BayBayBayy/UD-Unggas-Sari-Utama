@@ -82,7 +82,7 @@ class PenjualanViewModel: ObservableObject {
             print(detailPenjualanListToUpload)
         }
         
-        if let url = URL(string: "https://indramaryati.com/bayu/Penjualan/createPenjualan.php") {
+        if let url = URL(string: "https://2019lulus.site/UD.AmertaYoga/Penjualan/createPenjualan.php") {
             var urlRequest = URLRequest(url: url)
             urlRequest.httpMethod = "POST"
    
@@ -223,7 +223,7 @@ class PenjualanViewModel: ObservableObject {
             print(detailPemesananListToUpload)
         }
         
-        if let url = URL(string: "https://indramaryati.com/bayu/Pemesanan/createPemesanan.php") {
+        if let url = URL(string: "https://2019lulus.site/UD.AmertaYoga/Pemesanan/createPemesanan.php") {
             var urlRequest = URLRequest(url: url)
             urlRequest.httpMethod = "POST"
             

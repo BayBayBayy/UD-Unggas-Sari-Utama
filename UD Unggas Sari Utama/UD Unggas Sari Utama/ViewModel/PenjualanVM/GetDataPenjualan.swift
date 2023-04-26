@@ -26,11 +26,9 @@ class FethcerPenjualan: ObservableObject{
         fetchDataDetail()
     }
     
-    
-    
     //penjualan
     func fetchData() {
-        guard let url = URL(string: "https://indramaryati.com/bayu/Penjualan/penjualan.php") else {
+        guard let url = URL(string: "https://2019lulus.site/UD.AmertaYoga/Penjualan/penjualan.php") else {
             print("Invalid URL")
             return
         }
@@ -56,7 +54,7 @@ class FethcerPenjualan: ObservableObject{
     
     //detailPenjualan
     func fetchDataDetail() {
-        guard let url = URL(string: "https://indramaryati.com/bayu/Penjualan/detailPenjualan.php") else {
+        guard let url = URL(string: "https://2019lulus.site/UD.AmertaYoga/Penjualan/detailPenjualan.php") else {
             print("Invalid URL")
             return
         }

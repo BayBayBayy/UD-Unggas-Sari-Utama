@@ -12,7 +12,7 @@ class ProdukManager {
     
     func simpanProduk(id: String, nama_produk: String, satuan: String, produk_kategori: String, harga: String, jumlah_produk: String, produk_ecer: Bool,  tanggal_masuk_produk: Date, completionHandler: @escaping (String?) -> Void) {
         
-        let url = URL(string: "https://indramaryati.com/bayu/Produk/createProduk.php")!
+        let url = URL(string: "https://2019lulus.site/UD.AmertaYoga/Produk/createProduk.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
@@ -64,7 +64,7 @@ class ProdukManager {
     
     func editProduk(id: String, nama_produk: String, satuan: String, produk_kategori: String, harga: String, produk_ecer: Bool, status: Bool, tanggalMasukProduk: Date, completionHandler: @escaping (Bool, String) -> Void) {
         // URL endpoint untuk edit produk
-        let url = URL(string: "https://indramaryati.com/bayu/Produk/updateProduk.php")!
+        let url = URL(string: "https://2019lulus.site/UD.AmertaYoga/Produk/updateProduk.php")!
             
         // Buat request dengan metode HTTP POST
         var request = URLRequest(url: url)
@@ -130,7 +130,7 @@ class ProdukManager {
     
     func konversiProduk(id_asal: String, id_jadi: String, jumlah_asal: String, jumlah_jadi: String,  completionHandler: @escaping (Bool, String) -> Void){
         
-        let url = URL(string: "https://indramaryati.com/bayu/Produk/konversiProduk.php")!
+        let url = URL(string: "https://2019lulus.site/UD.AmertaYoga/Produk/konversiProduk.php")!
             
         // Buat request dengan metode HTTP POST
         var request = URLRequest(url: url)
@@ -176,7 +176,7 @@ class ProdukManager {
     
     func stokOpname(id_produk: String, keterangan: String, produkBertambah: Bool, produkBerkurang: Bool, jumlah: String, completionHandler: @escaping (Bool, String) -> Void){
         
-        let url = URL(string: "https://indramaryati.com/bayu/Produk/stokOpname.php")!
+        let url = URL(string: "https://2019lulus.site/UD.AmertaYoga/Produk/stokOpname.php")!
             
         // Buat request dengan metode HTTP POST
         var request = URLRequest(url: url)

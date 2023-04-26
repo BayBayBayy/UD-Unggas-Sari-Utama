@@ -50,11 +50,12 @@ struct DetailPenjualanView: View {
                 }.frame(width: geometry.size.width/1.1, height: geometry.size.height/6)
                 
                 ScrollView(){
-                    ForEach(dataDetailPenjualan, id: \.id) { index in
-                        let produk = dataProduk.getProdukById(id: index.produk_id)
+                    ForEach(Array(dataDetailPenjualan.enumerated()), id: \.1.id) { index, model in
+                           let produk = dataProduk.getProdukById(id: model.produk_id)
+                           let nomorUrut = index + 1
                         
-                        HStack{
-                            Text(index.produk_id)
+                           HStack{
+                               Text("\(nomorUrut)")
                                 .bold()
                                 .font(.system(size: 16))
                                 .frame(maxWidth: .infinity)
@@ -62,15 +63,15 @@ struct DetailPenjualanView: View {
                                 .bold()
                                 .font(.system(size: 16))
                                 .frame(maxWidth: .infinity)
-                            Text("\(index.jumlah_produk)")
+                            Text(String(format: "%1g", model.jumlah_produk))
                                 .bold()
                                 .font(.system(size: 16))
                                 .frame(maxWidth: .infinity)
-                            Text("\(index.harga_produk)")
+                            Text("\(model.harga_produk)")
                                 .bold()
                                 .font(.system(size: 16))
                                 .frame(maxWidth: .infinity)
-                            Text("\(index.sub_harga)")
+                            Text("\(model.sub_harga)")
                                 .bold()
                                 .font(.system(size: 16))
                                 .frame(maxWidth: .infinity)

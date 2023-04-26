@@ -54,7 +54,6 @@ struct HistoriPenjualanView: View {
                                     Button(action: {
                                         self.checkDetail = true
                                         viewModelPenjualan.selectedPenjualan = data
-                                       
                                     }) {
                                         ZStack{
                                             RoundedRectangle(cornerRadius: 8)
@@ -71,7 +70,6 @@ struct HistoriPenjualanView: View {
                                 .background(Color.white)
                                 .cornerRadius(8)
                             }
-                        
                     }
                     .background(Color("GrayContentColor"))
                 }
@@ -83,11 +81,17 @@ struct HistoriPenjualanView: View {
                     .shadow(radius: 1))
                 .onAppear {
                     dateFormatter.dateFormat = "dd-MM-yyyy" // format tanggal dari data
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.7){
                         viewModelPenjualan.fetchData()
                         viewModelPenjualan.fetchDataDetail()
                     }
                 }
+                .onChange(of: checkDetail, perform: { newValue in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.7){
+                        viewModelPenjualan.fetchData()
+                        viewModelPenjualan.fetchDataDetail()
+                    }
+                })
                 .simultaneousGesture(
                     TapGesture().onEnded {
                         dismiss()

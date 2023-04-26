@@ -22,7 +22,7 @@ class ProdukFetcher: ObservableObject {
     // View Data
     func fetchData() {
         
-        guard let url = URL(string: "https://indramaryati.com/bayu/Produk/viewProduk.php") else {
+        guard let url = URL(string: "https://2019lulus.site/UD.AmertaYoga/Produk/viewProduk.php") else {
             print("Invalid URL")
             return
         }

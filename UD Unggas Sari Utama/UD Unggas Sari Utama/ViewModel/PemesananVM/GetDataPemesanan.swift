@@ -29,7 +29,7 @@ class FetchPemesanan: ObservableObject{
     }
     
     func fetchData() {
-        guard let url = URL(string: "https://indramaryati.com/bayu/Pemesanan/pemesanan.php") else {
+        guard let url = URL(string: "https://2019lulus.site/UD.AmertaYoga/Pemesanan/pemesanan.php") else {
             print("Invalid URL")
             return
         }
@@ -54,7 +54,7 @@ class FetchPemesanan: ObservableObject{
     }
     
     func fetchDataDetail() {
-        guard let url = URL(string: "https://indramaryati.com/bayu/Pemesanan/detailPemesanan.php") else {
+        guard let url = URL(string: "https://2019lulus.site/UD.AmertaYoga/Pemesanan/detailPemesanan.php") else {
             print("Invalid URL")
             return
         }
@@ -128,7 +128,7 @@ class FetchPemesanan: ObservableObject{
         dataChartProduk = chartData.map { ($0.key, $0.value) }
     }
     
-    func calculatePenjualan(for selectedDate: Date) {
+    func calculatePemesanan(for selectedDate: Date) {
         DispatchQueue.main.async {
             // Filter dataPenjualan dengan selectedDate
             let filteredPenjualan = self.dataPemesanan.filter { Calendar.current.isDate($0.tanggal_pemesanan, inSameDayAs: selectedDate) }
@@ -165,22 +165,22 @@ class FetchPemesanan: ObservableObject{
     }
     
     func namaProdukLaris(for selectedDate: Date) -> String {
-        calculatePenjualan(for: selectedDate)
+        calculatePemesanan(for: selectedDate)
         return namaProdukLaris
     }
     
     func totalTransaksi(for selectedDate: Date) -> Int {
-        calculatePenjualan(for: selectedDate)
+        calculatePemesanan(for: selectedDate)
         return totalTransaksi
     }
     
     func jumlahTransaksi(for selectedDate: Date) -> Int {
-        calculatePenjualan(for: selectedDate)
+        calculatePemesanan(for: selectedDate)
         return jumlahTransaksi
     }
     
     func rataTransaksi(for selectedDate: Date) -> Double {
-        calculatePenjualan(for: selectedDate)
+        calculatePemesanan(for: selectedDate)
         return rataTransaksi
     }
     

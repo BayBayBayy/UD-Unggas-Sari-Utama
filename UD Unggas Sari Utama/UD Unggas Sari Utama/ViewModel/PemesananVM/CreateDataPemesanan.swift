@@ -19,7 +19,7 @@ class PemesananViewModel: ObservableObject{
     
     func pesananSelesai(id: String, status: String, completionHandler: @escaping (Bool, String) -> Void) {
         // URL endpoint untuk edit produk
-        let url = URL(string: "https://indramaryati.com/bayu/Pemesanan/updateStatusPesanan.php")!
+        let url = URL(string: "https://2019lulus.site/UD.AmertaYoga/Pemesanan/updateStatusPesanan.php")!
             
         // Buat request dengan metode HTTP POST
         var request = URLRequest(url: url)
