@@ -37,7 +37,7 @@ struct LaporanPenjualanView: View {
                 HStack(spacing: 80) {
                     CardDetailPenjualan(title: "Total Revenue", value: viewModel.totalTransaksi(for: selectedDate).formattedAsCurrency())
                         .frame(width: geometry.size.width/4, height: geometry.size.height/8)
-                    CardDetailPenjualan(title: "Total Transaksi", value: "\(viewModel.jumlahTransaksi(for: selectedDate)) Transaksi")
+                    CardDetailPenjualan(title: "Jumlah Transaksi", value: "\(viewModel.jumlahTransaksi(for: selectedDate)) Transaksi")
                         .frame(width: geometry.size.width/4, height: geometry.size.height/8)
                     CardDetailPenjualan(title: "Rata-Rata Transaksi", value: viewModel.rataTransaksi(for: selectedDate).formattedAsCurrency)
                         .frame(width: geometry.size.width/4, height: geometry.size.height/8)

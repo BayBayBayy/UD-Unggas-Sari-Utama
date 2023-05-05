@@ -35,9 +35,9 @@ struct LaporanPemesananView: View {
                 HStack(spacing: 80) {
                     CardDetailPenjualan(title: "Nama Produk Laris", value: viewModel.namaProdukLaris)
                         .frame(width: geometry.size.width/4, height: geometry.size.height/8)
-                    CardDetailPenjualan(title: "Total Transaksi", value: "Rp. \(viewModel.totalTransaksi(for: selectedDate).formattedWithSeparator())")
+                    CardDetailPenjualan(title: "Total Transaksi", value: "\(viewModel.totalTransaksi(for: selectedDate).formattedAsCurrency())")
                         .frame(width: geometry.size.width/4, height: geometry.size.height/8)
-                    CardDetailPenjualan(title: "Rata-Rata Transaksi", value: "Rp. \(viewModel.rataTransaksi(for: selectedDate).formattedWithSeparator())")
+                    CardDetailPenjualan(title: "Rata-Rata Transaksi", value: "\(viewModel.rataTransaksi(for: selectedDate).formattedAsCurrency)")
                         .frame(width: geometry.size.width/4, height: geometry.size.height/8)
                 }
 
@@ -70,15 +70,6 @@ struct LaporanPemesananView: View {
             .navigationBarTitleDisplayMode(.inline)
             .frame(width: geometry.size.width/1, height: geometry.size.height/1)
         }.edgesIgnoringSafeArea(.all)
-    }
-}
-
-extension Int {
-    func formattedWithSeparator() -> String {
-        let formatter = NumberFormatter()
-        formatter.groupingSeparator = "."
-        formatter.numberStyle = .decimal
-        return formatter.string(from: NSNumber(value: self)) ?? ""
     }
 }
 
