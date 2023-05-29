@@ -10,7 +10,7 @@ import SwiftUI
 struct PickerProduk: View {
     
     @ObservedObject var viewModel = ProdukFetcher()
-    @Binding var selectedProduk: String 
+    @Binding var selectedProduk: String
     var body: some View {
         HStack{
             Text("Pilih Berdasarkan")
@@ -23,6 +23,7 @@ struct PickerProduk: View {
                 }
             }
             .pickerStyle(.wheel)
+            Image(systemName: "arrow.down")
         }
         .onAppear(){
             self.viewModel.fetchData()
@@ -34,7 +35,7 @@ struct PickerProduk: View {
 struct PickerProdukEcer: View {
     @ObservedObject var viewModel = ProdukFetcher()
     @Binding var selectedEcer: String
-
+    
     var body: some View {
         HStack{
             Text("Pilih Berdasarkan")
@@ -49,6 +50,7 @@ struct PickerProdukEcer: View {
                 }
             }
             .pickerStyle(.wheel)
+            Image(systemName: "arrow.down")
         }
         .onAppear(){
             self.viewModel.fetchData()
@@ -73,6 +75,27 @@ struct PickerKategori: View {
                 }
             }
             .pickerStyle(.wheel)
+            Image(systemName: "arrow.down")
+        }
+    }
+}
+
+struct SortProduk: View{
+    @Binding var selectedSortBy: String
+    @ObservedObject var viewModel = ProdukFetcher()
+    let sortOptions = ["ID", "Nama", "Satuan", "Kategori","Ecer", "Jumlah", "Status"]
+    
+    var body: some View {
+        HStack {
+            Picker("Sort By", selection: $selectedSortBy) {
+                Text("Pilih Kategori")
+                    .tag("")
+                ForEach(sortOptions, id: \.self) { option in
+                    Text(option)
+                }
+            }
+            .pickerStyle(.wheel)
+            Image(systemName: "arrow.down")
         }
     }
 }

@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import Combine
+import CoreBluetooth
+import UIKit
 
 struct DetailPenjualanView: View {
     let penjualan: PenjualanResponseModel
@@ -101,27 +104,109 @@ struct DetailPenjualanView: View {
                     Spacer()
                         .frame(width: geometry.size.width/1.1, height: geometry.size.height/18)
                     
-                    Button{
-                        close = false
-                    } label: {
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color("GrayMiddleColor"))
-                                . frame( width: geometry.size.width/8, height: geometry.size.height/12)
-                                .cornerRadius(8)
-                                .border(Color.black, width: 2)
-                            Text("OK")
-                                .bold()
-                                .font(.title)
+                    HStack{
+                        Button{
+                            cetakNota()
+                        } label: {
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color("GrayMiddleColor"))
+                                    . frame( width: geometry.size.width/5, height: geometry.size.height/12)
+                                    .cornerRadius(8)
+                                    .border(Color.black, width: 2)
+                                Text("Print Nota")
+                                    .bold()
+                                    .font(.title2)
+                            }
+                            .frame( width: geometry.size.width/5, height: geometry.size.height/12)
                         }
-                        .frame( width: geometry.size.width/8, height: geometry.size.height/12)
+                        
+                        Button{
+                            close = false
+                        } label: {
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color("GrayMiddleColor"))
+                                    . frame( width: geometry.size.width/8, height: geometry.size.height/12)
+                                    .cornerRadius(8)
+                                    .border(Color.black, width: 2)
+                                Text("OK")
+                                    .bold()
+                                    .font(.title)
+                            }
+                            .frame( width: geometry.size.width/8, height: geometry.size.height/12)
+                        }
                     }
+                    
                 }.frame(width: geometry.size.width/1.1, height: geometry.size.height/4)
             }
             .frame(width: geometry.size.width/1, height: geometry.size.height/1)
             .background(Color("GrayBackgroundColor"))
         }.edgesIgnoringSafeArea(.all)
         
+    }
+    
+    func cetakNota() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+        let printInfo = UIPrintInfo.printInfo()
+        printInfo.outputType = .general
+        
+        let printController = UIPrintInteractionController.shared
+        printController.printInfo = printInfo
+        
+        let printFormatter = UIMarkupTextPrintFormatter(markupText: "")
+        
+        // header nota
+        let tokoImage = UIImage(named: "UD-Amerta-Yoga.png")!
+        let tokoImageData = tokoImage.pngData()!
+        let tokoBase64 = tokoImageData.base64EncodedString()
+        
+        let headerHTML = """
+        <div style="text-align: center;">
+            <img src="data:image/png;base64,\(tokoBase64)" alt="Toko Image" width="200" height="200">
+            <h1>UD. Amerta Yoga</h1>
+            <p>Br. Demulih, Susut, Bangli</p>
+            <p>081</p>
+            <hr>
+        </div>
+        """
+        printFormatter.markupText = headerHTML
+        
+        // detail penjualan
+        var detailHTML = "<table style='margin: 50 auto;'>"
+        detailHTML += "<tr><th>Nama Produk</th><th>Satuan</th><th>Jumlah</th><th>Harga</th><th>Subtotal</th></tr>"
+        for detail in dataDetailPenjualan {
+            if let produk = dataProduk.produk.first(where: { $0.id == detail.produk_id }) {
+                detailHTML += "<tr>"
+                detailHTML += "<td>\(produk.nama_produk)</td>"
+                detailHTML += "<td>\(produk.satuan)</td>"
+                detailHTML += "<td>\(detail.jumlah_produk)</td>"
+                detailHTML += "<td>\(produk.harga)</td>"
+                detailHTML += "<td>\(detail.sub_harga)</td>"
+                detailHTML += "</tr>"
+            } else {
+                // Handle the case where the element is not found or produkList is nil
+                print("produk nil")
+            }
+        }
+        detailHTML += "</table>"
+        printFormatter.markupText! += detailHTML
+        
+        // footer nota
+        let footerHTML = """
+        <div style="text-align: center;">
+            <hr>
+            <p>Total Harga: \(penjualan.total_harga)</p>
+            <p>Tanggal: \(dateFormatter.string(from: penjualan.tanggal_penjualan))</p>
+        </div>
+        """
+        printFormatter.markupText! += footerHTML
+        
+        printController.printFormatter = printFormatter
+        
+        printController.present(animated: true, completionHandler: nil)
     }
 }
 

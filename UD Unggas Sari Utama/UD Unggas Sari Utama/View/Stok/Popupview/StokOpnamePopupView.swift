@@ -31,13 +31,14 @@ struct StokOpnamePopupView: View {
                     title
                         . frame( height: geometry.size.height/8)
                     PickerProduk(viewModel: viewModel, selectedProduk: $produkSelect)
-                        . frame( height: geometry.size.height/6)
+                        . frame( height: geometry.size.height/4)
                     choiceSituation
-                        . frame( height: geometry.size.height/6)
+                        . frame( height: geometry.size.height/8)
                     fieldJumlah
-                        . frame( height: geometry.size.height/6)
+                        . frame( height: geometry.size.height/8)
                     fieldKeterangan
-                        . frame( height: geometry.size.height/6)
+                        . frame( height: geometry.size.height/8)
+                    Spacer()
                     
                     HStack{
                         Button{
@@ -112,7 +113,7 @@ struct StokOpnamePopupView: View {
      var fieldJumlah : some View{
          HStack{
              Text("Jumlah :")
-             TextField("", text: $jumlah)
+             TextField("Masukan jumlah produk", text: $jumlah)
          }
          .textFieldStyle(.roundedBorder)
          .keyboardType(.numberPad)
@@ -121,7 +122,7 @@ struct StokOpnamePopupView: View {
      var fieldKeterangan : some View{
          HStack{
              Text("Keterangan :")
-             TextField("", text: $keterangan)
+             TextField("Masukan keterangan produk", text: $keterangan)
          }
          .textFieldStyle(.roundedBorder)
      }

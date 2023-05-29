@@ -28,6 +28,9 @@ struct LaporanStokView: View {
                     Text("Nama")
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity)
+                    Text("Satuan")
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity)
                     Text("Total Stok")
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity)
@@ -54,6 +57,9 @@ struct LaporanStokView: View {
                             Text(product.produk_id)
                                 .frame(maxWidth: .infinity)
                             Text(product.nama_produk)
+                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                .multilineTextAlignment(.leading)
+                            Text(product.satuan)
                                 .frame(maxWidth: .infinity)
                             Text(String(format: "%1g", product.total_stok))
                                 .frame(maxWidth: .infinity)
@@ -73,6 +79,7 @@ struct LaporanStokView: View {
                     }
                 }
             }
+            .frame(maxWidth: .infinity)
             .background(Color("GrayBackgroundColor"))
             .navigationTitle("Laporan Stok")
             .navigationBarTitleDisplayMode(.inline)

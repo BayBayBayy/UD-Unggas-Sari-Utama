@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C405EB22A2280E3008608F1 /* SortProdukView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C405EB12A2280E3008608F1 /* SortProdukView.swift */; };
 		4C59236D298E099500472336 /* RadioButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C59236C298E099500472336 /* RadioButtonView.swift */; };
 		4C5C01BD29C5AB4700FBF184 /* DetailPenjualanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C01BC29C5AB4700FBF184 /* DetailPenjualanModel.swift */; };
 		4C5C01BF29C5B6F100FBF184 /* EditProdukPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C01BE29C5B6F100FBF184 /* EditProdukPopupView.swift */; };
@@ -42,7 +43,6 @@
 		4C945DCA2992B41800D5CA5A /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C945DC92992B41800D5CA5A /* ButtonView.swift */; };
 		4C945DCC2992BF3200D5CA5A /* ButtonPemesananView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C945DCB2992BF3200D5CA5A /* ButtonPemesananView.swift */; };
 		4C94F0AB29DFF045006743CC /* CardDetailPenjualan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C94F0AA29DFF045006743CC /* CardDetailPenjualan.swift */; };
-		4C94F0AD29E00AB9006743CC /* LaporanStokVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C94F0AC29E00AB9006743CC /* LaporanStokVM.swift */; };
 		4C9529D629933E76000042D0 /* DetailPesananPopupview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9529D529933E76000042D0 /* DetailPesananPopupview.swift */; };
 		4C9529DA2993F053000042D0 /* LaporanPemesananView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9529D92993F053000042D0 /* LaporanPemesananView.swift */; };
 		4C9529DC2993F1E0000042D0 /* LaporanPenjualanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9529DB2993F1E0000042D0 /* LaporanPenjualanView.swift */; };
@@ -52,6 +52,7 @@
 		4C9529E72994999E000042D0 /* DummyPemesananModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9529E62994999E000042D0 /* DummyPemesananModel.swift */; };
 		4C9529EA29949B39000042D0 /* ButtonActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9529E929949B39000042D0 /* ButtonActionView.swift */; };
 		4C95FC0A29E089760069E41B /* ConnectBluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C95FC0929E089760069E41B /* ConnectBluetooth.swift */; };
+		4C9860472A1DE331001E4868 /* LaporanStokVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9860462A1DE331001E4868 /* LaporanStokVM.swift */; };
 		4CAA87B3299D44DC0093FF76 /* ProdukDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAA87B2299D44DC0093FF76 /* ProdukDataResponse.swift */; };
 		4CAA87BA299DCD6B0093FF76 /* DataProdukView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAA87B9299DCD6B0093FF76 /* DataProdukView.swift */; };
 		4CB0BC5129D46E3E0097BC87 /* DetailPenjualanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB0BC5029D46E3E0097BC87 /* DetailPenjualanView.swift */; };
@@ -67,6 +68,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C405EB12A2280E3008608F1 /* SortProdukView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortProdukView.swift; sourceTree = "<group>"; };
 		4C59236C298E099500472336 /* RadioButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonView.swift; sourceTree = "<group>"; };
 		4C5C01BC29C5AB4700FBF184 /* DetailPenjualanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPenjualanModel.swift; sourceTree = "<group>"; };
 		4C5C01BE29C5B6F100FBF184 /* EditProdukPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProdukPopupView.swift; sourceTree = "<group>"; };
@@ -102,7 +104,6 @@
 		4C945DC92992B41800D5CA5A /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		4C945DCB2992BF3200D5CA5A /* ButtonPemesananView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonPemesananView.swift; sourceTree = "<group>"; };
 		4C94F0AA29DFF045006743CC /* CardDetailPenjualan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailPenjualan.swift; sourceTree = "<group>"; };
-		4C94F0AC29E00AB9006743CC /* LaporanStokVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaporanStokVM.swift; path = "../../../../../../Library/Mobile Documents/com~apple~CloudDocs/.Trash/LaporanStokVM.swift"; sourceTree = "<group>"; };
 		4C9529D529933E76000042D0 /* DetailPesananPopupview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPesananPopupview.swift; sourceTree = "<group>"; };
 		4C9529D92993F053000042D0 /* LaporanPemesananView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaporanPemesananView.swift; sourceTree = "<group>"; };
 		4C9529DB2993F1E0000042D0 /* LaporanPenjualanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaporanPenjualanView.swift; sourceTree = "<group>"; };
@@ -112,6 +113,7 @@
 		4C9529E62994999E000042D0 /* DummyPemesananModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyPemesananModel.swift; sourceTree = "<group>"; };
 		4C9529E929949B39000042D0 /* ButtonActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonActionView.swift; sourceTree = "<group>"; };
 		4C95FC0929E089760069E41B /* ConnectBluetooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectBluetooth.swift; sourceTree = "<group>"; };
+		4C9860462A1DE331001E4868 /* LaporanStokVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaporanStokVM.swift; sourceTree = "<group>"; };
 		4C9B3A1629A0F0C800C25F99 /* UD Unggas Sari Utama.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UD Unggas Sari Utama.entitlements"; sourceTree = "<group>"; };
 		4CAA87AB299BDF6D0093FF76 /* UD-Unggas-Sari-Utama-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "UD-Unggas-Sari-Utama-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4CAA87B2299D44DC0093FF76 /* ProdukDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdukDataResponse.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				4CA32122299803B30080E158 /* SubView */,
 				4C853C81298CDFDB004FA781 /* Popupview */,
 				4C7D6908297B9B38003A9949 /* StockView.swift */,
+				4C405EB12A2280E3008608F1 /* SortProdukView.swift */,
 				4C65EF7F298EB12300D7182A /* TabButtonActionStok.swift */,
 				4CAA87B9299DCD6B0093FF76 /* DataProdukView.swift */,
 			);
@@ -273,7 +276,7 @@
 			children = (
 				4C8CA39629A49AE600F2C62F /* GetDataPenjualan.swift */,
 				4C77376529CAE9130008E9F4 /* CreatePenjualanVM.swift */,
-				4C94F0AC29E00AB9006743CC /* LaporanStokVM.swift */,
+				4C9860462A1DE331001E4868 /* LaporanStokVM.swift */,
 			);
 			path = PenjualanVM;
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C9860472A1DE331001E4868 /* LaporanStokVM.swift in Sources */,
 				4C78E1E529B728940006C4F5 /* CreateDataProduk.swift in Sources */,
 				4C5F7DC629D8A782001F4707 /* KeyboardModifier.swift in Sources */,
 				4C6FF6E3298E4E7C001FE696 /* PickerProduk.swift in Sources */,
@@ -527,7 +531,6 @@
 				4C945DC8299159AB00D5CA5A /* TambahkanPesananPopupView.swift in Sources */,
 				4C59236D298E099500472336 /* RadioButtonView.swift in Sources */,
 				4CC94284295C0257006725E9 /* ContentView.swift in Sources */,
-				4C94F0AD29E00AB9006743CC /* LaporanStokVM.swift in Sources */,
 				4C65EF80298EB12300D7182A /* TabButtonActionStok.swift in Sources */,
 				4C78E1E829B795F50006C4F5 /* GetDataPemesanan.swift in Sources */,
 				4CAA87BA299DCD6B0093FF76 /* DataProdukView.swift in Sources */,
@@ -539,6 +542,7 @@
 				4C5C01BD29C5AB4700FBF184 /* DetailPenjualanModel.swift in Sources */,
 				4C5C846229A7DC46005185E9 /* ButtonLaporanPemesan.swift in Sources */,
 				4C9529EA29949B39000042D0 /* ButtonActionView.swift in Sources */,
+				4C405EB22A2280E3008608F1 /* SortProdukView.swift in Sources */,
 				4C945DCC2992BF3200D5CA5A /* ButtonPemesananView.swift in Sources */,
 				4C9529E02993F256000042D0 /* LaporanStokView.swift in Sources */,
 				4CC94282295C0257006725E9 /* UD_Unggas_Sari_UtamaApp.swift in Sources */,

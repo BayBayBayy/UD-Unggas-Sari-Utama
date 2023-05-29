@@ -17,7 +17,7 @@ class LaporanStokFetcher: ObservableObject{
     // View Data
     func fetchData() {
         
-        guard let url = URL(string: "https://indramaryati.com/bayu/Produk/laporanStok.php") else {
+        guard let url = URL(string: "https://2019lulus.site/UD.AmertaYoga/Produk/laporanStok.php") else {
             print("Invalid URL")
             return
         }

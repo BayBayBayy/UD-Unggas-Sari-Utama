@@ -14,16 +14,15 @@ struct TabButtonActionStok: View {
         GeometryReader{ geometry in
             HStack{
                 Spacer()
-                    .frame(width: geometry.size.width/2.5, height: geometry.size.height/1)
+                    .frame(width: geometry.size.width/2.9, height: geometry.size.height/1)
                 HStack{
-                    
                     NavigationLink {
                         LaporanStokView()
                     } label: {
                         ZStack{
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(Color("OrangeColorSet"))
-                                .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
+                                .frame(width: geometry.size.width/6, height: geometry.size.height/1.75)
                             VStack {
                                 Text("Laporan")
                                     .foregroundColor(.black)
@@ -32,7 +31,7 @@ struct TabButtonActionStok: View {
                                     .frame(width: geometry.size.width/8, height: geometry.size.height/16)
                             }
                         }
-                        .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
+                        .frame(width: geometry.size.width/6, height: geometry.size.height/1.75)
                         .cornerRadius(8)
                     }
                     
@@ -43,8 +42,7 @@ struct TabButtonActionStok: View {
                         ZStack{
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(Color("OrangeColorSet"))
-                                .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
-                               
+                                .frame(width: geometry.size.width/7, height: geometry.size.height/1.75)
                             VStack {
                                 Text("Stok Opname")
                                     .foregroundColor(.black)
@@ -53,7 +51,7 @@ struct TabButtonActionStok: View {
                                     .frame(width: geometry.size.width/8, height: geometry.size.height/16)
                             }
                         }
-                        .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
+                        .frame(width: geometry.size.width/7, height: geometry.size.height/1.75)
                         .cornerRadius(8)
                     }
                     
@@ -64,7 +62,7 @@ struct TabButtonActionStok: View {
                         ZStack{
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(Color("OrangeColorSet"))
-                                .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
+                                .frame(width: geometry.size.width/7, height: geometry.size.height/1.75)
                             VStack {
                                 Text("Input Barang Baru")
                                     .foregroundColor(.black)
@@ -73,7 +71,7 @@ struct TabButtonActionStok: View {
                                     .frame(width: geometry.size.width/8, height: geometry.size.height/16)
                             }
                         }
-                        .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
+                        .frame(width: geometry.size.width/7, height: geometry.size.height/1.75)
                         .cornerRadius(8)
                     }
                     
@@ -84,7 +82,7 @@ struct TabButtonActionStok: View {
                         ZStack{
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(Color("OrangeColorSet"))
-                                .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
+                                .frame(width: geometry.size.width/7, height: geometry.size.height/1.75)
                             VStack {
                                 Text("Konversi Stok")
                                     .foregroundColor(.black)
@@ -93,7 +91,7 @@ struct TabButtonActionStok: View {
                                     .frame(width: geometry.size.width/8, height: geometry.size.height/16)
                             }
                         }
-                        .frame(width: geometry.size.width/8, height: geometry.size.height/3.5)
+                        .frame(width: geometry.size.width/7, height: geometry.size.height/1.75)
                         .cornerRadius(8)
                     }
                     

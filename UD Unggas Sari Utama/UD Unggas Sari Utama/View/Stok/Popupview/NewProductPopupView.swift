@@ -119,14 +119,14 @@ extension NewProductPopupView {
     var nama : some View{
         HStack{
             Text("Nama :")
-            TextField("", text: $namaProduk)
+            TextField("Masukan nama produk", text: $namaProduk)
         }
         .textFieldStyle(.roundedBorder)
     }
     var satuan : some View{
         HStack{
             Text("Satuan :")
-            TextField("", text: $satuanProduk)
+            TextField("Masukan satuan produk", text: $satuanProduk)
             
         }
         .textFieldStyle(.roundedBorder)
@@ -134,14 +134,14 @@ extension NewProductPopupView {
     var kategori : some View{
         HStack{
             Text("Kategori :")
-            TextField("", text: $kategoriProduk)
+            TextField("Masukan kategori produk", text: $kategoriProduk)
         }
         .textFieldStyle(.roundedBorder)
     }
     var harga : some View{
         HStack{
             Text("Harga :")
-            TextField("", text: $hargaProduk)
+            TextField("Masukan harga produk", text: $hargaProduk)
                 .keyboardType(.numberPad)
         }
         .textFieldStyle(.roundedBorder)
@@ -149,7 +149,7 @@ extension NewProductPopupView {
     var jumlah : some View{
         HStack{
             Text("Jumlah :")
-            TextField("", text: $jumlahProduk)
+            TextField("Masukan jumlah produk", text: $jumlahProduk)
                 .keyboardType(.numberPad)
         }
         .textFieldStyle(.roundedBorder)

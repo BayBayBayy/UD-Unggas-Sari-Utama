@@ -11,12 +11,14 @@ import SwiftUI
 
 class ProdukFetcher: ObservableObject {
     @Published var produk: [ProdukResponseModel] = []
+    @Published var produkSort: [ProdukResponseModel] = []
     @Published var selectedProduk: ProdukResponseModel? // tambahkan properti selectedProduk
     @Published var selectedProduct: ProdukResponseModel?
     @Published var selectedProdukId: String?
-
+    
     init(){
         fetchData()
+        fetchDataSort(sortBy: "id")
     }
     
     // View Data
@@ -46,6 +48,32 @@ class ProdukFetcher: ObservableObject {
         }.resume()
     }
     
+    func fetchDataSort(sortBy: String) {
+        
+        guard let url = URL(string: "https://2019lulus.site/UD.AmertaYoga/Produk/sortProduk.php?sort_by=\(sortBy)") else {
+            print("Invalid URL")
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                print("Error:", error ?? "Unknown error")
+                return
+            }
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            decoder.nonConformingFloatDecodingStrategy = .convertFromString(positiveInfinity: "inf", negativeInfinity: "-inf", nan: "nan")
+            do {
+                let produk = try JSONDecoder().decode([ProdukResponseModel].self, from: data)
+                DispatchQueue.main.async {
+                    self.produkSort = produk
+                }
+            } catch let error {
+                print("Error decoding JSON:", error)
+            }
+        }.resume()
+    }
+    
     func refreshData() {
         self.produk.removeAll()
         fetchData()
@@ -59,8 +87,8 @@ class ProdukFetcher: ObservableObject {
         }
     }
     
-
-
+    
+    
     func getProdukById(id: String) -> ProdukResponseModel? {
         return produk.first(where: { $0.id == id })
     }
