@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct ViewArray<T> {
+    var array : [T] = []
+}
+
 struct ProdukResponseModel: Codable, Identifiable, Hashable{
     var id: String
     var nama_produk: String
